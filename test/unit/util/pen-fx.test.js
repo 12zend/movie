@@ -662,6 +662,7 @@ describe('built-in Pen FX category', () => {
         });
         expect(skin.getTexture()).toBe('pen-texture');
         expect(engine.groupStack).toEqual([{
+            buffer: {framebuffer: 'group-framebuffer', texture: 'group-staging', width: 480, height: 360},
             baselineFramebuffer: penFramebuffer,
             baselineTexture: 'pen-texture',
             framebuffer: 'group-framebuffer',
@@ -733,16 +734,15 @@ describe('built-in Pen FX category', () => {
         expect(engine.groupStack.length).toBe(1);
         engine.endGroup();
 
-        expect(engine._render).toHaveBeenCalledWith('group-over-program', 'engine-framebuffer', [
-            {name: 'u_base', texture: 'pen-texture'},
-            {name: 'u_effect', texture: 'group-staging'}
-        ], {u_blend: 0, u_opacity: 1}, ['u_blend']);
-        expect(engine._replaceSkin).toHaveBeenCalledWith(skin, 'engine-texture');
+        expect(engine._render).toHaveBeenCalledWith('group-over-program', 'pen-framebuffer', [
+            {name: 'u_image', texture: 'group-staging'}
+        ], {}, []);
+        expect(engine._replaceSkin).not.toHaveBeenCalled();
         expect(skin._texture).toBe('pen-texture');
         expect(skin._framebuffer).toBe(penFramebuffer);
         expect(Object.prototype.hasOwnProperty.call(skin, 'getTexture')).toBe(false);
-        expect(gl.deleteFramebuffer).toHaveBeenCalledWith('group-framebuffer');
-        expect(gl.deleteTexture).toHaveBeenCalledWith('group-staging');
+        expect(engine.groupBufferPool).toHaveLength(1);
+        expect(gl.deleteTexture).not.toHaveBeenCalled();
         expect(engine.groupStack).toEqual([]);
     });
 
@@ -821,8 +821,7 @@ describe('built-in Pen FX category', () => {
             {name: 'u_base', texture: 'pen-texture'},
             {name: 'u_effect', texture: 'group-staging'}
         ], {u_blend: 0, u_opacity: 1}, ['u_blend']);
-        expect(gl.deleteFramebuffer).toHaveBeenCalledWith('expanded-framebuffer');
-        expect(gl.deleteTexture).toHaveBeenCalledWith('expanded-source');
+        expect(engine.groupBufferPool.map(buffer => buffer.texture)).toEqual(['group-staging', 'expanded-source']);
     });
 
     test('captures source and matte layers before compositing a luma matte over the baseline', () => {

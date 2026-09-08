@@ -1,6 +1,7 @@
 import installMovieFrameGraphRenderer, {
     FRAME_GRAPH_NODE_TYPES,
-    executeSequence
+    executeSequence,
+    rotatePoint
 } from '../../../src/lib/movie-frame-graph';
 
 const deferred = () => {
@@ -103,4 +104,36 @@ describe('Movie frame graph renderer', () => {
         await result;
         expect(events).toEqual(['draw', 'scene', 'stamp']);
     });
+});
+
+
+test('runs 1000 synchronous siblings in the same continuation after an asynchronous resource', async () => {
+    const events = [];
+    const result = executeSequence(Array.from({length: 1001}, (_, index) => index), index => {
+        if (index === 0) return Promise.resolve();
+        events.push(index);
+        if (index === 1) Promise.resolve().then(() => events.push('microtask'));
+    });
+    await result;
+    expect(events.slice(0, 1000)).toEqual(Array.from({length: 1000}, (_, index) => index + 1));
+    expect(events[1000]).toBe('microtask');
+});
+
+
+test('reuses group rotation trigonometry across 1000 points and invalidates it on edits', () => {
+    const rotation = {x: 0, y: 0, z: 90};
+    const sine = jest.spyOn(Math, 'sin');
+    try {
+        for (let index = 0; index < 1000; index++) {
+            const point = rotatePoint({x: 1, y: 0, z: 0}, rotation);
+            expect(point.x).toBeCloseTo(0);
+            expect(point.y).toBeCloseTo(1);
+        }
+        expect(sine).toHaveBeenCalledTimes(3);
+        rotation.z = 180;
+        expect(rotatePoint({x: 1, y: 0, z: 0}, rotation).x).toBeCloseTo(-1);
+        expect(sine).toHaveBeenCalledTimes(6);
+    } finally {
+        sine.mockRestore();
+    }
 });

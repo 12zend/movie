@@ -1313,6 +1313,8 @@ class ModelRenderer {
     }
 
     clearObjects () {
+        if (this.imagePlaneBatches) this.imagePlaneBatches.forEach(batch => batch.dispose());
+        this.imagePlaneBatches = [];
         if (this.currentObjects) this.currentObjects.forEach(object => this.removeObject(object));
         this.invalidateRenderCache();
         this.currentObject = null;
@@ -1349,6 +1351,67 @@ class ModelRenderer {
             sourceObject,
             transform
         }], cameraTransform, stageSize, bitmapResolution);
+    }
+
+    renderInstancedImagePlanes () {
+        const batches = this.imagePlaneBatches || (this.imagePlaneBatches = []);
+        const hidden = [];
+        let batchCount = 0;
+        try {
+            for (let start = 0; start < this.currentObjects.length;) {
+                const first = this.currentObjects[start];
+                const eligible = object => object && object.isMesh && object.visible &&
+                    object.userData.movieStaticPlane && object.scale.x > 0 && object.scale.y > 0 && object.scale.z > 0;
+                if (!eligible(first)) {
+                    start++;
+                    continue;
+                }
+                let end = start + 1;
+                while (end < this.currentObjects.length) {
+                    const object = this.currentObjects[end];
+                    if (!eligible(object) || object.geometry !== first.geometry ||
+                        object.material !== first.material) break;
+                    end++;
+                }
+                const count = end - start;
+                if (count > 1) {
+                    let batch = batches[batchCount];
+                    if (!batch || batch.geometry !== first.geometry || batch.material !== first.material ||
+                        batch.instanceMatrix.count < count) {
+                        if (batch) batch.dispose();
+                        batch = new THREE.InstancedMesh(first.geometry, first.material, count);
+                        batch.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+                        // Bounds are already evaluated on the individual planes for the camera depth range.
+                        batch.frustumCulled = false;
+                        batches[batchCount] = batch;
+                    }
+                    batch.count = count;
+                    batch.castShadow = first.castShadow;
+                    batch.receiveShadow = first.receiveShadow;
+                    for (let index = start; index < end; index++) {
+                        const object = this.currentObjects[index];
+                        object.updateMatrix();
+                        batch.setMatrixAt(index - start, object.matrix);
+                        object.visible = false;
+                        hidden.push(object);
+                    }
+                    batch.instanceMatrix.needsUpdate = true;
+                    this.scene.add(batch);
+                    batchCount++;
+                }
+                start = end;
+            }
+            return this.renderSceneWithZBuffer();
+        } finally {
+            hidden.forEach(object => {
+                object.visible = true;
+            });
+            batches.forEach((batch, index) => {
+                this.scene.remove(batch);
+                if (index >= batchCount) batch.dispose();
+            });
+            batches.length = batchCount;
+        }
     }
 
     renderWorldScene (sceneItems, cameraTransform, stageSize, bitmapResolution = 2, lights = null) {
@@ -1405,7 +1468,7 @@ class ModelRenderer {
         this.camera.updateMatrixWorld(true);
 
         if (this.usesShadows && this.renderer.shadowMap) this.renderer.shadowMap.needsUpdate = true;
-        this.renderSceneWithZBuffer();
+        this.renderInstancedImagePlanes();
         this.lastRenderKey = renderKey;
         this.renderVersion++;
         return this.canvas;

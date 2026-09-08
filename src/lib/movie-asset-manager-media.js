@@ -5,6 +5,7 @@ import {
     MODEL_SOURCE_EXTENSIONS,
     MOTION_EXTENSIONS,
     SOUND_EXTENSIONS,
+    TEXT_BITMAP_RESOLUTION,
     VIDEO_FRAME_RATE,
     BITMAP_RESOLUTION
 } from './movie-asset-manager-constants';
@@ -23,8 +24,12 @@ import {
     unusedName
 } from './movie-asset-manager-utils';
 
-const MAX_TEXT_CANVAS_CACHE = 128;
+const MAX_TEXT_CANVAS_CACHE = 1024;
 const MAX_TEXT_CANVAS_PIXELS = 16 * 1024 * 1024;
+const TEXT_FONT_SIZE = 96;
+const TEXT_PADDING = 16;
+const TEXT_LINE_HEIGHT = Math.round(TEXT_FONT_SIZE * 1.2);
+const TEXT_RENDER_SCALE = TEXT_BITMAP_RESOLUTION / BITMAP_RESOLUTION;
 
 const MovieAssetManagerMediaMethods = {
     async addVideoFromFile (targetId, file) {
@@ -701,15 +706,16 @@ const MovieAssetManagerMediaMethods = {
             return cached.canvas;
         }
         const lines = text.split(/\r?\n/);
-        const fontSize = 96;
-        const padding = 16;
-        const lineHeight = Math.round(fontSize * 1.2);
+        const fontSize = TEXT_FONT_SIZE * TEXT_RENDER_SCALE;
+        const padding = TEXT_PADDING * TEXT_RENDER_SCALE;
+        const lineHeight = TEXT_LINE_HEIGHT * TEXT_RENDER_SCALE;
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
         context.font = `${fontSize}px ${font.family}`;
         const width = Math.max(2, ...lines.map(line => Math.ceil(context.measureText(line || ' ').width)));
         canvas.width = Math.min(4096, width + (padding * 2));
         canvas.height = Math.min(4096, Math.max(2, (lineHeight * lines.length) + (padding * 2)));
+        canvas.movieBitmapResolution = TEXT_BITMAP_RESOLUTION;
         context.font = `${fontSize}px ${font.family}`;
         context.fillStyle = '#000000';
         context.textBaseline = 'top';
@@ -729,22 +735,62 @@ const MovieAssetManagerMediaMethods = {
     },
 
     renderText (target, font, text) {
-        const canvas = this.createTextCanvas(font, text);
-        this.applyBitmap(target, canvas, 'text');
+        if (!(this.textSkinCache instanceof Map)) {
+            this.textSkinCache = new Map();
+            this.textSkinCachePixels = 0;
+        }
+        const key = JSON.stringify([font.name, font.family, text]);
+        let entry = this.textSkinCache.get(key);
+        if (!entry) {
+            const canvas = this.createTextCanvas(font, text);
+            entry = {
+                canvas,
+                pixels: canvas.width * canvas.height,
+                skinId: this.runtime.renderer.createBitmapSkin(canvas, TEXT_BITMAP_RESOLUTION)
+            };
+            this.textSkinCachePixels += entry.pixels;
+        }
+        this.textSkinCache.delete(key);
+        this.textSkinCache.set(key, entry);
+        this.applyBitmap(target, entry.canvas, 'text', null, false, TEXT_BITMAP_RESOLUTION, entry.skinId);
+        this.trimTextSkinCache();
     },
 
-    applyBitmap (target, bitmap, mode, rotationCenter, penOnly = false, bitmapResolution = BITMAP_RESOLUTION) {
+    trimTextSkinCache () {
+        if (!(this.textSkinCache instanceof Map)) return;
+        const empty = this.targetStates.size === 0;
+        if (!empty && this.textSkinCache.size <= 1024 && this.textSkinCachePixels <= MAX_TEXT_CANVAS_PIXELS) return;
+        // A skin bound to a target remains alive until that target changes appearance or is destroyed.
+        const active = new Set();
+        for (const state of this.targetStates.values()) {
+            if (state.mode === 'text') active.add(state.sharedTextSkinId);
+        }
+        for (const [key, entry] of this.textSkinCache) {
+            if (!empty && this.textSkinCache.size <= 1024 && this.textSkinCachePixels <= MAX_TEXT_CANVAS_PIXELS) break;
+            if (active.has(entry.skinId)) continue;
+            this.runtime.renderer.destroySkin(entry.skinId);
+            this.textSkinCache.delete(key);
+            this.textSkinCachePixels -= entry.pixels;
+        }
+    },
+
+    applyBitmap (target, bitmap, mode, rotationCenter, penOnly = false,
+        bitmapResolution = BITMAP_RESOLUTION, sharedTextSkinId = null) {
         const state = this.getTargetState(target);
         state.projectionKey = null;
+        state.sharedTextSkinId = sharedTextSkinId;
         const hasRotationCenter = rotationCenter !== null && typeof rotationCenter !== 'undefined';
-        if (state.skinId === null) {
-            state.skinId = hasRotationCenter ?
-                this.runtime.renderer.createBitmapSkin(bitmap, bitmapResolution, rotationCenter) :
-                this.runtime.renderer.createBitmapSkin(bitmap, bitmapResolution);
-        } else if (hasRotationCenter) {
-            this.runtime.renderer.updateBitmapSkin(state.skinId, bitmap, bitmapResolution, rotationCenter);
-        } else {
-            this.runtime.renderer.updateBitmapSkin(state.skinId, bitmap, bitmapResolution);
+        // Shared text skins are immutable. Keep the target's mutable video/model skin separate.
+        if (sharedTextSkinId === null) {
+            if (state.skinId === null) {
+                state.skinId = hasRotationCenter ?
+                    this.runtime.renderer.createBitmapSkin(bitmap, bitmapResolution, rotationCenter) :
+                    this.runtime.renderer.createBitmapSkin(bitmap, bitmapResolution);
+            } else if (hasRotationCenter) {
+                this.runtime.renderer.updateBitmapSkin(state.skinId, bitmap, bitmapResolution, rotationCenter);
+            } else {
+                this.runtime.renderer.updateBitmapSkin(state.skinId, bitmap, bitmapResolution);
+            }
         }
         const previousVideoBitmap = state.videoBitmap;
         state.videoBitmap = bitmap && typeof bitmap.close === 'function' ? bitmap : null;
@@ -753,7 +799,9 @@ const MovieAssetManagerMediaMethods = {
         }
         state.mode = mode;
         state.penOnly = penOnly;
-        this.runtime.renderer.updateDrawableSkinId(target.drawableID, state.skinId);
+        this.runtime.renderer.updateDrawableSkinId(
+            target.drawableID, sharedTextSkinId === null ? state.skinId : sharedTextSkinId
+        );
         this.applyProjection(target);
         if (target.visible) {
             target.emitVisualChange();
@@ -790,7 +838,11 @@ const MovieAssetManagerMediaMethods = {
 
     restoreCustomSkin (target) {
         const state = this.targetStates.get(target.id);
-        const skinId = state && state.mode === 'shape' ? state.shapeSkinId : state && state.skinId;
+        let skinId = state && state.skinId;
+        if (state && state.mode === 'shape') skinId = state.shapeSkinId;
+        if (state && state.mode === 'text' && typeof state.sharedTextSkinId === 'number') {
+            skinId = state.sharedTextSkinId;
+        }
         if (state && state.mode !== 'costume' && skinId !== null && this.runtime.renderer) {
             this.runtime.renderer.updateDrawableSkinId(target.drawableID, skinId);
         }
@@ -826,6 +878,7 @@ const MovieAssetManagerMediaMethods = {
             this.runtime.renderer.destroySkin(state.skinId);
         }
         this.targetStates.delete(target.id);
+        this.trimTextSkinCache();
     }
 };
 

@@ -355,6 +355,7 @@ const MovieAssetManagerTransformMethods = {
             target.currentCostume,
             state.skinId,
             state.shapeSkinId,
+            state.sharedTextSkinId,
             camera.focalLength,
             camera.rotationOrder,
             cameraPosition.x,

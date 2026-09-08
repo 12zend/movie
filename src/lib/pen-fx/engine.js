@@ -219,7 +219,7 @@ const createPenFXEngine = (gl, renderer) => {
             const entry = this.groupStack[this.groupStack.length - 1];
             if (this.groupEffectScope !== 'expanded' || !entry || entry.skin !== skin ||
                 skin._texture !== entry.texture) return skin._texture;
-            if (!entry.effectSource) entry.effectSource = this._createBufferTexture();
+            if (!entry.effectSource) entry.effectSource = this._acquireGroupBuffer();
             // Build the expanded input lazily. The group remains isolated while objects are drawn, and only an
             // explicitly expanded effect sees the completed baseline underneath the group's pixels.
             this._renderGroupOver(entry.effectSource.framebuffer, entry.baselineTexture, entry.texture, 0, 1);
@@ -381,14 +381,43 @@ const createPenFXEngine = (gl, renderer) => {
             return this.depthTexture;
         }
 
+        _acquireGroupBuffer () {
+            const pool = this.groupBufferPool || (this.groupBufferPool = []);
+            const buffer = pool.pop();
+            if (buffer) return buffer;
+            return {...this._createBufferTexture(), width: this.width, height: this.height};
+        }
+
+        _releaseGroupBuffer (buffer) {
+            const pool = this.groupBufferPool || (this.groupBufferPool = []);
+            // Retain only a small, bounded amount of idle GPU storage. Live nested groups never share targets.
+            const pixels = this.width * this.height;
+            const limit = Math.min(8, Math.floor((16 * 1024 * 1024) / Math.max(1, pixels)));
+            if (buffer.width === this.width && buffer.height === this.height && pool.length < limit) {
+                pool.push(buffer);
+            } else {
+                gl.deleteFramebuffer(buffer.framebuffer);
+                gl.deleteTexture(buffer.texture);
+            }
+        }
+
+        _clearGroupBufferPool () {
+            for (const buffer of this.groupBufferPool || []) {
+                gl.deleteFramebuffer(buffer.framebuffer);
+                gl.deleteTexture(buffer.texture);
+            }
+            this.groupBufferPool = [];
+        }
+
         beginGroup () {
             const skin = this._prepare(false, false);
             if (!skin) return;
-            const staging = this._createBufferTexture();
+            const staging = this._acquireGroupBuffer();
             const hadOwnGetTexture = Object.prototype.hasOwnProperty.call(skin, 'getTexture');
             const originalGetTexture = skin.getTexture;
             const baselineTexture = skin._texture;
             this.groupStack.push({
+                buffer: staging,
                 baselineFramebuffer: skin._framebuffer,
                 baselineTexture,
                 framebuffer: staging.framebuffer,
@@ -440,6 +469,16 @@ const createPenFXEngine = (gl, renderer) => {
                             {name: 'u_effect', texture: entry.texture}
                         ], {u_blend: blendIndex, u_opacity: opacity}, ['u_blend']);
                         this._replaceSkin(skin, this.textures[0]);
+                    } else if (blendIndex === 0 && opacity === 1) {
+                        // Premultiplied source-over can blend directly into the baseline. This avoids reading
+                        // the full baseline into a temporary texture and then copying the result back.
+                        gl.enable(gl.BLEND);
+                        gl.blendEquation(gl.FUNC_ADD);
+                        gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+                        const target = skin._framebuffer.framebuffer || skin._framebuffer;
+                        this.withProgramOverrides(null, () => this._render(this._program('copy'), target,
+                            [{name: 'u_image', texture: entry.texture}], {}, []));
+                        this._markSkinChanged(skin);
                     } else {
                         // Composite the isolated group content over the untouched baseline instead of replacing it,
                         // so the default pen backdrop and earlier drawings survive every group.
@@ -463,12 +502,10 @@ const createPenFXEngine = (gl, renderer) => {
                     width: this.width
                 });
             } else {
-                gl.deleteFramebuffer(entry.framebuffer);
-                gl.deleteTexture(entry.texture);
+                this._releaseGroupBuffer(entry.buffer);
             }
             if (entry.effectSource) {
-                gl.deleteFramebuffer(entry.effectSource.framebuffer);
-                gl.deleteTexture(entry.effectSource.texture);
+                this._releaseGroupBuffer(entry.effectSource);
             }
         }
 
@@ -683,6 +720,7 @@ const createPenFXEngine = (gl, renderer) => {
                 }
             }
             this.groupStack.length = 0;
+            this._clearGroupBufferPool();
         }
 
         clearMatteStack () {

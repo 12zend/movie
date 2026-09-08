@@ -488,3 +488,59 @@ describe('Movie 3D projection', () => {
         expect(rotation.z).toBeCloseTo(0);
     });
 });
+
+
+describe('Objects image plane instancing', () => {
+    test('submits 1000 matching planes as one instanced mesh and reuses its buffer', () => {
+        const renderer = Object.create(ModelRenderer.prototype);
+        renderer.scene = new THREE.Scene();
+        const source = createImagePlane({width: 32, height: 32}, 16, 16);
+        renderer.currentObjects = Array.from({length: 1000}, (_, index) => {
+            const object = source.clone();
+            object.position.set(index, index * 2, -480);
+            renderer.scene.add(object);
+            return object;
+        });
+        const submitted = [];
+        renderer.renderSceneWithZBuffer = jest.fn(() => {
+            const visible = renderer.scene.children.filter(object => object.visible);
+            expect(visible).toHaveLength(1);
+            expect(visible[0].isInstancedMesh).toBe(true);
+            expect(visible[0].count).toBe(1000);
+            const matrix = new THREE.Matrix4();
+            visible[0].getMatrixAt(999, matrix);
+            expect(matrix.elements.slice(12, 15)).toEqual([999, 1998, -480]);
+            submitted.push(visible[0]);
+        });
+        renderer.renderInstancedImagePlanes();
+        renderer.renderInstancedImagePlanes();
+        expect(submitted[0]).toBe(submitted[1]);
+        expect(renderer.currentObjects.every(object => object.visible)).toBe(true);
+        expect(renderer.scene.children).toHaveLength(1000);
+        submitted[0].dispose();
+        source.geometry.dispose();
+        source.material.map.dispose();
+        source.material.dispose();
+    });
+
+    test('preserves mirrored planes and restores visibility after a failed render', () => {
+        const renderer = Object.create(ModelRenderer.prototype);
+        renderer.scene = new THREE.Scene();
+        const source = createImagePlane({width: 32, height: 32}, 16, 16);
+        renderer.currentObjects = [source.clone(), source.clone(), source.clone()];
+        renderer.currentObjects[2].scale.x = -1;
+        renderer.currentObjects.forEach(object => renderer.scene.add(object));
+        renderer.renderSceneWithZBuffer = () => {
+            expect(renderer.scene.children.filter(object => object.visible)).toHaveLength(2);
+            expect(renderer.currentObjects[2].visible).toBe(true);
+            throw new Error('render failed');
+        };
+        expect(() => renderer.renderInstancedImagePlanes()).toThrow('render failed');
+        expect(renderer.currentObjects.every(object => object.visible)).toBe(true);
+        expect(renderer.scene.children).toHaveLength(3);
+        renderer.imagePlaneBatches[0].dispose();
+        source.geometry.dispose();
+        source.material.map.dispose();
+        source.material.dispose();
+    });
+});

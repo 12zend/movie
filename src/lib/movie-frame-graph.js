@@ -15,22 +15,32 @@ const finiteNumber = (value, fallback = 0) => {
     return Number.isFinite(number) ? number : fallback;
 };
 
+const rotationCache = new WeakMap();
+
 const rotatePoint = (point, rotation) => {
     const xRotation = finiteNumber(rotation && rotation.x) * Math.PI / 180;
     const yRotation = finiteNumber(rotation && rotation.y) * Math.PI / 180;
     const zRotation = finiteNumber(rotation && rotation.z) * Math.PI / 180;
     let {x, y, z} = point;
 
-    const xCosine = Math.cos(xRotation);
-    const xSine = Math.sin(xRotation);
+    let cached = rotation && typeof rotation === 'object' ? rotationCache.get(rotation) : null;
+    if (!cached || cached.x !== xRotation || cached.y !== yRotation || cached.z !== zRotation) {
+        cached = {
+            x: xRotation,
+            y: yRotation,
+            z: zRotation,
+            xCosine: Math.cos(xRotation),
+            xSine: Math.sin(xRotation),
+            yCosine: Math.cos(yRotation),
+            ySine: Math.sin(yRotation),
+            zCosine: Math.cos(zRotation),
+            zSine: Math.sin(zRotation)
+        };
+        if (rotation && typeof rotation === 'object') rotationCache.set(rotation, cached);
+    }
+    const {xCosine, xSine, yCosine, ySine, zCosine, zSine} = cached;
     [y, z] = [(y * xCosine) - (z * xSine), (y * xSine) + (z * xCosine)];
-
-    const yCosine = Math.cos(yRotation);
-    const ySine = Math.sin(yRotation);
     [x, z] = [(x * yCosine) + (z * ySine), (-x * ySine) + (z * yCosine)];
-
-    const zCosine = Math.cos(zRotation);
-    const zSine = Math.sin(zRotation);
     [x, y] = [(x * zCosine) - (y * zSine), (x * zSine) + (y * zCosine)];
     return {x, y, z};
 };
@@ -87,16 +97,15 @@ const applyObjectTransforms = (configuration, stack) => {
 };
 
 const executeSequence = (items, execute) => {
-    let pending = null;
-    for (const item of items || []) {
-        if (pending) {
-            pending = pending.then(() => execute(item));
-            continue;
+    if (!items) return;
+    let index = 0;
+    const advance = () => {
+        while (index < items.length) {
+            const result = execute(items[index++]);
+            if (isPromise(result)) return Promise.resolve(result).then(advance);
         }
-        const result = execute(item);
-        if (isPromise(result)) pending = Promise.resolve(result);
-    }
-    if (pending) return pending;
+    };
+    return advance();
 };
 
 const createNode = (type, properties, id) => ({

@@ -6,6 +6,7 @@ import {
     COSTUME_GROUP_SOURCE,
     MovieAssetManager
 } from '../../../src/lib/movie-asset-manager';
+import {TEXT_BITMAP_RESOLUTION} from '../../../src/lib/movie-asset-manager-constants';
 import {FRAME_GRAPH_NODE_TYPES, MovieFrameGraphRenderer} from '../../../src/lib/movie-frame-graph';
 
 const makeManager = () => {
@@ -3541,6 +3542,61 @@ describe('MovieAssetManager rendering performance', () => {
         expect(manager.getTargetState(target).textRenderPromise).toBeNull();
     });
 
+    test('renders text canvases at 8x resolution without changing their logical size', () => {
+        const manager = makeManager();
+        let context;
+        context = {
+            fillText: jest.fn(),
+            font: '',
+            measureText: jest.fn(() => ({
+                width: (parseInt(context.font, 10) / 96) * 100
+            }))
+        };
+        const canvas = {
+            getContext: jest.fn(() => context)
+        };
+        const originalDocument = global.document;
+        global.document = {createElement: jest.fn(() => canvas)};
+
+        try {
+            const rendered = manager.createTextCanvas(
+                {family: 'sans-serif', name: 'sans-serif'},
+                'hello'
+            );
+
+            expect(rendered.width).toBe(1056);
+            expect(rendered.height).toBe(1176);
+            expect(rendered.movieBitmapResolution).toBe(TEXT_BITMAP_RESOLUTION);
+            expect(rendered.width / rendered.movieBitmapResolution).toBe(66);
+            expect(rendered.height / rendered.movieBitmapResolution).toBe(73.5);
+            expect(context.font).toBe('768px sans-serif');
+            expect(context.fillText).toHaveBeenCalledWith('hello', 128, 128);
+        } finally {
+            global.document = originalDocument;
+        }
+    });
+
+    test('uses the high-resolution text bitmap for the regular text skin', () => {
+        const manager = makeManager();
+        const canvas = {width: 100, height: 100, movieBitmapResolution: TEXT_BITMAP_RESOLUTION};
+        manager.createTextCanvas = jest.fn(() => canvas);
+        manager.applyBitmap = jest.fn();
+
+        const target = makeTarget();
+        manager.getTargetState(target);
+        manager.renderText(target, {family: 'sans-serif', name: 'sans-serif'}, 'hello');
+
+        expect(manager.applyBitmap).toHaveBeenCalledWith(
+            expect.any(Object),
+            canvas,
+            'text',
+            null,
+            false,
+            TEXT_BITMAP_RESOLUTION,
+            1
+        );
+    });
+
     test('does not discard text requests while a font is loading', async () => {
         const manager = makeManager();
         const target = makeTarget();
@@ -3555,5 +3611,115 @@ describe('MovieAssetManager rendering performance', () => {
         await renderPromise;
 
         expect(manager.renderText.mock.calls.map(call => call[2])).toEqual(['first', 'latest']);
+    });
+});
+
+
+describe('Objects draw resource scaling', () => {
+    test('uploads two alternating texts only once each for 1000 synchronous draws', () => {
+        const manager = makeManager();
+        const target = makeTarget();
+        manager.applyProjection = jest.fn();
+        manager.createTextCanvas = jest.fn(() => ({width: 32, height: 32}));
+        const font = {name: 'sans', family: 'sans-serif'};
+        manager.getFont = jest.fn(() => font);
+        manager.ensureFontLoaded = jest.fn(() => null);
+        manager.applyObjectDrawConfiguration = jest.fn();
+        manager.finishObjectDraw = jest.fn();
+        let skinId = 0;
+        manager.runtime.renderer.createBitmapSkin.mockImplementation(() => ++skinId);
+        for (let index = 0; index < 1000; index++) {
+            expect(manager.performObjectDraw(target, {source: 'text', text: String(index % 2)})).toBeUndefined();
+        }
+        expect(manager.createTextCanvas).toHaveBeenCalledTimes(2);
+        expect(manager.runtime.renderer.createBitmapSkin).toHaveBeenCalledTimes(2);
+        expect(manager.runtime.renderer.updateBitmapSkin).not.toHaveBeenCalled();
+        expect(manager.finishObjectDraw).toHaveBeenCalledTimes(1000);
+        manager.restoreCustomSkin(target);
+        expect(manager.runtime.renderer.updateDrawableSkinId).toHaveBeenLastCalledWith(target.drawableID, 2);
+    });
+
+    test('keeps shared text alive when another target changes mode or is destroyed', () => {
+        const manager = makeManager();
+        manager.applyProjection = jest.fn();
+        manager.createTextCanvas = jest.fn(() => ({width: 32, height: 32}));
+        manager.runtime.renderer.destroySkin = jest.fn();
+        let skinId = 0;
+        manager.runtime.renderer.createBitmapSkin.mockImplementation(() => ++skinId);
+        const first = makeTarget();
+        const second = {...makeTarget(), id: 'second', drawableID: 2};
+        const font = {name: 'sans', family: 'sans-serif'};
+        manager.renderText(first, font, 'shared');
+        manager.renderText(second, font, 'shared');
+        manager.applyBitmap(first, {width: 32, height: 32}, 'video');
+        expect(manager.getTargetState(first).skinId).toBe(2);
+        manager.destroyTargetState(first);
+        expect(manager.runtime.renderer.destroySkin.mock.calls).toEqual([[2]]);
+        manager.restoreCustomSkin(second);
+        expect(manager.runtime.renderer.updateDrawableSkinId).toHaveBeenLastCalledWith(2, 1);
+        manager.destroyTargetState(second);
+        expect(manager.runtime.renderer.destroySkin.mock.calls).toEqual([[2], [1]]);
+        expect(manager.textSkinCache.size).toBe(0);
+    });
+
+    test('does not reset the active costume in 1000 consecutive draws', () => {
+        const manager = makeManager();
+        const target = {...makeTarget(), currentCostume: 0, setCostume: jest.fn()};
+        manager.applyObjectDrawConfiguration = jest.fn();
+        manager.finishObjectDraw = jest.fn();
+        manager.getCostumeForObjectDraw = jest.fn(() => ({}));
+        manager.getCostumeIndexForObjectDraw = jest.fn(() => 0);
+        for (let index = 0; index < 1000; index++) {
+            expect(manager.performObjectDraw(target, {source: 'costume'})).toBeUndefined();
+        }
+        expect(target.setCostume).not.toHaveBeenCalled();
+        expect(manager.finishObjectDraw).toHaveBeenCalledTimes(1000);
+        manager.getTargetState(target).mode = 'text';
+        manager.performObjectDraw(target, {source: 'costume'});
+        expect(target.setCostume).toHaveBeenCalledTimes(1);
+    });
+
+    test('decodes and uploads one frame for 1000 queued video draws without dropping stamps', async () => {
+        const manager = makeManager();
+        const target = makeTarget();
+        manager.applyProjection = jest.fn();
+        manager.applyObjectDrawConfiguration = jest.fn();
+        manager.finishObjectDraw = jest.fn();
+        const video = {assetId: 'clip', name: 'clip', duration: 10, frameRate: 30};
+        manager.videos.set(target.id, [video]);
+        manager.decodeObjectVideoFrame = jest.fn(async () => ({width: 32, height: 32}));
+        manager.snapshotVideoFrame = jest.fn(async bitmap => ({bitmap, bitmapResolution: 2}));
+        const pending = [];
+        for (let index = 0; index < 1000; index++) {
+            pending.push(manager.queueObjectDraw(target, {source: 'video', asset: 'clip', frame: 4}));
+        }
+        await Promise.all(pending);
+        expect(manager.decodeObjectVideoFrame).toHaveBeenCalledTimes(1);
+        expect(manager.snapshotVideoFrame).toHaveBeenCalledTimes(1);
+        expect(manager.runtime.renderer.createBitmapSkin).toHaveBeenCalledTimes(1);
+        expect(manager.runtime.renderer.updateBitmapSkin).not.toHaveBeenCalled();
+        expect(manager.finishObjectDraw).toHaveBeenCalledTimes(1000);
+    });
+
+    test('shares one video plane and GPU texture across 1000 scene entries', async () => {
+        const manager = makeManager();
+        const target = makeTarget();
+        manager.videos.set(target.id, [{assetId: 'clip', name: 'clip', duration: 10, frameRate: 30}]);
+        manager.decodeObjectVideoFrame = jest.fn(async () => ({width: 32, height: 32}));
+        manager.snapshotVideoFrame = jest.fn(async bitmap => ({bitmap, bitmapResolution: 2}));
+        const frames = new Map();
+        const sources = new Set();
+        for (let index = 0; index < 1000; index++) {
+            const result = await manager.prepareObjectSceneItem(target,
+                {source: 'video', asset: 'clip', frame: 4}, frames);
+            expect(result.ownsResource).toBe(false);
+            sources.add(result.item.sourceObject);
+        }
+        expect(sources.size).toBe(1);
+        expect(manager.decodeObjectVideoFrame).toHaveBeenCalledTimes(1);
+        const plane = frames.get('clip:4').plane;
+        plane.geometry.dispose();
+        plane.material.map.dispose();
+        plane.material.dispose();
     });
 });
