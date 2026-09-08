@@ -1,6 +1,6 @@
 # PenFX shader package 仕様
 
-shading.app の `Looks` カテゴリにある `Import shader` から、PenFX 用の shader package（zip）を読み込めます。読み込んだパッケージは `My Blocks Shader` とは独立した PenFX の機能です。
+shading.app の `Looks` カテゴリにある `Import shader` から、PenFX 用の shader package（zip）を読み込めます。Custom Shader（PenFX）がメインのシェーダー機能です。
 
 既存の PenFX も例外ではありません。59 個の既定ブロックと、それらが使う 26 個の fragment program は
 [`penfx-builtins.zip`](../src/lib/pen-fx/default-shader-package/penfx-builtins.zip) に入っています。起動直後は manifest から

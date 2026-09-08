@@ -513,7 +513,7 @@ class Tab extends EventTargetShim {
                     // procedures_prototype also has a procedure code but we do not want to color them.
                     if (!this.isInsertionMarker() && this.type === 'procedures_call') {
                         const block = this.procCode_ && vm.runtime.getAddonBlock(this.procCode_);
-                        if (block && !block.myBlocksShader) {
+                        if (block) {
                             const theme = reduxInstance.state.scratchGui.theme.theme;
                             const colors = theme.getBlockColors().addons;
                             this.colour_ = colors.primary;

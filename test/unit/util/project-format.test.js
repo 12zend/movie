@@ -73,15 +73,6 @@ describe('Movie project format', () => {
         })).toBe('shade');
     });
 
-    test('marks My Blocks Shader definitions as Movie project data', () => {
-        const json = project({shader: block('myblocksshader_return')});
-
-        expect(getMovieProjectFeatures(json)).toEqual(['my-blocks-shader']);
-        expect(getProjectExtension({
-            targets: [{blocks: {_blocks: json.targets[0].blocks}}]
-        })).toBe('shade');
-    });
-
     test('round-trips custom opcodes and inputs through project.json block serialization', () => {
         const blocks = {
             command: {

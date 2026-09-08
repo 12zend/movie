@@ -712,18 +712,6 @@ const myBlocks = function (isInitialSetup, isStage, targetId, colors) {
     `;
 };
 
-const myBlocksShader = function () {
-    return `
-    <category
-        name="My Blocks Shader"
-        id="myBlocksShader"
-        colour="#FF6680"
-        secondaryColour="#FF4D6A"
-        custom="MY_BLOCKS_SHADER">
-    </category>
-    `;
-};
-
 const proceduralShapeBlocks = function () {
     const number = (name, value) => (
         `<value name="${name}"><shadow type="math_number"><field name="NUM">${value}</field></shadow></value>`
@@ -930,10 +918,6 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
     const variablesXML = moveCategory('data') || variables(isInitialSetup, isStage, targetId, colors.data);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isInitialSetup, isStage, targetId, colors.more);
     const penXML = moveCategory('pen');
-    // The VM registration allows myblocksshader_* opcodes to deserialize. Its
-    // empty extension category is replaced by the native dynamic category.
-    moveCategory('myblocksshader');
-    const myBlocksShaderXML = myBlocksShader();
 
     // Always display TurboWarp blocks as the first extension, if it exists,
     // and also add an "is compiled?" block to the top.
@@ -954,7 +938,6 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         operatorsXML, gap,
         variablesXML, gap,
         myBlocksXML, gap,
-        myBlocksShaderXML, gap,
         ...(penXML ? [penXML, gap] : [])
     ];
 

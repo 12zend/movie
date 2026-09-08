@@ -70,21 +70,7 @@ describe('Movie toolbox categories', () => {
             .toBeLessThan(toolbox.indexOf('<block type="objects_grouping"/>'));
     });
 
-    test('places My Blocks Shader next to My Blocks as a native category', () => {
-        const categories = [{
-            id: 'myblocksshader',
-            xml: '<category id="myblocksshader" name="My Blocks Shader" />'
-        }];
-        const toolbox = makeToolboxXML(false, false, 'target', categories);
-
-        expect(toolbox).toContain('id="myBlocksShader"');
-        expect(toolbox).toContain('custom="MY_BLOCKS_SHADER"');
-        expect(toolbox).toContain('id="myBlocksShader"\n        colour="#FF6680"');
-        expect(toolbox).not.toContain('id="myblocksshader"');
-        expect(toolbox.indexOf('id="myBlocks"')).toBeLessThan(toolbox.indexOf('id="myBlocksShader"'));
-    });
-
-    test('shows the default Pen category below My Blocks Shader', () => {
+    test('shows the default Pen category below My Blocks', () => {
         const categories = [
             {id: 'custom', xml: '<category id="custom" />'},
             {id: 'penfx', xml: '<category id="penfx" />'},
@@ -93,7 +79,7 @@ describe('Movie toolbox categories', () => {
         const toolbox = makeToolboxXML(false, false, 'target', categories);
 
         expect(toolbox).toContain('id="pen"');
-        expect(toolbox.indexOf('id="myBlocksShader"')).toBeLessThan(toolbox.indexOf('id="pen"'));
+        expect(toolbox.indexOf('id="myBlocks"')).toBeLessThan(toolbox.indexOf('id="pen"'));
         expect(toolbox.indexOf('id="sound"')).toBeLessThan(toolbox.indexOf('id="custom"'));
     });
 
