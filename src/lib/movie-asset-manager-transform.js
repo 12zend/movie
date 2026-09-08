@@ -370,6 +370,21 @@ const MovieAssetManagerTransformMethods = {
         if (state.mode === 'model' || state.mode === 'scene') {
             this.runtime.renderer.updateDrawablePosition(target.drawableID, [0, 0]);
             this.runtime.renderer.updateDrawableDirectionScale(target.drawableID, 90, [100, 100]);
+            const drawable = this.runtime.renderer._allDrawables &&
+                this.runtime.renderer._allDrawables[target.drawableID];
+            if (drawable && typeof drawable.getUniforms === 'function') {
+                const uniforms = drawable.getUniforms();
+                const matrix = uniforms && uniforms.u_modelMatrix;
+                if (matrix) {
+                    // Scratch only recalculates the six affine XY entries. Clear the projective
+                    // entries left by spritePlaneMatrix before displaying an already-projected scene.
+                    matrix[2] = matrix[3] = matrix[6] = matrix[7] = 0;
+                    matrix[8] = matrix[9] = matrix[11] = matrix[14] = 0;
+                    matrix[10] = matrix[15] = 1;
+                    drawable._inverseTransformDirty = true;
+                    drawable._transformedHullDirty = true;
+                }
+            }
             this.runtime.renderer.updateDrawableVisible(target.drawableID, target.visible && !state.penOnly);
             if (target.visible) {
                 target.emitVisualChange();

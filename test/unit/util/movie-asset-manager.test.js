@@ -1,4 +1,5 @@
 import RenderedTarget from 'scratch-vm/src/sprites/rendered-target';
+import Drawable from 'scratch-render/src/Drawable';
 import * as THREE from 'three';
 
 import {
@@ -2197,6 +2198,36 @@ describe('MovieAssetManager rendering performance', () => {
         expect(Math.hypot(modelMatrix[8], modelMatrix[9], modelMatrix[11])).toBeGreaterThan(0);
         expect(drawable._inverseTransformDirty).toBe(true);
         expect(drawable._transformedHullDirty).toBe(true);
+    });
+
+    test.each(['model', 'scene'])('clears text perspective when reusing a drawable for %s output', mode => {
+        const manager = makeManager();
+        const target = makeTarget();
+        const drawable = new Drawable(target.drawableID, {});
+        drawable._skin = {size: [640, 360], rotationCenter: [320, 180]};
+        manager.runtime.renderer._allDrawables = {[target.drawableID]: drawable};
+        manager.runtime.renderer.updateDrawablePosition = (id, position) => drawable.updatePosition(position);
+        manager.runtime.renderer.updateDrawableDirectionScale = (id, direction, scale) => {
+            drawable.updateDirection(direction);
+            drawable.updateScale(scale);
+        };
+        manager.camera = {
+            focalLength: 480, position: {x: 0, y: 0, z: 510},
+            rotation: {x: 0, y: -12, z: 0}, rotationOrder: 'XYZ'
+        };
+        const state = manager.getTargetState(target);
+        state.mode = 'text';
+        state.worldZ = 1300;
+        state.rotation = {x: 60, y: 30, z: 0};
+        manager.applyProjection(target);
+        expect(Math.abs(drawable.getUniforms().u_modelMatrix[7])).toBeGreaterThan(0);
+
+        state.mode = mode;
+        manager.applyProjection(target);
+        const expected = new Drawable(2, {});
+        expected._skin = drawable.skin;
+        expect(Array.from(drawable.getUniforms().u_modelMatrix))
+            .toEqual(Array.from(expected.getUniforms().u_modelMatrix));
     });
 
     test('captures per-axis scale in a model scene snapshot', () => {
