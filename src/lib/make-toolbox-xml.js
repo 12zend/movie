@@ -724,18 +724,6 @@ const myBlocksShader = function () {
     `;
 };
 
-const myBlocksScene = function () {
-    return `
-    <category
-        name="My Blocks Scene"
-        id="myBlocksScene"
-        colour="#FF6680"
-        secondaryColour="#FF4D6A"
-        custom="MY_BLOCKS_SCENE">
-    </category>
-    `;
-};
-
 const proceduralShapeBlocks = function () {
     const number = (name, value) => (
         `<value name="${name}"><shadow type="math_number"><field name="NUM">${value}</field></shadow></value>`
@@ -946,10 +934,6 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
     // empty extension category is replaced by the native dynamic category.
     moveCategory('myblocksshader');
     const myBlocksShaderXML = myBlocksShader();
-    // Scene blocks are also registered as an empty VM extension category and
-    // replaced here by the dynamic category populated from the workspace.
-    moveCategory('myblocksscene');
-    const myBlocksSceneXML = myBlocksScene();
 
     // Always display TurboWarp blocks as the first extension, if it exists,
     // and also add an "is compiled?" block to the top.
@@ -971,7 +955,6 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         variablesXML, gap,
         myBlocksXML, gap,
         myBlocksShaderXML, gap,
-        myBlocksSceneXML, gap,
         ...(penXML ? [penXML, gap] : [])
     ];
 

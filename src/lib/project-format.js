@@ -176,8 +176,7 @@ const isMovieBlockOpcode = opcode => (
     ADVANCED_GRAPHIC_BLOCK_SET.has(opcode) ||
     (typeof opcode === 'string' && (
         opcode.startsWith('penfx_') ||
-        opcode.startsWith('myblocksshader_') ||
-        opcode.startsWith('myblocksscene_')
+        opcode.startsWith('myblocksshader_')
     ))
 );
 
@@ -193,10 +192,6 @@ const addBlockFeatures = (features, block) => {
     if (typeof block.opcode === 'string' && block.opcode.startsWith('penfx_')) features.add('pen-fx');
     if (typeof block.opcode === 'string' && block.opcode.startsWith('myblocksshader_')) {
         features.add('my-blocks-shader');
-    }
-    if (typeof block.opcode === 'string' && block.opcode.startsWith('myblocksscene_')) {
-        features.add('my-blocks-scene');
-        features.add('3d-engine');
     }
     if (MOVIE_3D_BLOCKS.includes(block.opcode) || MOVIE_3D_REPORTER_BLOCKS.includes(block.opcode)) {
         features.add('3d-engine');

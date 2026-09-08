@@ -108,8 +108,11 @@ const MovieAssetManagerPrimitiveMethods = {
         primitives.looks_switchmodelto = (args, util) => this.replaceModelScene(util.target, args.MODEL);
         primitives.looks_addrenderingframe = () => this.addRenderingFrame();
         primitives.looks_clearrenderingframe = () => this.clearRenderingFrames();
-        // Rendering export disabled - UI preserved. Block becomes no-op.
-        primitives.looks_exportrenderingmp4 = () => {};
+        primitives.looks_exportrenderingmp4 = (args, util) => this.exportRenderingMp4(
+            util && util.target,
+            args && args.SOUND,
+            args && args.FRAMERATE
+        );
         const stopAllSounds = primitives.sound_stopallsounds;
         primitives.sound_stopallsounds = (args, util) => {
             this.stopTimelineSounds();

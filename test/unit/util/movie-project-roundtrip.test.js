@@ -5,7 +5,6 @@ import VM from 'scratch-vm';
 import sb3 from 'scratch-vm/src/serialization/sb3';
 
 import installMovieAssetManager from '../../../src/lib/movie-asset-manager';
-import installMyBlocksScene from '../../../src/lib/my-blocks-scene';
 import installMyBlocksShader from '../../../src/lib/my-blocks-shader';
 
 const projectJSON = {
@@ -140,81 +139,6 @@ const makeShaderProjectJSON = () => {
     return json;
 };
 
-const makeSceneProjectJSON = () => {
-    const sceneMutation = {
-        tagName: 'mutation',
-        children: [],
-        myblocksscene: 'true',
-        sceneid: 'scene-id',
-        sceneuserproccode: 'box',
-        sceneuserargumentids: '[]',
-        sceneuserargumentnames: '[]',
-        sceneuserargumentdefaults: '[]',
-        scenecoordinateids: '["px-id","py-id","pz-id"]',
-        proccode: 'box %s %s %s',
-        argumentids: '["px-id","py-id","pz-id"]',
-        argumentnames: '["px","py","pz"]',
-        argumentdefaults: '["0","0","0"]',
-        warp: 'true'
-    };
-    const blocks = {
-        definition: shaderBlock('procedures_definition', {
-            next: 'return',
-            inputs: {custom_block: {block: 'prototype', shadow: 'prototype'}},
-            topLevel: true,
-            x: 10,
-            y: 20
-        }),
-        prototype: shaderBlock('procedures_prototype', {
-            parent: 'definition',
-            mutation: sceneMutation,
-            shadow: true
-        }),
-        return: shaderBlock('myblocksscene_return', {
-            parent: 'definition',
-            inputs: {
-                CONDITION: {block: 'less-than', shadow: null},
-                R: {block: 'red', shadow: null},
-                G: {block: 'green', shadow: null},
-                B: {block: 'blue', shadow: null}
-            }
-        }),
-        'less-than': shaderBlock('operator_lt', {
-            parent: 'return',
-            inputs: {
-                OPERAND1: {block: 'p-x', shadow: null},
-                OPERAND2: {block: 'size', shadow: null}
-            }
-        }),
-        'p-x': shaderBlock('myblocksscene_get_x', {parent: 'less-than'}),
-        size: shaderBlock('math_number', {parent: 'less-than', fields: {NUM: {value: '0.65'}}}),
-        red: shaderBlock('math_number', {parent: 'return', fields: {NUM: {value: '0.95'}}}),
-        green: shaderBlock('math_number', {parent: 'return', fields: {NUM: {value: '0.18'}}}),
-        blue: shaderBlock('math_number', {parent: 'return', fields: {NUM: {value: '0.06'}}}),
-        call: shaderBlock('procedures_call', {
-            mutation: {
-                tagName: 'mutation',
-                children: [],
-                myblocksscene: 'true',
-                sceneid: 'scene-id',
-                sceneproccode: 'box %s %s %s',
-                proccode: 'box',
-                argumentids: '[]',
-                argumentnames: '[]',
-                argumentdefaults: '[]',
-                warp: 'true'
-            },
-            topLevel: true,
-            x: 10,
-            y: 180
-        })
-    };
-    const [serializedBlocks] = sb3.serializeBlocks(blocks);
-    const json = JSON.parse(JSON.stringify(projectJSON));
-    json.targets[0].blocks = serializedBlocks;
-    return json;
-};
-
 describe('Movie project save and load', () => {
     test('keeps custom blocks in a marked project.json inside a shade-compatible ZIP', async () => {
         const vm = new VM();
@@ -284,48 +208,5 @@ describe('Movie project save and load', () => {
         }));
         expect(reloadedVM.runtime._primitives.myblocksshader_return({}, {})).toBeUndefined();
         expect(reloadedVM.runtime._primitives.myblocksshader_return_from({}, {})).toBeUndefined();
-    });
-
-    test('round-trips My Blocks Scene definitions, calls and built-in blocks', async () => {
-        const vm = new VM();
-        installMovieAssetManager(vm);
-        installMyBlocksScene(vm);
-        await vm.loadProject(JSON.stringify(makeSceneProjectJSON()));
-
-        expect(vm.extensionManager.isExtensionLoaded('myblocksscene')).toBe(true);
-        const archive = await vm.saveProjectSb3('arraybuffer');
-        const zip = await JSZip.loadAsync(archive);
-        const savedJSON = JSON.parse(await zip.file('project.json').async('string'));
-        expect(savedJSON.mb3).toEqual({
-            version: 1,
-            features: ['3d-engine', 'my-blocks-scene', 'timeline']
-        });
-
-        const reloadedVM = new VM();
-        installMovieAssetManager(reloadedVM);
-        installMyBlocksScene(reloadedVM);
-        await reloadedVM.loadProject(archive);
-
-        const loadedBlocks = Object.values(reloadedVM.runtime.targets[0].blocks._blocks);
-        expect(loadedBlocks.map(block => block.opcode)).toEqual(expect.arrayContaining([
-            'procedures_definition',
-            'procedures_prototype',
-            'procedures_call',
-            'myblocksscene_return',
-            'operator_lt',
-            'myblocksscene_get_x'
-        ]));
-        const loadedPrototype = loadedBlocks.find(block => block.opcode === 'procedures_prototype');
-        const loadedCall = loadedBlocks.find(block => block.opcode === 'procedures_call');
-        expect(loadedPrototype.mutation).toEqual(expect.objectContaining({
-            myblocksscene: 'true',
-            sceneid: 'scene-id',
-            sceneuserproccode: 'box'
-        }));
-        expect(loadedCall.mutation).toEqual(expect.objectContaining({
-            myblocksscene: 'true',
-            sceneid: 'scene-id'
-        }));
-        expect(reloadedVM.runtime._primitives.myblocksscene_return({}, {})).toBeUndefined();
     });
 });

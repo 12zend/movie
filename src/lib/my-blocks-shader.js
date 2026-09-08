@@ -6,7 +6,6 @@
 /* eslint-disable no-console */
 
 const SHADER_MARKER = 'myblocksshader';
-const SCENE_MARKER = 'myblocksscene';
 const SHADER_CALL_OPCODE = 'procedures_call';
 const SHADER_RETURN_OPCODE = 'myblocksshader_return';
 const SHADER_RETURN_FROM_OPCODE = 'myblocksshader_return_from';
@@ -371,8 +370,7 @@ class ShaderExpressionCompiler {
     procedureInfo (procedureCode) {
         for (const prototype of Object.values(this.blocks)) {
             if (prototype.opcode !== 'procedures_prototype' || !prototype.mutation) continue;
-            if (prototype.mutation[SHADER_MARKER] === 'true' ||
-                prototype.mutation[SCENE_MARKER] === 'true') continue;
+            if (prototype.mutation[SHADER_MARKER] === 'true') continue;
             if (prototype.mutation.proccode !== procedureCode) continue;
             const definition = this.block(prototype.parent);
             if (!definition || definition.opcode !== 'procedures_definition') return null;
@@ -1207,7 +1205,6 @@ export {
     SHADER_COMPILER_HELPERS,
     SHADER_GET_OPCODES,
     SHADER_MARKER,
-    SCENE_MARKER,
     SHADER_RETURN_FROM_OPCODE,
     SHADER_RETURN_OPCODE,
     MyBlocksShaderManager,

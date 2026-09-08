@@ -2,7 +2,6 @@ import {
     SHADER_CALL_OPCODE,
     SHADER_GET_OPCODES,
     SHADER_MARKER,
-    SCENE_MARKER,
     SHADER_RETURN_FROM_OPCODE,
     SHADER_RETURN_OPCODE
 } from './my-blocks-shader';
@@ -24,16 +23,6 @@ const SHADER_ATTRIBUTES = [
     'shadercoordids'
 ];
 const SHADER_CALL_ATTRIBUTES = [SHADER_MARKER, 'shaderid', 'shaderproccode'];
-const SCENE_ATTRIBUTES = [
-    SCENE_MARKER,
-    'sceneid',
-    'sceneuserproccode',
-    'sceneuserargumentids',
-    'sceneuserargumentnames',
-    'sceneuserargumentdefaults',
-    'scenecoordinateids'
-];
-const SCENE_CALL_ATTRIBUTES = [SCENE_MARKER, 'sceneid', 'sceneproccode'];
 
 const lockShaderColour = block => {
     if (!block || typeof block.setColour !== 'function') return;
@@ -120,14 +109,10 @@ const patchProcedureMutations = ScratchBlocks => {
         const originalFromDom = procedureDefinition.domToMutation;
         procedureDefinition.mutationToDom = function (...args) {
             const mutation = originalToDom.apply(this, args);
-            const attributes = this.myBlocksShaderAttributes_ ?
-                {values: this.myBlocksShaderAttributes_, names: SHADER_ATTRIBUTES} :
-                (this.myBlocksSceneAttributes_ ?
-                    {values: this.myBlocksSceneAttributes_, names: SCENE_ATTRIBUTES} : null);
-            if (attributes) {
-                for (const name of attributes.names) {
-                    if (attributes.values[name] !== null) {
-                        mutation.setAttribute(name, attributes.values[name]);
+            if (this.myBlocksShaderAttributes_) {
+                for (const name of SHADER_ATTRIBUTES) {
+                    if (this.myBlocksShaderAttributes_[name] !== null) {
+                        mutation.setAttribute(name, this.myBlocksShaderAttributes_[name]);
                     }
                 }
             }
@@ -141,19 +126,10 @@ const patchProcedureMutations = ScratchBlocks => {
                     this.myBlocksShaderAttributes_[name] = mutation.getAttribute(name);
                 }
                 lockShaderColour(this);
-            } else if (mutation.getAttribute(SCENE_MARKER) === 'true') {
-                this.myBlocksSceneAttributes_ = {};
-                for (const name of SCENE_ATTRIBUTES) {
-                    this.myBlocksSceneAttributes_[name] = mutation.getAttribute(name);
-                }
-                lockShaderColour(this);
             }
         };
     };
 
-    // The declaration editor uses procedures_declaration rather than the
-    // procedures_prototype block. Preserve the family metadata there too so
-    // editing a Scene can keep its stable ID and user-facing arguments.
     patchProcedureDefinition(ScratchBlocks.Blocks.procedures_prototype);
     patchProcedureDefinition(ScratchBlocks.Blocks.procedures_declaration);
 
@@ -167,13 +143,9 @@ const patchProcedureMutations = ScratchBlocks => {
         const originalOnChange = caller.onchange;
         caller.mutationToDom = function (...args) {
             const mutation = originalToDom.apply(this, args);
-            const attributes = this.myBlocksShaderAttributes_ ?
-                {values: this.myBlocksShaderAttributes_, names: SHADER_CALL_ATTRIBUTES} :
-                (this.myBlocksSceneAttributes_ ?
-                    {values: this.myBlocksSceneAttributes_, names: SCENE_CALL_ATTRIBUTES} : null);
-            if (attributes) {
-                for (const name of attributes.names) {
-                    const value = attributes.values[name];
+            if (this.myBlocksShaderAttributes_) {
+                for (const name of SHADER_CALL_ATTRIBUTES) {
+                    const value = this.myBlocksShaderAttributes_[name];
                     if (value !== null) mutation.setAttribute(name, value);
                 }
             }
@@ -187,23 +159,17 @@ const patchProcedureMutations = ScratchBlocks => {
                     this.myBlocksShaderAttributes_[name] = mutation.getAttribute(name);
                 }
                 lockShaderColour(this);
-            } else if (mutation.getAttribute(SCENE_MARKER) === 'true') {
-                this.myBlocksSceneAttributes_ = {};
-                for (const name of SCENE_CALL_ATTRIBUTES) {
-                    this.myBlocksSceneAttributes_[name] = mutation.getAttribute(name);
-                }
-                lockShaderColour(this);
             }
         };
         caller.updateDisplay_ = function (...args) {
             const result = originalUpdateDisplay.apply(this, args);
-            if (this.myBlocksShaderAttributes_ || this.myBlocksSceneAttributes_) lockShaderColour(this);
+            if (this.myBlocksShaderAttributes_) lockShaderColour(this);
             return result;
         };
         caller.onchange = function (...args) {
             let result;
             if (originalOnChange) result = originalOnChange.apply(this, args);
-            if (this.myBlocksShaderAttributes_ || this.myBlocksSceneAttributes_) lockShaderColour(this);
+            if (this.myBlocksShaderAttributes_) lockShaderColour(this);
             return result;
         };
     }
@@ -215,10 +181,7 @@ const patchProcedureMutations = ScratchBlocks => {
             if (!node || String(node.tagName).toLowerCase() !== 'block') return true;
             const mutation = Array.from(node.childNodes || []).find(child =>
                 child && String(child.tagName).toLowerCase() === 'mutation');
-            return !mutation || (
-                mutation.getAttribute(SHADER_MARKER) !== 'true' &&
-                mutation.getAttribute(SCENE_MARKER) !== 'true'
-            );
+            return !mutation || mutation.getAttribute(SHADER_MARKER) !== 'true';
         });
     }
 
@@ -226,18 +189,14 @@ const patchProcedureMutations = ScratchBlocks => {
         ScratchBlocks.Procedures.myBlocksShaderEditorPatched_ = true;
         const originalEdit = ScratchBlocks.Procedures.editProcedureCallback_;
         ScratchBlocks.Procedures.editProcedureCallback_ = block => {
-            if (block && block.type === SHADER_CALL_OPCODE &&
-                (block.myBlocksShaderAttributes_ || block.myBlocksSceneAttributes_)) {
+            if (block && block.type === SHADER_CALL_OPCODE && block.myBlocksShaderAttributes_) {
                 const workspace = block.workspace.isFlyout ? block.workspace.targetWorkspace : block.workspace;
-                const attributes = block.myBlocksShaderAttributes_ || block.myBlocksSceneAttributes_;
-                const id = attributes.shaderid || attributes.sceneid;
+                const attributes = block.myBlocksShaderAttributes_;
+                const id = attributes.shaderid;
                 const familyPrototype = workspace.getAllBlocks().find(candidate => {
                     if (candidate.type !== 'procedures_prototype') return false;
-                    const candidateAttributes = candidate.myBlocksShaderAttributes_ ||
-                        candidate.myBlocksSceneAttributes_;
-                    return Boolean(candidateAttributes && (
-                        candidateAttributes.shaderid === id || candidateAttributes.sceneid === id
-                    ));
+                    const candidateAttributes = candidate.myBlocksShaderAttributes_;
+                    return Boolean(candidateAttributes && candidateAttributes.shaderid === id);
                 });
                 if (familyPrototype) return originalEdit(familyPrototype);
             }

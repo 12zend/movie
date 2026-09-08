@@ -7,13 +7,7 @@ import {
     toNumber
 } from './movie-asset-manager-utils';
 
-const RENDERING_EXPORT_DISABLED_MESSAGE =
-    'Rendering export is disabled (UI preserved). ' +
-    'Restore src/lib/movie-asset-manager-sound-export.js to re-enable.';
-
 const MovieAssetManagerSoundExportMethods = {
-    // Rendering export system disabled - UI preserved. Timeline orchestration remains,
-    // but final export step throws RENDERING_EXPORT_DISABLED_MESSAGE.
     renderAndExportTimeline (options = {}) {
         let cancelled = false;
         let renderErrorEmitted = false;
@@ -574,8 +568,20 @@ const MovieAssetManagerSoundExportMethods = {
         this.emit('renderingFramesChanged', 0);
     },
 
-    exportTimeline () {
-        throw new Error(RENDERING_EXPORT_DISABLED_MESSAGE);
+    exportTimeline (options = {}) {
+        const target = this.runtime.targets.find(item => item.isOriginal && !item.isStage);
+        const format = this.normalizeRenderingFormat(options.format || this.timeline.exportFormat);
+        if (format === 'png-sequence') return this.exportRenderingPngSequence();
+        if (format === 'png-frame') return this.exportRenderingFramePng(options.frameIndex);
+        if (format === 'audio-wav') {
+            return this.exportRenderingAudioWav(target, this.timeline.sound, this.timeline.framerate);
+        }
+        return this.exportRenderingVideo(
+            target,
+            this.timeline.sound,
+            this.timeline.framerate,
+            format
+        );
     },
 
     getRenderingSound (target, requestedSound) {

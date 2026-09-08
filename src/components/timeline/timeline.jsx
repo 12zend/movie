@@ -430,8 +430,6 @@ class Timeline extends React.Component {
     }
 
     handleExport () {
-        // Rendering export system disabled - UI preserved.
-        // Keep settings update for preview, but show disabled message for export.
         const settings = this.state.draft || this.state.timeline;
         this.manager.updateTimelineSettings({
             duration: Number(settings.duration),
@@ -443,11 +441,22 @@ class Timeline extends React.Component {
             reuseFrames: settings.reuseFrames,
             width: Number(settings.width)
         });
-        this.setState({
-            exportError: 'Rendering export is disabled (UI preserved). Restore export system to re-enable.',
-            exporting: false
-        });
-        return Promise.resolve();
+        this.setState({exportError: '', exporting: true});
+        const finish = error => {
+            if (!this.unmounted) {
+                this.setState({
+                    exportError: error && error.message ? error.message : '',
+                    exporting: false
+                });
+            }
+        };
+        const singleFrame = settings.exportFormat === 'png-frame';
+        return this.manager.renderAndExportTimeline({
+            end: singleFrame ? this.state.timeline.currentTime : Number(settings.rangeEnd),
+            format: settings.exportFormat,
+            reuseFrames: settings.reuseFrames === true,
+            start: singleFrame ? this.state.timeline.currentTime : Number(settings.rangeStart)
+        }).then(() => finish(), finish);
     }
 
     renderSettings () {

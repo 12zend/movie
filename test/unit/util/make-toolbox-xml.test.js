@@ -84,19 +84,6 @@ describe('Movie toolbox categories', () => {
         expect(toolbox.indexOf('id="myBlocks"')).toBeLessThan(toolbox.indexOf('id="myBlocksShader"'));
     });
 
-    test('places My Blocks Scene below My Blocks Shader as a native category', () => {
-        const categories = [{
-            id: 'myblocksscene',
-            xml: '<category id="myblocksscene" name="My Blocks Scene" />'
-        }];
-        const toolbox = makeToolboxXML(false, false, 'target', categories);
-
-        expect(toolbox).toContain('id="myBlocksScene"');
-        expect(toolbox).toContain('custom="MY_BLOCKS_SCENE"');
-        expect(toolbox).not.toContain('id="myblocksscene"');
-        expect(toolbox.indexOf('id="myBlocksShader"')).toBeLessThan(toolbox.indexOf('id="myBlocksScene"'));
-    });
-
     test('shows the default Pen category below My Blocks Shader', () => {
         const categories = [
             {id: 'custom', xml: '<category id="custom" />'},

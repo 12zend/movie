@@ -82,15 +82,6 @@ describe('Movie project format', () => {
         })).toBe('shade');
     });
 
-    test('marks My Blocks Scene definitions as 3D Movie project data', () => {
-        const json = project({scene: block('myblocksscene_return')});
-
-        expect(getMovieProjectFeatures(json)).toEqual(['3d-engine', 'my-blocks-scene']);
-        expect(getProjectExtension({
-            targets: [{blocks: {_blocks: json.targets[0].blocks}}]
-        })).toBe('shade');
-    });
-
     test('round-trips custom opcodes and inputs through project.json block serialization', () => {
         const blocks = {
             command: {
