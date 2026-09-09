@@ -2,22 +2,16 @@ import JSZip from '@turbowarp/jszip';
 import WavEncoder from 'wav-encoder';
 
 import {
-    MP4_AUDIO_MIME_TYPES,
-    MP4_VIDEO_MIME_TYPES,
     RENDERING_FILE_NAME,
     RENDERING_DEFAULT_FRAME_RATE,
     RENDERING_FORMATS,
     RENDERING_MASTER_GAIN,
-    RENDERING_MAX_FRAME_RATE,
-    WEBM_AUDIO_MIME_TYPES,
-    WEBM_VIDEO_MIME_TYPES
+    RENDERING_MAX_FRAME_RATE
 } from './movie-asset-manager-constants';
 import {
     canvasToBlob,
     clamp,
-    now,
-    toNumber,
-    wait
+    toNumber
 } from './movie-asset-manager-utils';
 import downloadBlob from './download-blob';
 
@@ -139,27 +133,9 @@ const MovieAssetManagerRenderExportMethods = {
         return RENDERING_FORMATS.includes(format) ? format : 'mp4';
     },
 
-    getRenderingVideoMimeType (format, includeAudio) {
-        if (typeof MediaRecorder === 'undefined') {
-            throw new Error('This browser does not support video rendering.');
-        }
-        const normalizedFormat = this.normalizeRenderingFormat(format);
-        const candidates = normalizedFormat === 'webm' ?
-            (includeAudio ? WEBM_AUDIO_MIME_TYPES : WEBM_VIDEO_MIME_TYPES) :
-            (includeAudio ? MP4_AUDIO_MIME_TYPES : MP4_VIDEO_MIME_TYPES);
-        if (typeof MediaRecorder.isTypeSupported !== 'function') return candidates[candidates.length - 1];
-        for (const candidate of candidates) {
-            try {
-                if (MediaRecorder.isTypeSupported(candidate)) return candidate;
-            } catch (error) {
-                // Some browsers throw when they see a codec they do not recognize.
-            }
-        }
-        throw new Error(`This browser cannot encode ${normalizedFormat.toUpperCase()} with MediaRecorder.`);
-    },
-
-    getRenderingMp4MimeType (includeAudio) {
-        return this.getRenderingVideoMimeType('mp4', includeAudio);
+    getRenderingMp4MimeType () {
+        // Kept for compatibility; mediabunny handles codec selection.
+        return 'video/mp4';
     },
 
     getRenderingAudioMasterGain (clips) {
@@ -209,7 +185,7 @@ const MovieAssetManagerRenderExportMethods = {
         return {input, nodes};
     },
 
-    async encodeRenderingFramesWithMediabunny (frames, framerate, audio, format = 'mp4', options = {}) {
+    async encodeRenderingFrames (frames, framerate, audio, format = 'mp4', options = {}) {
         if (!Array.isArray(frames) || frames.length === 0) {
             throw new Error('Add at least one rendering frame before exporting.');
         }
@@ -389,213 +365,6 @@ const MovieAssetManagerRenderExportMethods = {
                 // the timeline's audioContext is not closed.
             }
         }
-    },
-
-    async encodeRenderingFramesWithMediaRecorder (frames, framerate, audio, format = 'mp4') {
-        if (typeof document === 'undefined' || typeof MediaStream === 'undefined') {
-            throw new Error('Rendering export is only available in a browser.');
-        }
-        const firstFrame = frames[0];
-        const [stageWidth, stageHeight] = this.getStageSize();
-        const width = Math.max(1, Number(firstFrame.width) || stageWidth);
-        const height = Math.max(1, Number(firstFrame.height) || stageHeight);
-        const canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
-        const context = canvas.getContext('2d');
-        if (!context) throw new Error('Could not create the rendering export canvas.');
-
-        const drawFrame = frame => {
-            context.clearRect(0, 0, width, height);
-            context.drawImage(frame, 0, 0, width, height);
-        };
-        drawFrame(firstFrame);
-        if (typeof canvas.captureStream !== 'function') {
-            throw new Error('This browser cannot capture rendering frames.');
-        }
-
-        // Prefer explicit frame capture so MediaRecorder can never sample the export canvas between clearing it
-        // and drawing the completed frame. Fall back to timed capture for browsers without requestFrame().
-        let videoStream = canvas.captureStream(0);
-        let videoTrack = videoStream.getVideoTracks()[0];
-        if (!videoTrack) throw new Error('Could not create a video stream for the rendering.');
-        const manuallyCaptureFrames = typeof videoTrack.requestFrame === 'function';
-        if (!manuallyCaptureFrames) {
-            videoTrack.stop();
-            videoStream = canvas.captureStream(framerate);
-            videoTrack = videoStream.getVideoTracks()[0];
-            if (!videoTrack) throw new Error('Could not create a video stream for the rendering.');
-        }
-        const recordingStream = new MediaStream();
-        recordingStream.addTrack(videoTrack);
-
-        const audioSources = [];
-        let audioDestination = null;
-        let audioMasterNodes = [];
-        if (audio) {
-            if (!audio.context || typeof audio.context.createMediaStreamDestination !== 'function') {
-                throw new Error('This browser cannot add audio to the rendering.');
-            }
-            audioDestination = audio.context.createMediaStreamDestination();
-            const audioMaster = this.createRenderingAudioMaster(audio.context, audioDestination, audio.clips);
-            audioMasterNodes = audioMaster.nodes;
-            for (const clip of audio.clips) {
-                const source = audio.context.createBufferSource();
-                const nodes = [source];
-                source.buffer = clip.buffer;
-                source.playbackRate.value = clip.playbackRate;
-                let output = source;
-                if (typeof audio.context.createStereoPanner === 'function') {
-                    const panNode = audio.context.createStereoPanner();
-                    panNode.pan.value = clip.pan;
-                    output.connect(panNode);
-                    output = panNode;
-                    nodes.push(panNode);
-                }
-                if (typeof audio.context.createGain === 'function') {
-                    const gainNode = audio.context.createGain();
-                    gainNode.gain.value = clip.volume;
-                    output.connect(gainNode);
-                    output = gainNode;
-                    nodes.push(gainNode);
-                }
-                output.connect(audioMaster.input);
-                audioSources.push({
-                    duration: clip.duration,
-                    nodes,
-                    offset: clip.offset,
-                    source,
-                    startTime: clip.startTime
-                });
-            }
-            const audioTrack = audioDestination.stream.getAudioTracks()[0];
-            if (!audioTrack) throw new Error('Could not create an audio stream for the rendering.');
-            recordingStream.addTrack(audioTrack);
-        }
-
-        const mimeType = this.getRenderingVideoMimeType(format, Boolean(audio));
-        const recorder = new MediaRecorder(recordingStream, {mimeType});
-        const chunks = [];
-        let recordingError = null;
-        let finished = false;
-
-        const cleanup = () => {
-            if (finished) return;
-            finished = true;
-            for (const audioSource of audioSources) {
-                try {
-                    audioSource.source.stop();
-                } catch (error) {
-                    // The source may not have started if recording setup failed.
-                }
-                audioSource.nodes.forEach(node => {
-                    if (typeof node.disconnect === 'function') node.disconnect();
-                });
-            }
-            audioMasterNodes.forEach(node => {
-                if (typeof node.disconnect === 'function') node.disconnect();
-            });
-            if (audioDestination && typeof audioDestination.disconnect === 'function') {
-                audioDestination.disconnect();
-            }
-            recordingStream.getTracks().forEach(track => track.stop());
-            if (audio && audio.ownsContext && audio.context && typeof audio.context.close === 'function') {
-                const closePromise = audio.context.close();
-                if (closePromise && typeof closePromise.catch === 'function') closePromise.catch(() => {});
-            }
-        };
-
-        let resolveRecording;
-        let rejectRecording;
-        const recordingPromise = new Promise((resolve, reject) => {
-            resolveRecording = resolve;
-            rejectRecording = reject;
-        });
-        const finishRecording = error => {
-            if (finished) return;
-            cleanup();
-            if (error) {
-                rejectRecording(error);
-            } else {
-                resolveRecording(new Blob(chunks, {type: mimeType}));
-            }
-        };
-        const failRecording = error => {
-            recordingError = error instanceof Error ? error : new Error(String(error));
-            if (recorder.state === 'inactive') {
-                finishRecording(recordingError);
-                return;
-            }
-            try {
-                recorder.stop();
-            } catch (stopError) {
-                finishRecording(recordingError);
-            }
-        };
-
-        recorder.ondataavailable = event => {
-            if (event.data && event.data.size !== 0) chunks.push(event.data);
-        };
-        recorder.onerror = event => failRecording(
-            (event && event.error) || new Error('The MP4 renderer encountered an error.')
-        );
-        recorder.onstop = () => finishRecording(recordingError);
-
-        try {
-            if (audio && audio.context && typeof audio.context.resume === 'function') {
-                await audio.context.resume();
-            }
-            recorder.start();
-            const audioStartTime = audio && audio.context ? audio.context.currentTime : 0;
-            for (const audioSource of audioSources) {
-                const scheduledStart = audioStartTime + audioSource.startTime;
-                audioSource.source.start(scheduledStart, audioSource.offset);
-                if (Number.isFinite(Number(audioSource.duration))) {
-                    audioSource.source.stop(scheduledStart + Math.max(0, Number(audioSource.duration)));
-                }
-            }
-
-            const frameDuration = 1000 / framerate;
-            const startTime = now();
-            if (manuallyCaptureFrames) videoTrack.requestFrame();
-            for (let index = 1; index < frames.length; index++) {
-                await wait(Math.max(0, startTime + (index * frameDuration) - now()));
-                drawFrame(frames[index]);
-                if (manuallyCaptureFrames) videoTrack.requestFrame();
-            }
-            await wait(Math.max(0, startTime + (frames.length * frameDuration) - now()));
-            if (recorder.state !== 'inactive') recorder.stop();
-        } catch (error) {
-            failRecording(error);
-        }
-
-        return recordingPromise;
-    },
-
-    async encodeRenderingFrames (frames, framerate, audio, format = 'mp4', options = {}) {
-        if (!Array.isArray(frames) || frames.length === 0) {
-            throw new Error('Add at least one rendering frame before exporting.');
-        }
-        // Prefer deterministic WebCodecs encoding (via mediabunny) when available.
-        // This writes every frame at an exact timestamp (frame / framerate) instead of
-        // relying on MediaRecorder's wall-clock sampling, which can pause or duplicate
-        // frames between clearRect/drawImage.
-        if (typeof VideoEncoder !== 'undefined') {
-            try {
-                return await this.encodeRenderingFramesWithMediabunny(frames, framerate, audio, format, options);
-            } catch (error) {
-                // If the mediabunny path fails for an encoding reason, fall back to MediaRecorder
-                // only when the browser actually supports it. Re-throw AbortError or explicit
-                // unsupported errors.
-                if (error && (error.name === 'AbortError' ||
-                    /WebCodecs is unavailable|Cannot encode video/.test(error.message))) {
-                    throw error;
-                }
-                if (typeof MediaStream === 'undefined' || typeof MediaRecorder === 'undefined') throw error;
-                // Fall through to MediaRecorder fallback for other transient mediabunny errors.
-            }
-        }
-        return this.encodeRenderingFramesWithMediaRecorder(frames, framerate, audio, format);
     },
 
     async exportRenderingVideo (target, requestedSound, requestedFramerate, requestedFormat = 'mp4', options = {}) {
