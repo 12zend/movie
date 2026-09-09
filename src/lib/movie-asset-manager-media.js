@@ -706,16 +706,30 @@ const MovieAssetManagerMediaMethods = {
             return cached.canvas;
         }
         const lines = text.split(/\r?\n/);
-        const fontSize = TEXT_FONT_SIZE * TEXT_RENDER_SCALE;
-        const padding = TEXT_PADDING * TEXT_RENDER_SCALE;
-        const lineHeight = TEXT_LINE_HEIGHT * TEXT_RENDER_SCALE;
+        const baseFontSize = TEXT_FONT_SIZE * TEXT_RENDER_SCALE;
+        const basePadding = TEXT_PADDING * TEXT_RENDER_SCALE;
+        const baseLineHeight = TEXT_LINE_HEIGHT * TEXT_RENDER_SCALE;
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        context.font = `${fontSize}px ${font.family}`;
+        context.font = `${baseFontSize}px ${font.family}`;
         const width = Math.max(2, ...lines.map(line => Math.ceil(context.measureText(line || ' ').width)));
-        canvas.width = Math.min(4096, width + (padding * 2));
-        canvas.height = Math.min(4096, Math.max(2, (lineHeight * lines.length) + (padding * 2)));
-        canvas.movieBitmapResolution = TEXT_BITMAP_RESOLUTION;
+        const requestedWidth = width + (basePadding * 2);
+        const requestedHeight = Math.max(2, (baseLineHeight * lines.length) + (basePadding * 2));
+        const maxEdge = 4096;
+        let scale = 1;
+        if (requestedWidth > maxEdge || requestedHeight > maxEdge ||
+            (requestedWidth * requestedHeight) > MAX_TEXT_CANVAS_PIXELS) {
+            const scaleX = maxEdge / requestedWidth;
+            const scaleY = maxEdge / requestedHeight;
+            const scaleArea = Math.sqrt(MAX_TEXT_CANVAS_PIXELS / (requestedWidth * requestedHeight));
+            scale = Math.min(1, scaleX, scaleY, scaleArea);
+        }
+        const fontSize = baseFontSize * scale;
+        const padding = basePadding * scale;
+        const lineHeight = baseLineHeight * scale;
+        canvas.width = Math.max(2, Math.ceil(requestedWidth * scale));
+        canvas.height = Math.max(2, Math.ceil(requestedHeight * scale));
+        canvas.movieBitmapResolution = TEXT_BITMAP_RESOLUTION * scale;
         context.font = `${fontSize}px ${font.family}`;
         context.fillStyle = '#000000';
         context.textBaseline = 'top';
@@ -743,16 +757,19 @@ const MovieAssetManagerMediaMethods = {
         let entry = this.textSkinCache.get(key);
         if (!entry) {
             const canvas = this.createTextCanvas(font, text);
+            const resolution = Number(canvas.movieBitmapResolution) > 0 ?
+                Number(canvas.movieBitmapResolution) : TEXT_BITMAP_RESOLUTION;
             entry = {
                 canvas,
                 pixels: canvas.width * canvas.height,
-                skinId: this.runtime.renderer.createBitmapSkin(canvas, TEXT_BITMAP_RESOLUTION)
+                resolution,
+                skinId: this.runtime.renderer.createBitmapSkin(canvas, resolution)
             };
             this.textSkinCachePixels += entry.pixels;
         }
         this.textSkinCache.delete(key);
         this.textSkinCache.set(key, entry);
-        this.applyBitmap(target, entry.canvas, 'text', null, false, TEXT_BITMAP_RESOLUTION, entry.skinId);
+        this.applyBitmap(target, entry.canvas, 'text', null, false, entry.resolution, entry.skinId);
         this.trimTextSkinCache();
     },
 
