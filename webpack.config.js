@@ -64,7 +64,11 @@ const base = {
         symlinks: false,
         alias: {
             'text-encoding$': path.resolve(__dirname, 'src/lib/tw-text-encoder'),
-            'scratch-render-fonts$': path.resolve(__dirname, 'src/lib/tw-scratch-render-fonts')
+            'scratch-render-fonts$': path.resolve(__dirname, 'src/lib/tw-scratch-render-fonts'),
+            // Webpack 4 does not consistently resolve Mediabunny's conditional
+            // exports and can fall back to its TypeScript source tree. Point
+            // it at the already-built browser modules explicitly.
+            'mediabunny$': path.resolve(__dirname, 'node_modules/mediabunny/dist/modules/src/index.js')
         }
     },
     module: {
@@ -79,7 +83,8 @@ const base = {
                 path.resolve(__dirname, 'src'),
                 /node_modules[\\/]scratch-[^\\/]+[\\/]src/,
                 /node_modules[\\/]pify/,
-                /node_modules[\\/]@vernier[\\/]godirect/
+                /node_modules[\\/]@vernier[\\/]godirect/,
+                /node_modules[\\/]mediabunny/
             ],
             options: {
                 // Explicitly disable babelrc so we don't catch various config
