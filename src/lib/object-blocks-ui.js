@@ -1150,8 +1150,6 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
             this.setPreviousStatement(true);
             this.setNextStatement(true);
             this.setOutputShape(ScratchBlocks.OUTPUT_SHAPE_SQUARE);
-            this.renderCompute_ = makeObjectRowsRenderer(ScratchBlocks);
-            this.renderDrawRight_ = makeObjectRightEdgeRenderer(ScratchBlocks);
             this.setOnChange(function () {
                 // ScratchBlocks binds onchange handlers to the block instance.
                 // eslint-disable-next-line no-invalid-this
@@ -1306,8 +1304,6 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
             this.setPreviousStatement(true);
             this.setNextStatement(true);
             this.setOutputShape(ScratchBlocks.OUTPUT_SHAPE_SQUARE);
-            this.renderCompute_ = makeObjectRowsRenderer(ScratchBlocks);
-            this.renderDrawRight_ = makeObjectRightEdgeRenderer(ScratchBlocks);
             this.setOnChange(function () {
                 // ScratchBlocks binds onchange handlers to the block instance.
                 // eslint-disable-next-line no-invalid-this
@@ -1350,8 +1346,6 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
                 this.setPreviousStatement(true);
                 this.setNextStatement(true);
                 this.setOutputShape(ScratchBlocks.OUTPUT_SHAPE_SQUARE);
-                this.renderCompute_ = makeObjectRowsRenderer(ScratchBlocks);
-                this.renderDrawRight_ = makeObjectRightEdgeRenderer(ScratchBlocks);
             }
         };
     };
