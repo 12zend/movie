@@ -12,7 +12,7 @@ describe('Movie toolbox categories', () => {
         const categories = [{id: 'objects', xml: '<category id="objects" />'}];
         const toolbox = makeToolboxXML(false, false, 'target', categories, 'costume1');
 
-        expect(toolbox).toContain('<category name="Objects" id="objects"');
+        expect(toolbox).toContain('<category name="レイヤー" id="objects"');
         expect(toolbox).not.toContain('<category name="Shape"');
         expect(toolbox).not.toContain('<category name="Arc"');
         expect(toolbox).not.toContain('<category name="Circular Segment"');
@@ -48,14 +48,18 @@ describe('Movie toolbox categories', () => {
         expect(toolbox).toContain('<value name="START"><shadow type="math_angle"><field name="NUM">0</field>');
         expect(toolbox).toContain('<field name="ASSET">costume1</field>');
         expect(toolbox).toContain('<block type="objects_grouping"/>');
-        expect(toolbox).toContain('<block type="objects_scene"/>');
-        expect(toolbox).toContain('<block type="looks_clearlight"/>');
-        expect(toolbox).toContain('<block type="looks_addpointlight">');
-        expect(toolbox).toContain('<block type="looks_addlight">');
-        expect(toolbox.indexOf('type="looks_clearlight"')).toBeGreaterThan(toolbox.indexOf('id="objects"'));
-        expect(toolbox.indexOf('type="looks_addlight"')).toBeLessThan(toolbox.indexOf('</category>'));
+        expect(toolbox).not.toContain('<block type="objects_scene"/>');
+        expect(toolbox).not.toContain('<block type="objects_timelineTime"/>');
+        expect(toolbox).not.toContain('<block type="objects_leftKeyframeTime">');
+        expect(toolbox).not.toContain('<block type="objects_posterizeTime">');
+        expect(toolbox).not.toContain('<block type="objects_interpolateColor">');
+        expect(toolbox).not.toContain('<block type="looks_clearlight"/>');
+        expect(toolbox).not.toContain('<block type="looks_addpointlight">');
+        expect(toolbox).not.toContain('<block type="looks_addlight">');
+        expect(toolbox).toContain('<block type="objects_timeWithin">');
+        expect(toolbox).toContain('<block type="objects_keyframeTime">');
         expect(toolbox.indexOf('<block type="objects_grouping"/>'))
-            .toBeLessThan(toolbox.indexOf('<block type="objects_scene"/>'));
+            .toBeLessThan(toolbox.indexOf('<block type="objects_timeWithin">'));
         expect(toolbox.indexOf('id="objects"')).toBeLessThan(toolbox.indexOf('id="motion"'));
         expect(toolbox.indexOf('id="objects"')).toBeLessThan(toolbox.indexOf('id="sound"'));
         expect(toolbox.indexOf('<block type="objects_draw">'))
@@ -111,7 +115,7 @@ describe('Movie toolbox categories', () => {
     test('renames Motion to Camera and only offers camera controls', () => {
         const toolbox = makeToolboxXML(false, false, 'target', []);
 
-        expect(toolbox).toContain('<category name="Camera" id="motion"');
+        expect(toolbox).toContain('<category name="カメラ" id="motion"');
         expect(toolbox).toContain('type="motion_setcamerato"');
         expect(toolbox).toContain('type="motion_lookat"');
         expect(toolbox).not.toContain('type="motion_gotoxyz"');

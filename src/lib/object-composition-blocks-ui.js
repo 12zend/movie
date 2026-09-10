@@ -16,7 +16,7 @@ const easingOptions = ANIMATION_EASING_TYPES.map(type => [
 ]);
 
 const objectDefinition = definition => Object.assign({
-    category: 'Objects',
+    category: 'レイヤー',
     colour: PRIMARY,
     colourSecondary: SECONDARY,
     colourTertiary: TERTIARY
@@ -56,7 +56,7 @@ const installObjectCompositionBlockDefinitions = ScratchBlocks => {
     });
 
     installObjectBlock('objects_transform', {
-        message0: 'transform',
+        message0: '移動',
         message1: 'position x: %1 y: %2 z: %3',
         args1: [numberInput('PX'), numberInput('PY'), numberInput('PZ')],
         message2: 'anchor x: %1 y: %2 z: %3',
@@ -72,7 +72,7 @@ const installObjectCompositionBlockDefinitions = ScratchBlocks => {
     });
 
     installObjectBlock('objects_composite', {
-        message0: 'composite opacity: %1 %% blend mode: %2',
+        message0: '合成 不透明度: %1 %% ブレンド: %2',
         args0: [
             numberInput('OPACITY'),
             {
@@ -202,7 +202,7 @@ const installObjectCompositionBlockDefinitions = ScratchBlocks => {
     });
 
     installObjectBlock('objects_keyframeTime', {
-        message0: 'keyframe %1 time',
+        message0: 'キーフレームの %1 番目',
         args0: [numberInput('ID')],
         inputsInline: true,
         extensions: ['output_number']
@@ -248,7 +248,7 @@ const installObjectCompositionBlockDefinitions = ScratchBlocks => {
     });
 
     installObjectBlock('objects_timeWithin', {
-        message0: 'time within %1 to %2 sec',
+        message0: '%1 から %2 まで',
         args0: [numberInput('T1'), numberInput('T2')],
         inputsInline: true,
         extensions: ['output_boolean']

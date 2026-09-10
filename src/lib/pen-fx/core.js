@@ -31,7 +31,7 @@ const createPenFXClass = vm => {
         getInfo() {
             return {
                 id: 'penfx',
-                name: 'Looks',
+                name: 'エフェクト',
                 color1: '#6b56d9',
                 color2: '#5945c2',
                 color3: '#46359f',

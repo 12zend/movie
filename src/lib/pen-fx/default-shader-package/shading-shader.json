@@ -138,8 +138,8 @@
   "blocks": [
     {
       "id": "contrast",
-      "name": "contrast",
-      "text": "contrast value: [VALUE] pivot: [PIVOT] mix: [MIX] %",
+      "name": "コントラスト",
+      "text": "コントラスト 値: [VALUE] 基準: [PIVOT] 混合: [MIX] %",
       "opcode": "contrast",
       "blockType": "command",
       "implementation": {
@@ -149,19 +149,19 @@
       "inputs": [
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "PIVOT",
-          "label": "pivot",
+          "label": "基準",
           "type": "number",
           "defaultValue": 0.5
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -169,8 +169,8 @@
     },
     {
       "id": "brightness",
-      "name": "brightness",
-      "text": "brightness color: [COLOR] value: [VALUE] mix: [MIX] %",
+      "name": "明るさ",
+      "text": "明るさ 色: [COLOR] 値: [VALUE] 混合: [MIX] %",
       "opcode": "brightness",
       "blockType": "command",
       "implementation": {
@@ -180,19 +180,19 @@
       "inputs": [
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "color",
           "defaultValue": "#101010"
         },
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -200,8 +200,8 @@
     },
     {
       "id": "gamma",
-      "name": "gamma",
-      "text": "gamma value: [VALUE] mix: [MIX] %",
+      "name": "ガンマ",
+      "text": "ガンマ 値: [VALUE] 混合: [MIX] %",
       "opcode": "gamma",
       "blockType": "command",
       "implementation": {
@@ -211,13 +211,13 @@
       "inputs": [
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -225,8 +225,8 @@
     },
     {
       "id": "saturation",
-      "name": "saturation",
-      "text": "saturation value: [VALUE] mix: [MIX] %",
+      "name": "彩度",
+      "text": "彩度 値: [VALUE] 混合: [MIX] %",
       "opcode": "saturation",
       "blockType": "command",
       "implementation": {
@@ -236,13 +236,13 @@
       "inputs": [
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -250,8 +250,8 @@
     },
     {
       "id": "alpha",
-      "name": "alpha",
-      "text": "alpha [VALUE] % mix: [MIX] %",
+      "name": "透明度",
+      "text": "透明度 [VALUE] % 混合: [MIX] %",
       "opcode": "alpha",
       "blockType": "command",
       "implementation": {
@@ -261,13 +261,13 @@
       "inputs": [
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -275,8 +275,8 @@
     },
     {
       "id": "color-grade",
-      "name": "colorGrade",
-      "text": "color grade exposure: [EXPOSURE] temp: [TEMP] tint: [TINT] contrast: [CONTRAST] pivot: [PIVOT] filter: [COLOR] saturation: [SATURATION] mix: [MIX] %",
+      "name": "カラーグレード",
+      "text": "カラーグレード 露出: [EXPOSURE] 色温度: [TEMP] 色かぶり: [TINT] コントラスト: [CONTRAST] 基準: [PIVOT] フィルター: [COLOR] 彩度: [SATURATION] 混合: [MIX] %",
       "opcode": "colorGrade",
       "blockType": "command",
       "implementation": {
@@ -286,49 +286,49 @@
       "inputs": [
         {
           "id": "EXPOSURE",
-          "label": "exposure",
+          "label": "露出",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "TEMP",
-          "label": "temp",
+          "label": "色温度",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "TINT",
-          "label": "tint",
+          "label": "色かぶり",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "CONTRAST",
-          "label": "contrast",
+          "label": "コントラスト",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "PIVOT",
-          "label": "pivot",
+          "label": "基準",
           "type": "number",
           "defaultValue": 0.5
         },
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "color",
           "defaultValue": "#ffffff"
         },
         {
           "id": "SATURATION",
-          "label": "saturation",
+          "label": "彩度",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -336,8 +336,8 @@
     },
     {
       "id": "color-blindness",
-      "name": "colorBlindness",
-      "text": "color blindness [TYPE] severity: [SEVERITY] % mix: [MIX] %",
+      "name": "色覚サポート",
+      "text": "色覚サポート [TYPE] 強さ: [SEVERITY] % 混合: [MIX] %",
       "opcode": "colorBlindness",
       "blockType": "command",
       "implementation": {
@@ -347,7 +347,7 @@
       "inputs": [
         {
           "id": "TYPE",
-          "label": "type",
+          "label": "種類",
           "type": "menu",
           "items": [
             "deuteranopia",
@@ -358,13 +358,13 @@
         },
         {
           "id": "SEVERITY",
-          "label": "severity",
+          "label": "強さ",
           "type": "number",
           "defaultValue": 50
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -372,8 +372,8 @@
     },
     {
       "id": "color-space-adjust",
-      "name": "colorSpaceAdjust",
-      "text": "HSL adjust hue add: [HADD] mul: [HMUL] saturation add: [SADD] mul: [SMUL] lightness add: [LADD] mul: [LMUL] mix: [MIX] %",
+      "name": "HSL調整",
+      "text": "HSL調整 色相加算: [HADD] 乗算: [HMUL] 彩度加算: [SADD] 乗算: [SMUL] 明度加算: [LADD] 乗算: [LMUL] 混合: [MIX] %",
       "opcode": "colorSpaceAdjust",
       "blockType": "command",
       "implementation": {
@@ -383,43 +383,43 @@
       "inputs": [
         {
           "id": "HADD",
-          "label": "hadd",
+          "label": "色相加算",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "HMUL",
-          "label": "hmul",
+          "label": "色相乗算",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "SADD",
-          "label": "sadd",
+          "label": "彩度加算",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "SMUL",
-          "label": "smul",
+          "label": "彩度乗算",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "LADD",
-          "label": "ladd",
+          "label": "明度加算",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "LMUL",
-          "label": "lmul",
+          "label": "明度乗算",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -427,8 +427,8 @@
     },
     {
       "id": "tone-map",
-      "name": "toneMap",
-      "text": "tone map [TYPE] exposure: [EXPOSURE] white point: [WHITE] mix: [MIX] %",
+      "name": "トーンマップ",
+      "text": "トーンマップ [TYPE] 露出: [EXPOSURE] ホワイトポイント: [WHITE] 混合: [MIX] %",
       "opcode": "toneMap",
       "blockType": "command",
       "implementation": {
@@ -438,7 +438,7 @@
       "inputs": [
         {
           "id": "TYPE",
-          "label": "type",
+          "label": "種類",
           "type": "menu",
           "items": [
             "clamp",
@@ -450,19 +450,19 @@
         },
         {
           "id": "EXPOSURE",
-          "label": "exposure",
+          "label": "露出",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "WHITE",
-          "label": "white",
+          "label": "ホワイトポイント",
           "type": "number",
           "defaultValue": 4
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -470,8 +470,8 @@
     },
     {
       "id": "auto-exposure",
-      "name": "autoExposure",
-      "text": "auto exposure target: [TARGET] min: [MIN] max: [MAX] mix: [MIX] %",
+      "name": "自動露出",
+      "text": "自動露出 目標: [TARGET] 最小: [MIN] 最大: [MAX] 混合: [MIX] %",
       "opcode": "autoExposure",
       "blockType": "command",
       "implementation": {
@@ -481,25 +481,25 @@
       "inputs": [
         {
           "id": "TARGET",
-          "label": "target",
+          "label": "目標",
           "type": "number",
           "defaultValue": 0.18
         },
         {
           "id": "MIN",
-          "label": "min",
+          "label": "最小",
           "type": "number",
           "defaultValue": 0.25
         },
         {
           "id": "MAX",
-          "label": "max",
+          "label": "最大",
           "type": "number",
           "defaultValue": 4
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -507,8 +507,8 @@
     },
     {
       "id": "palette-swap",
-      "name": "paletteSwap",
-      "text": "palette map shadows: [C1] [C2] [C3] highlights: [C4] mix: [MIX] %",
+      "name": "パレット変換",
+      "text": "パレット変換 影: [C1] [C2] [C3] ハイライト: [C4] 混合: [MIX] %",
       "opcode": "paletteSwap",
       "blockType": "command",
       "implementation": {
@@ -518,31 +518,31 @@
       "inputs": [
         {
           "id": "C1",
-          "label": "c1",
+          "label": "影1",
           "type": "color",
           "defaultValue": "#0b1026"
         },
         {
           "id": "C2",
-          "label": "c2",
+          "label": "影2",
           "type": "color",
           "defaultValue": "#3b426e"
         },
         {
           "id": "C3",
-          "label": "c3",
+          "label": "影3",
           "type": "color",
           "defaultValue": "#8a6f7d"
         },
         {
           "id": "C4",
-          "label": "c4",
+          "label": "ハイライト",
           "type": "color",
           "defaultValue": "#f6d6bd"
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -550,8 +550,8 @@
     },
     {
       "id": "chroma-key",
-      "name": "chromaKey",
-      "text": "chroma key: [KEY] tolerance: [TOLERANCE] softness: [SOFTNESS] use [BEHAVIOR] colors: [COLOR1] [COLOR2] mix: [MIX] %",
+      "name": "クロマキー",
+      "text": "クロマキー: [KEY] 許容: [TOLERANCE] 柔らかさ: [SOFTNESS] [BEHAVIOR] 色: [COLOR1] [COLOR2] 混合: [MIX] %",
       "opcode": "chromaKey",
       "blockType": "command",
       "implementation": {
@@ -561,25 +561,25 @@
       "inputs": [
         {
           "id": "KEY",
-          "label": "key",
+          "label": "キー",
           "type": "color",
           "defaultValue": "#00ff00"
         },
         {
           "id": "TOLERANCE",
-          "label": "tolerance",
+          "label": "許容",
           "type": "number",
           "defaultValue": 0.1
         },
         {
           "id": "SOFTNESS",
-          "label": "softness",
+          "label": "柔らかさ",
           "type": "number",
           "defaultValue": 0.05
         },
         {
           "id": "BEHAVIOR",
-          "label": "behavior",
+          "label": "動作",
           "type": "menu",
           "items": [
             "solid",
@@ -590,19 +590,19 @@
         },
         {
           "id": "COLOR1",
-          "label": "color1",
+          "label": "色1",
           "type": "color",
           "defaultValue": "#000000"
         },
         {
           "id": "COLOR2",
-          "label": "color2",
+          "label": "色2",
           "type": "color",
           "defaultValue": "#ffffff"
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -610,8 +610,8 @@
     },
     {
       "id": "color-overlay",
-      "name": "colorOverlay",
-      "text": "color overlay [COLOR] mix: [MIX] %",
+      "name": "カラーオーバーレイ",
+      "text": "カラーオーバーレイ [COLOR] 混合: [MIX] %",
       "opcode": "colorOverlay",
       "blockType": "command",
       "implementation": {
@@ -621,13 +621,13 @@
       "inputs": [
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "color",
           "defaultValue": "#ffffff"
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -635,8 +635,8 @@
     },
     {
       "id": "gradation-overlay",
-      "name": "gradationOverlay",
-      "text": "gradation overlay [GRADIENT] dir: [DIR] mix: [MIX] %",
+      "name": "グラデーションオーバーレイ",
+      "text": "グラデーションオーバーレイ [GRADIENT] 向き: [DIR] 混合: [MIX] %",
       "opcode": "gradationOverlay",
       "blockType": "command",
       "implementation": {
@@ -646,19 +646,19 @@
       "inputs": [
         {
           "id": "GRADIENT",
-          "label": "gradient",
+          "label": "グラデーション",
           "type": "string",
           "defaultValue": "{\"stops\":[{\"color\":\"#000000\",\"position\":0},{\"color\":\"#ffffff\",\"position\":1}]}"
         },
         {
           "id": "DIR",
-          "label": "dir",
+          "label": "向き",
           "type": "angle",
           "defaultValue": 90
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -666,8 +666,8 @@
     },
     {
       "id": "stroke",
-      "name": "stroke",
-      "text": "stroke color: [COLOR] width: [WIDTH]",
+      "name": "輪郭",
+      "text": "輪郭 色: [COLOR] 太さ: [WIDTH]",
       "opcode": "stroke",
       "blockType": "command",
       "implementation": {
@@ -677,13 +677,13 @@
       "inputs": [
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "color",
           "defaultValue": "#000000"
         },
         {
           "id": "WIDTH",
-          "label": "width",
+          "label": "太さ",
           "type": "number",
           "defaultValue": 4
         }
@@ -691,8 +691,8 @@
     },
     {
       "id": "blob",
-      "name": "blob",
-      "text": "blob [MODE] key: [KEY] threshold: [THRESHOLD] blur: [BLUR] min: [MIN] % max: [MAX] % boxes: [SHAPE] color: [COLOR] width: [WIDTH] opacity: [OPACITY] % fill: [FILL] % markers: [MARKER]",
+      "name": "ブロブ",
+      "text": "ブロブ [MODE] キー: [KEY] しきい値: [THRESHOLD] ぼかし: [BLUR] 最小: [MIN] % 最大: [MAX] % 箱: [SHAPE] 色: [COLOR] 太さ: [WIDTH] 不透明度: [OPACITY] % 塗り: [FILL] % マーカー: [MARKER]",
       "opcode": "blob",
       "blockType": "command",
       "implementation": {
@@ -702,7 +702,7 @@
       "inputs": [
         {
           "id": "MODE",
-          "label": "mode",
+          "label": "モード",
           "type": "menu",
           "items": [
             "bright",
@@ -715,37 +715,37 @@
         },
         {
           "id": "KEY",
-          "label": "key",
+          "label": "キー",
           "type": "color",
           "defaultValue": "#ffffff"
         },
         {
           "id": "THRESHOLD",
-          "label": "threshold",
+          "label": "しきい値",
           "type": "number",
           "defaultValue": 50
         },
         {
           "id": "BLUR",
-          "label": "blur",
+          "label": "ぼかし",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "MIN",
-          "label": "min",
+          "label": "最小",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "MAX",
-          "label": "max",
+          "label": "最大",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "SHAPE",
-          "label": "shape",
+          "label": "形状",
           "type": "menu",
           "items": [
             "rectangle",
@@ -755,31 +755,31 @@
         },
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "color",
           "defaultValue": "#00ffff"
         },
         {
           "id": "WIDTH",
-          "label": "width",
+          "label": "太さ",
           "type": "number",
           "defaultValue": 2
         },
         {
           "id": "OPACITY",
-          "label": "opacity",
+          "label": "不透明度",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "FILL",
-          "label": "fill",
+          "label": "塗り",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "MARKER",
-          "label": "marker",
+          "label": "マーカー",
           "type": "menu",
           "items": [
             "false",
@@ -791,8 +791,8 @@
     },
     {
       "id": "rgb-shift",
-      "name": "rgbShift",
-      "text": "rgb shift dir: [DIR] value: [VALUE] color: [COLOR] mix: [MIX] %",
+      "name": "RGBシフト",
+      "text": "RGBシフト 向き: [DIR] 値: [VALUE] 色: [COLOR] 混合: [MIX] %",
       "opcode": "rgbShift",
       "blockType": "command",
       "implementation": {
@@ -803,19 +803,19 @@
       "inputs": [
         {
           "id": "DIR",
-          "label": "dir",
+          "label": "向き",
           "type": "angle",
           "defaultValue": 90
         },
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 5
         },
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "menu",
           "items": [
             "RG",
@@ -826,7 +826,7 @@
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -834,8 +834,8 @@
     },
     {
       "id": "gaussian-blur",
-      "name": "gaussianBlur",
-      "text": "gaussian blur type: [TYPE] value: [VALUE] mix: [MIX] %",
+      "name": "ガウスぼかし",
+      "text": "ガウスぼかし 種類: [TYPE] 値: [VALUE] 混合: [MIX] %",
       "opcode": "gaussianBlur",
       "blockType": "command",
       "implementation": {
@@ -845,7 +845,7 @@
       "inputs": [
         {
           "id": "TYPE",
-          "label": "type",
+          "label": "種類",
           "type": "menu",
           "items": [
             "normal",
@@ -856,13 +856,13 @@
         },
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 5
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -870,8 +870,8 @@
     },
     {
       "id": "directional-blur",
-      "name": "directionalBlur",
-      "text": "directional blur dir: [DIR] value: [VALUE] mix: [MIX] %",
+      "name": "方向ぼかし",
+      "text": "方向ぼかし 向き: [DIR] 値: [VALUE] 混合: [MIX] %",
       "opcode": "directionalBlur",
       "blockType": "command",
       "implementation": {
@@ -881,19 +881,19 @@
       "inputs": [
         {
           "id": "DIR",
-          "label": "dir",
+          "label": "向き",
           "type": "angle",
           "defaultValue": 90
         },
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 5
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -901,8 +901,8 @@
     },
     {
       "id": "radial-blur",
-      "name": "radialBlur",
-      "text": "radial blur type: [TYPE] value: [VALUE] center x: [X] y: [Y] mix: [MIX] %",
+      "name": "放射ぼかし",
+      "text": "放射ぼかし 種類: [TYPE] 値: [VALUE] 中心 x: [X] y: [Y] 混合: [MIX] %",
       "opcode": "radialBlur",
       "blockType": "command",
       "implementation": {
@@ -912,7 +912,7 @@
       "inputs": [
         {
           "id": "TYPE",
-          "label": "type",
+          "label": "種類",
           "type": "menu",
           "items": [
             "dir",
@@ -922,7 +922,7 @@
         },
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 5
         },
@@ -940,7 +940,7 @@
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -948,8 +948,8 @@
     },
     {
       "id": "lens-blur",
-      "name": "lensBlur",
-      "text": "lens blur radius: [RADIUS] shape: [SHAPE] rotation: [ROTATION] mix: [MIX] %",
+      "name": "レンズぼかし",
+      "text": "レンズぼかし 半径: [RADIUS] 形状: [SHAPE] 回転: [ROTATION] 混合: [MIX] %",
       "opcode": "lensBlur",
       "blockType": "command",
       "implementation": {
@@ -959,13 +959,13 @@
       "inputs": [
         {
           "id": "RADIUS",
-          "label": "radius",
+          "label": "半径",
           "type": "number",
           "defaultValue": 8
         },
         {
           "id": "SHAPE",
-          "label": "shape",
+          "label": "形状",
           "type": "menu",
           "items": [
             "circle",
@@ -976,13 +976,13 @@
         },
         {
           "id": "ROTATION",
-          "label": "rotation",
+          "label": "回転",
           "type": "angle",
           "defaultValue": 0
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -990,8 +990,8 @@
     },
     {
       "id": "depth-of-field",
-      "name": "depthOfField",
-      "text": "depth of field focus: [FOCUS] range: [RANGE] aperture: [APERTURE] max blur: [MAXBLUR] near: [NEAR] % far: [FAR] % edge softness: [EDGE] shape: [SHAPE] rotation: [ROTATION] mix: [MIX] %",
+      "name": "被写界深度",
+      "text": "被写界深度 ピント: [FOCUS] 範囲: [RANGE] 絞り: [APERTURE] 最大ぼかし: [MAXBLUR] 近: [NEAR] % 遠: [FAR] % 輪郭の柔らかさ: [EDGE] 形状: [SHAPE] 回転: [ROTATION] 混合: [MIX] %",
       "opcode": "depthOfField",
       "blockType": "command",
       "implementation": {
@@ -1001,49 +1001,49 @@
       "inputs": [
         {
           "id": "FOCUS",
-          "label": "focus",
+          "label": "ピント",
           "type": "number",
           "defaultValue": 480
         },
         {
           "id": "RANGE",
-          "label": "range",
+          "label": "範囲",
           "type": "number",
           "defaultValue": 24
         },
         {
           "id": "APERTURE",
-          "label": "aperture",
+          "label": "絞り",
           "type": "number",
           "defaultValue": 48
         },
         {
           "id": "MAXBLUR",
-          "label": "maxblur",
+          "label": "最大ぼかし",
           "type": "number",
           "defaultValue": 24
         },
         {
           "id": "NEAR",
-          "label": "near",
+          "label": "近",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "FAR",
-          "label": "far",
+          "label": "遠",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "EDGE",
-          "label": "edge",
+          "label": "輪郭",
           "type": "number",
           "defaultValue": 8
         },
         {
           "id": "SHAPE",
-          "label": "shape",
+          "label": "形状",
           "type": "menu",
           "items": [
             "circle",
@@ -1054,13 +1054,13 @@
         },
         {
           "id": "ROTATION",
-          "label": "rotation",
+          "label": "回転",
           "type": "angle",
           "defaultValue": 0
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1068,8 +1068,8 @@
     },
     {
       "id": "fog",
-      "name": "fog",
-      "text": "fog [TYPE] start: [START] end: [END] near color: [NEARCOLOR] far color: [FARCOLOR] density: [DENSITY] % curve: [CURVE] mix: [MIX] %",
+      "name": "フォグ",
+      "text": "フォグ [TYPE] 開始: [START] 終了: [END] 近くの色: [NEARCOLOR] 遠くの色: [FARCOLOR] 濃度: [DENSITY] % カーブ: [CURVE] 混合: [MIX] %",
       "opcode": "fog",
       "blockType": "command",
       "implementation": {
@@ -1079,7 +1079,7 @@
       "inputs": [
         {
           "id": "TYPE",
-          "label": "type",
+          "label": "種類",
           "type": "menu",
           "items": [
             "linear",
@@ -1091,43 +1091,43 @@
         },
         {
           "id": "START",
-          "label": "start",
+          "label": "開始",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "END",
-          "label": "end",
+          "label": "終了",
           "type": "number",
           "defaultValue": 1000
         },
         {
           "id": "NEARCOLOR",
-          "label": "nearcolor",
+          "label": "近くの色",
           "type": "color",
           "defaultValue": "#d9e7f2"
         },
         {
           "id": "FARCOLOR",
-          "label": "farcolor",
+          "label": "遠くの色",
           "type": "color",
           "defaultValue": "#ffffff"
         },
         {
           "id": "DENSITY",
-          "label": "density",
+          "label": "濃度",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "CURVE",
-          "label": "curve",
+          "label": "カーブ",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1135,8 +1135,8 @@
     },
     {
       "id": "lens-distortion",
-      "name": "lensDistortion",
-      "text": "lens distortion value: [VALUE] center x: [X] y: [Y] zoom: [ZOOM] % mix: [MIX] %",
+      "name": "レンズ歪み",
+      "text": "レンズ歪み 値: [VALUE] 中心 x: [X] y: [Y] ズーム: [ZOOM] % 混合: [MIX] %",
       "opcode": "lensDistortion",
       "blockType": "command",
       "implementation": {
@@ -1146,7 +1146,7 @@
       "inputs": [
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 25
         },
@@ -1164,13 +1164,13 @@
         },
         {
           "id": "ZOOM",
-          "label": "zoom",
+          "label": "ズーム",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1178,8 +1178,8 @@
     },
     {
       "id": "bloom",
-      "name": "bloom",
-      "text": "bloom threshold: [THRESHOLD] radius: [RADIUS] value: [VALUE] color: [COLOR] invert: [INVERT]",
+      "name": "ブルーム",
+      "text": "ブルーム しきい値: [THRESHOLD] 半径: [RADIUS] 値: [VALUE] 色: [COLOR] 反転: [INVERT]",
       "opcode": "bloom",
       "blockType": "command",
       "implementation": {
@@ -1189,31 +1189,31 @@
       "inputs": [
         {
           "id": "THRESHOLD",
-          "label": "threshold",
+          "label": "しきい値",
           "type": "number",
           "defaultValue": 0.7
         },
         {
           "id": "RADIUS",
-          "label": "radius",
+          "label": "半径",
           "type": "number",
           "defaultValue": 8
         },
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "color",
           "defaultValue": "#ffffff"
         },
         {
           "id": "INVERT",
-          "label": "invert",
+          "label": "反転",
           "type": "menu",
           "items": [
             "false",
@@ -1225,8 +1225,8 @@
     },
     {
       "id": "deep-glow",
-      "name": "deepGlow",
-      "text": "deep glow threshold: [THRESHOLD] radius: [RADIUS] value: [VALUE] color: [COLOR]",
+      "name": "ディープグロー",
+      "text": "ディープグロー しきい値: [THRESHOLD] 半径: [RADIUS] 値: [VALUE] 色: [COLOR]",
       "opcode": "deepGlow",
       "blockType": "command",
       "implementation": {
@@ -1236,25 +1236,25 @@
       "inputs": [
         {
           "id": "THRESHOLD",
-          "label": "threshold",
+          "label": "しきい値",
           "type": "number",
           "defaultValue": 0.7
         },
         {
           "id": "RADIUS",
-          "label": "radius",
+          "label": "半径",
           "type": "number",
           "defaultValue": 8
         },
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "color",
           "defaultValue": "#ffffff"
         }
@@ -1262,8 +1262,8 @@
     },
     {
       "id": "edge-detection",
-      "name": "edgeDetection",
-      "text": "edge detection threshold: [THRESHOLD] strength: [VALUE] radius: [RADIUS] softness: [SOFTNESS] color: [COLOR] background: [BACKGROUND] alpha: [ALPHA] % mix: [MIX] %",
+      "name": "輪郭検出",
+      "text": "輪郭検出 しきい値: [THRESHOLD] 強さ: [VALUE] 半径: [RADIUS] 柔らかさ: [SOFTNESS] 色: [COLOR] 背景: [BACKGROUND] 透明度: [ALPHA] % 混合: [MIX] %",
       "opcode": "edgeDetection",
       "blockType": "command",
       "implementation": {
@@ -1273,49 +1273,49 @@
       "inputs": [
         {
           "id": "THRESHOLD",
-          "label": "threshold",
+          "label": "しきい値",
           "type": "number",
           "defaultValue": 0.1
         },
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "RADIUS",
-          "label": "radius",
+          "label": "半径",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "SOFTNESS",
-          "label": "softness",
+          "label": "柔らかさ",
           "type": "number",
           "defaultValue": 0.02
         },
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "color",
           "defaultValue": "#000000"
         },
         {
           "id": "BACKGROUND",
-          "label": "background",
+          "label": "背景",
           "type": "color",
           "defaultValue": "#ffffff"
         },
         {
           "id": "ALPHA",
-          "label": "alpha",
+          "label": "透明度",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1323,8 +1323,8 @@
     },
     {
       "id": "sharpen",
-      "name": "sharpen",
-      "text": "sharpen value: [VALUE] radius: [RADIUS] mix: [MIX] %",
+      "name": "シャープ",
+      "text": "シャープ 値: [VALUE] 半径: [RADIUS] 混合: [MIX] %",
       "opcode": "sharpen",
       "blockType": "command",
       "implementation": {
@@ -1334,19 +1334,19 @@
       "inputs": [
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "RADIUS",
-          "label": "radius",
+          "label": "半径",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1354,8 +1354,8 @@
     },
     {
       "id": "fxaa",
-      "name": "fxaa",
-      "text": "FXAA contrast: [CONTRAST] relative: [RELATIVE] subpixel: [SUBPIXEL] mix: [MIX] %",
+      "name": "FXAA",
+      "text": "FXAA コントラスト: [CONTRAST] 相対: [RELATIVE] サブピクセル: [SUBPIXEL] 混合: [MIX] %",
       "opcode": "fxaa",
       "blockType": "command",
       "implementation": {
@@ -1365,25 +1365,25 @@
       "inputs": [
         {
           "id": "CONTRAST",
-          "label": "contrast",
+          "label": "コントラスト",
           "type": "number",
           "defaultValue": 0.0312
         },
         {
           "id": "RELATIVE",
-          "label": "relative",
+          "label": "相対",
           "type": "number",
           "defaultValue": 0.063
         },
         {
           "id": "SUBPIXEL",
-          "label": "subpixel",
+          "label": "サブピクセル",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1391,8 +1391,8 @@
     },
     {
       "id": "difference-of-gaussians",
-      "name": "differenceOfGaussians",
-      "text": "difference of gaussians sigma: [SIGMA] scale: [SCALE] tau: [TAU] threshold: [THRESHOLD] colored: [COLORED] ink: [COLOR] mix: [MIX] %",
+      "name": "ガウス差分",
+      "text": "ガウス差分 シグマ: [SIGMA] スケール: [SCALE] タウ: [TAU] しきい値: [THRESHOLD] カラー: [COLORED] インク: [COLOR] 混合: [MIX] %",
       "opcode": "differenceOfGaussians",
       "blockType": "command",
       "implementation": {
@@ -1402,31 +1402,31 @@
       "inputs": [
         {
           "id": "SIGMA",
-          "label": "sigma",
+          "label": "シグマ",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "SCALE",
-          "label": "scale",
+          "label": "スケール",
           "type": "number",
           "defaultValue": 1.6
         },
         {
           "id": "TAU",
-          "label": "tau",
+          "label": "タウ",
           "type": "number",
           "defaultValue": 0.98
         },
         {
           "id": "THRESHOLD",
-          "label": "threshold",
+          "label": "しきい値",
           "type": "number",
           "defaultValue": 0.02
         },
         {
           "id": "COLORED",
-          "label": "colored",
+          "label": "カラー",
           "type": "menu",
           "items": [
             "false",
@@ -1436,13 +1436,13 @@
         },
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "color",
           "defaultValue": "#101020"
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1450,8 +1450,8 @@
     },
     {
       "id": "kuwahara",
-      "name": "kuwahara",
-      "text": "kuwahara radius: [RADIUS] mix: [MIX] %",
+      "name": "桑原フィルター",
+      "text": "桑原フィルター 半径: [RADIUS] 混合: [MIX] %",
       "opcode": "kuwahara",
       "blockType": "command",
       "implementation": {
@@ -1461,13 +1461,13 @@
       "inputs": [
         {
           "id": "RADIUS",
-          "label": "radius",
+          "label": "半径",
           "type": "number",
           "defaultValue": 4
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1475,8 +1475,8 @@
     },
     {
       "id": "chromatic-aberration",
-      "name": "chromaticAberration",
-      "text": "chromatic aberration intensity: [INTENSITY] radius: [RADIUS] hardness: [HARDNESS] offset x: [X] y: [Y] mix: [MIX] %",
+      "name": "色収差",
+      "text": "色収差 強さ: [INTENSITY] 半径: [RADIUS] 硬さ: [HARDNESS] ずれ x: [X] y: [Y] 混合: [MIX] %",
       "opcode": "chromaticAberration",
       "blockType": "command",
       "implementation": {
@@ -1487,19 +1487,19 @@
       "inputs": [
         {
           "id": "INTENSITY",
-          "label": "intensity",
+          "label": "強さ",
           "type": "number",
           "defaultValue": 2
         },
         {
           "id": "RADIUS",
-          "label": "radius",
+          "label": "半径",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "HARDNESS",
-          "label": "hardness",
+          "label": "硬さ",
           "type": "number",
           "defaultValue": 1
         },
@@ -1517,7 +1517,7 @@
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1525,8 +1525,8 @@
     },
     {
       "id": "film-grain",
-      "name": "filmGrain",
-      "text": "film grain intensity: [INTENSITY] response: [RESPONSE] size: [SIZE] animate: [ANIMATE] mix: [MIX] %",
+      "name": "フィルムグレイン",
+      "text": "フィルムグレイン 強さ: [INTENSITY] 応答: [RESPONSE] 粒の大きさ: [SIZE] アニメ: [ANIMATE] 混合: [MIX] %",
       "opcode": "filmGrain",
       "blockType": "command",
       "implementation": {
@@ -1536,25 +1536,25 @@
       "inputs": [
         {
           "id": "INTENSITY",
-          "label": "intensity",
+          "label": "強さ",
           "type": "number",
           "defaultValue": 0.15
         },
         {
           "id": "RESPONSE",
-          "label": "response",
+          "label": "応答",
           "type": "number",
           "defaultValue": 0.15
         },
         {
           "id": "SIZE",
-          "label": "size",
+          "label": "大きさ",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "ANIMATE",
-          "label": "animate",
+          "label": "アニメ",
           "type": "menu",
           "items": [
             "false",
@@ -1564,7 +1564,7 @@
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1572,8 +1572,8 @@
     },
     {
       "id": "dither",
-      "name": "dither",
-      "text": "dither colors r: [R] g: [G] b: [B] spread: [SPREAD] scale: [SCALE] mix: [MIX] %",
+      "name": "ディザ",
+      "text": "ディザ 色 r: [R] g: [G] b: [B] 拡散: [SPREAD] スケール: [SCALE] 混合: [MIX] %",
       "opcode": "dither",
       "blockType": "command",
       "implementation": {
@@ -1601,19 +1601,19 @@
         },
         {
           "id": "SPREAD",
-          "label": "spread",
+          "label": "拡散",
           "type": "number",
           "defaultValue": 0.5
         },
         {
           "id": "SCALE",
-          "label": "scale",
+          "label": "スケール",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1621,8 +1621,8 @@
     },
     {
       "id": "halftone",
-      "name": "halftone",
-      "text": "CMYK halftone size: [SIZE] mix: [MIX] %",
+      "name": "ハーフトーン",
+      "text": "ハーフトーン 大きさ: [SIZE] 混合: [MIX] %",
       "opcode": "halftone",
       "blockType": "command",
       "implementation": {
@@ -1632,13 +1632,13 @@
       "inputs": [
         {
           "id": "SIZE",
-          "label": "size",
+          "label": "大きさ",
           "type": "number",
           "defaultValue": 4
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1646,8 +1646,8 @@
     },
     {
       "id": "ascii",
-      "name": "ascii",
-      "text": "ASCII cell x: [X] y: [Y] foreground: [FG] background: [BG] invert: [INVERT] mix: [MIX] %",
+      "name": "アスキーアート",
+      "text": "アスキーアート セル x: [X] y: [Y] 前景: [FG] 背景: [BG] 反転: [INVERT] 混合: [MIX] %",
       "opcode": "ascii",
       "blockType": "command",
       "implementation": {
@@ -1669,19 +1669,19 @@
         },
         {
           "id": "FG",
-          "label": "fg",
+          "label": "前景",
           "type": "color",
           "defaultValue": "#ffffff"
         },
         {
           "id": "BG",
-          "label": "bg",
+          "label": "背景",
           "type": "color",
           "defaultValue": "#000000"
         },
         {
           "id": "INVERT",
-          "label": "invert",
+          "label": "反転",
           "type": "menu",
           "items": [
             "false",
@@ -1691,7 +1691,7 @@
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1699,8 +1699,8 @@
     },
     {
       "id": "crt",
-      "name": "crt",
-      "text": "CRT curvature: [CURVATURE] border: [BORDER] scan size: [SIZE] strength: [STRENGTH] mix: [MIX] %",
+      "name": "ブラウン管",
+      "text": "ブラウン管 カーブ: [CURVATURE] 枠: [BORDER] 走査線の大きさ: [SIZE] 強さ: [STRENGTH] 混合: [MIX] %",
       "opcode": "crt",
       "blockType": "command",
       "implementation": {
@@ -1710,31 +1710,31 @@
       "inputs": [
         {
           "id": "CURVATURE",
-          "label": "curvature",
+          "label": "カーブ",
           "type": "number",
           "defaultValue": 10
         },
         {
           "id": "BORDER",
-          "label": "border",
+          "label": "枠",
           "type": "number",
           "defaultValue": 0.08
         },
         {
           "id": "SIZE",
-          "label": "size",
+          "label": "大きさ",
           "type": "number",
           "defaultValue": 2
         },
         {
           "id": "STRENGTH",
-          "label": "strength",
+          "label": "強さ",
           "type": "number",
           "defaultValue": 0.35
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1742,8 +1742,8 @@
     },
     {
       "id": "vhs",
-      "name": "vhs",
-      "text": "VHS tracking: [TRACKING] px chroma bleed: [CHROMA] px noise: [NOISE] % scanlines: [SCANLINES] % seed: [SEED] evolution: [EVOLUTION] mix: [MIX] %",
+      "name": "VHS",
+      "text": "VHS トラッキング: [TRACKING] 色にじみ: [CHROMA] ノイズ: [NOISE] % 走査線: [SCANLINES] % シード: [SEED] 変化: [EVOLUTION] 混合: [MIX] %",
       "opcode": "vhs",
       "blockType": "command",
       "groupEffectScope": "expanded",
@@ -1754,43 +1754,43 @@
       "inputs": [
         {
           "id": "TRACKING",
-          "label": "tracking",
+          "label": "トラッキング",
           "type": "number",
           "defaultValue": 6
         },
         {
           "id": "CHROMA",
-          "label": "chroma",
+          "label": "色にじみ",
           "type": "number",
           "defaultValue": 3
         },
         {
           "id": "NOISE",
-          "label": "noise",
+          "label": "ノイズ",
           "type": "number",
           "defaultValue": 12
         },
         {
           "id": "SCANLINES",
-          "label": "scanlines",
+          "label": "走査線",
           "type": "number",
           "defaultValue": 25
         },
         {
           "id": "SEED",
-          "label": "seed",
+          "label": "シード",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "EVOLUTION",
-          "label": "evolution",
+          "label": "変化",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1798,8 +1798,8 @@
     },
     {
       "id": "glitch",
-      "name": "glitch",
-      "text": "digital glitch slices: [SLICES] shift: [SHIFT] px RGB split: [RGB] px density: [DENSITY] % seed: [SEED] evolution: [EVOLUTION] mix: [MIX] %",
+      "name": "グリッチ",
+      "text": "グリッチ 分割: [SLICES] ずれ: [SHIFT] RGB分離: [RGB] 密度: [DENSITY] % シード: [SEED] 変化: [EVOLUTION] 混合: [MIX] %",
       "opcode": "glitch",
       "blockType": "command",
       "groupEffectScope": "expanded",
@@ -1810,43 +1810,43 @@
       "inputs": [
         {
           "id": "SLICES",
-          "label": "slices",
+          "label": "分割",
           "type": "number",
           "defaultValue": 24
         },
         {
           "id": "SHIFT",
-          "label": "shift",
+          "label": "ずれ",
           "type": "number",
           "defaultValue": 28
         },
         {
           "id": "RGB",
-          "label": "rgb",
+          "label": "RGB",
           "type": "number",
           "defaultValue": 6
         },
         {
           "id": "DENSITY",
-          "label": "density",
+          "label": "濃度",
           "type": "number",
           "defaultValue": 35
         },
         {
           "id": "SEED",
-          "label": "seed",
+          "label": "シード",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "EVOLUTION",
-          "label": "evolution",
+          "label": "変化",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1854,8 +1854,8 @@
     },
     {
       "id": "vignette",
-      "name": "vignette",
-      "text": "vignette color: [COLOR] size x: [X] y: [Y] offset x: [OFFSETX] y: [OFFSETY] intensity: [INTENSITY] roundness: [ROUNDNESS] softness: [SOFTNESS] mix: [MIX] %",
+      "name": "ビネット",
+      "text": "ビネット 色: [COLOR] 大きさ x: [X] y: [Y] ずれ x: [OFFSETX] y: [OFFSETY] 強さ: [INTENSITY] 丸み: [ROUNDNESS] 柔らかさ: [SOFTNESS] 混合: [MIX] %",
       "opcode": "vignette",
       "blockType": "command",
       "implementation": {
@@ -1865,7 +1865,7 @@
       "inputs": [
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "color",
           "defaultValue": "#000000"
         },
@@ -1883,37 +1883,37 @@
         },
         {
           "id": "OFFSETX",
-          "label": "offsetx",
+          "label": "ずれx",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "OFFSETY",
-          "label": "offsety",
+          "label": "ずれy",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "INTENSITY",
-          "label": "intensity",
+          "label": "強さ",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "ROUNDNESS",
-          "label": "roundness",
+          "label": "丸み",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "SOFTNESS",
-          "label": "softness",
+          "label": "柔らかさ",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1921,8 +1921,8 @@
     },
     {
       "id": "composition",
-      "name": "composition",
-      "text": "composition grid [DIVISIONS] divisions width: [WIDTH] color: [COLOR] opacity: [OPACITY] % mix: [MIX] %",
+      "name": "構図ガイド",
+      "text": "構図ガイド [DIVISIONS] 分割 太さ: [WIDTH] 色: [COLOR] 不透明度: [OPACITY] % 混合: [MIX] %",
       "opcode": "composition",
       "blockType": "command",
       "implementation": {
@@ -1932,31 +1932,31 @@
       "inputs": [
         {
           "id": "DIVISIONS",
-          "label": "divisions",
+          "label": "分割",
           "type": "number",
           "defaultValue": 3
         },
         {
           "id": "WIDTH",
-          "label": "width",
+          "label": "太さ",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "color",
           "defaultValue": "#ffffff"
         },
         {
           "id": "OPACITY",
-          "label": "opacity",
+          "label": "不透明度",
           "type": "number",
           "defaultValue": 50
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -1964,8 +1964,8 @@
     },
     {
       "id": "framing",
-      "name": "framing",
-      "text": "frame [SHAPE] radius: [RADIUS] softness: [SOFTNESS] color: [COLOR] opacity: [OPACITY] % offset x: [X] y: [Y] mix: [MIX] %",
+      "name": "フレーム",
+      "text": "フレーム [SHAPE] 半径: [RADIUS] 柔らかさ: [SOFTNESS] 色: [COLOR] 不透明度: [OPACITY] % ずれ x: [X] y: [Y] 混合: [MIX] %",
       "opcode": "framing",
       "blockType": "command",
       "implementation": {
@@ -1975,7 +1975,7 @@
       "inputs": [
         {
           "id": "SHAPE",
-          "label": "shape",
+          "label": "形状",
           "type": "menu",
           "items": [
             "rectangle",
@@ -1985,25 +1985,25 @@
         },
         {
           "id": "RADIUS",
-          "label": "radius",
+          "label": "半径",
           "type": "number",
           "defaultValue": 0.45
         },
         {
           "id": "SOFTNESS",
-          "label": "softness",
+          "label": "柔らかさ",
           "type": "number",
           "defaultValue": 0.02
         },
         {
           "id": "COLOR",
-          "label": "color",
+          "label": "色",
           "type": "color",
           "defaultValue": "#000000"
         },
         {
           "id": "OPACITY",
-          "label": "opacity",
+          "label": "不透明度",
           "type": "number",
           "defaultValue": 100
         },
@@ -2021,7 +2021,7 @@
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -2029,8 +2029,8 @@
     },
     {
       "id": "zoom",
-      "name": "zoom",
-      "text": "zoom scale: [VALUE] offset x: [X] y: [Y] sample: [SAMPLE] mix: [MIX] %",
+      "name": "ズーム",
+      "text": "ズーム 倍率: [VALUE] ずれ x: [X] y: [Y] サンプル: [SAMPLE] 混合: [MIX] %",
       "opcode": "zoom",
       "blockType": "command",
       "implementation": {
@@ -2040,7 +2040,7 @@
       "inputs": [
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 1
         },
@@ -2058,7 +2058,7 @@
         },
         {
           "id": "SAMPLE",
-          "label": "sample",
+          "label": "サンプル",
           "type": "menu",
           "items": [
             "clamp",
@@ -2070,7 +2070,7 @@
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -2078,8 +2078,8 @@
     },
     {
       "id": "wavy",
-      "name": "wavy",
-      "text": "wavy type: [TYPE] amount: [VALUE] size: [SIZE] complexity: [COMPLEXITY] evolution: [EVOLUTION] seed: [SEED] offset x: [X] y: [Y] center x: [CENTERX] y: [CENTERY] mix: [MIX] %",
+      "name": "波",
+      "text": "波 種類: [TYPE] 量: [VALUE] 大きさ: [SIZE] 複雑さ: [COMPLEXITY] 変化: [EVOLUTION] シード: [SEED] ずれ x: [X] y: [Y] 中心 x: [CENTERX] y: [CENTERY] 混合: [MIX] %",
       "opcode": "wavy",
       "blockType": "command",
       "implementation": {
@@ -2089,7 +2089,7 @@
       "inputs": [
         {
           "id": "TYPE",
-          "label": "type",
+          "label": "種類",
           "type": "menu",
           "items": [
             "both",
@@ -2102,31 +2102,31 @@
         },
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 8
         },
         {
           "id": "SIZE",
-          "label": "size",
+          "label": "大きさ",
           "type": "number",
           "defaultValue": 64
         },
         {
           "id": "COMPLEXITY",
-          "label": "complexity",
+          "label": "複雑さ",
           "type": "number",
           "defaultValue": 3
         },
         {
           "id": "EVOLUTION",
-          "label": "evolution",
+          "label": "変化",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "SEED",
-          "label": "seed",
+          "label": "シード",
           "type": "number",
           "defaultValue": 0
         },
@@ -2144,19 +2144,19 @@
         },
         {
           "id": "CENTERX",
-          "label": "centerx",
+          "label": "中心x",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "CENTERY",
-          "label": "centery",
+          "label": "中心y",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -2164,8 +2164,8 @@
     },
     {
       "id": "fractalnoise",
-      "name": "fractalnoise",
-      "text": "fractal noise fractal type: [FRACTALTYPE] noise type: [NOISETYPE] invert: [INVERT] contrast: [CONTRAST] brightness: [BRIGHTNESS] overflow: [OVERFLOW] rotate: [ROTATE] scale: [SCALE] width: [WIDTH] height: [HEIGHT] random offset: [OX] [OY] perspective offset: [PERSPECTIVE] depth: [DEPTH] evolution: [EVOLUTION] cycle evolution: [CYCLEEVOLUTION] cycle: [FREQ]",
+      "name": "フラクタルノイズ",
+      "text": "フラクタルノイズ フラクタル種類: [FRACTALTYPE] ノイズ種類: [NOISETYPE] 反転: [INVERT] コントラスト: [CONTRAST] 明るさ: [BRIGHTNESS] オーバーフロー: [OVERFLOW] 回転: [ROTATE] スケール: [SCALE] 幅: [WIDTH] 高さ: [HEIGHT] ランダムずれ: [OX] [OY] 遠近ずれ: [PERSPECTIVE] 奥行: [DEPTH] 変化: [EVOLUTION] 周期変化: [CYCLEEVOLUTION] 周期: [FREQ]",
       "opcode": "fractalnoise",
       "blockType": "command",
       "implementation": {
@@ -2175,7 +2175,7 @@
       "inputs": [
         {
           "id": "FRACTALTYPE",
-          "label": "fractaltype",
+          "label": "フラクタル種類",
           "type": "menu",
           "items": [
             "基本",
@@ -2200,7 +2200,7 @@
         },
         {
           "id": "NOISETYPE",
-          "label": "noisetype",
+          "label": "ノイズ種類",
           "type": "menu",
           "items": [
             "ブロック",
@@ -2212,7 +2212,7 @@
         },
         {
           "id": "INVERT",
-          "label": "invert",
+          "label": "反転",
           "type": "menu",
           "items": [
             "false",
@@ -2222,19 +2222,19 @@
         },
         {
           "id": "CONTRAST",
-          "label": "contrast",
+          "label": "コントラスト",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "BRIGHTNESS",
-          "label": "brightness",
+          "label": "明るさ",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "OVERFLOW",
-          "label": "overflow",
+          "label": "オーバーフロー",
           "type": "menu",
           "items": [
             "HDR",
@@ -2245,43 +2245,43 @@
         },
         {
           "id": "ROTATE",
-          "label": "rotate",
+          "label": "回転",
           "type": "angle",
           "defaultValue": 0
         },
         {
           "id": "SCALE",
-          "label": "scale",
+          "label": "スケール",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "WIDTH",
-          "label": "width",
+          "label": "太さ",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "HEIGHT",
-          "label": "height",
+          "label": "高さ",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "OX",
-          "label": "ox",
+          "label": "ずれx",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "OY",
-          "label": "oy",
+          "label": "ずれy",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "PERSPECTIVE",
-          "label": "perspective",
+          "label": "遠近",
           "type": "menu",
           "items": [
             "false",
@@ -2291,19 +2291,19 @@
         },
         {
           "id": "DEPTH",
-          "label": "depth",
+          "label": "奥行",
           "type": "number",
           "defaultValue": 6
         },
         {
           "id": "EVOLUTION",
-          "label": "evolution",
+          "label": "変化",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "CYCLEEVOLUTION",
-          "label": "cycleevolution",
+          "label": "周期変化",
           "type": "menu",
           "items": [
             "false",
@@ -2313,7 +2313,7 @@
         },
         {
           "id": "FREQ",
-          "label": "freq",
+          "label": "周期",
           "type": "number",
           "defaultValue": 1
         }
@@ -2321,8 +2321,8 @@
     },
     {
       "id": "pulse",
-      "name": "pulse",
-      "text": "pulse center x: [X] y: [Y] radius: [RADIUS] value: [VALUE] width: [WIDTH] frequency: [FREQUENCY] mix: [MIX] %",
+      "name": "パルス",
+      "text": "パルス 中心 x: [X] y: [Y] 半径: [RADIUS] 値: [VALUE] 幅: [WIDTH] 周波数: [FREQUENCY] 混合: [MIX] %",
       "opcode": "pulse",
       "blockType": "command",
       "implementation": {
@@ -2344,31 +2344,31 @@
         },
         {
           "id": "RADIUS",
-          "label": "radius",
+          "label": "半径",
           "type": "number",
           "defaultValue": 80
         },
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 12
         },
         {
           "id": "WIDTH",
-          "label": "width",
+          "label": "太さ",
           "type": "number",
           "defaultValue": 18
         },
         {
           "id": "FREQUENCY",
-          "label": "frequency",
+          "label": "周波数",
           "type": "number",
           "defaultValue": 0.55
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -2376,8 +2376,8 @@
     },
     {
       "id": "pixelate",
-      "name": "pixelate",
-      "text": "pixelate size x: [X] y: [Y] offset x: [OFFSETX] y: [OFFSETY] mix: [MIX] %",
+      "name": "モザイク",
+      "text": "モザイク 大きさ x: [X] y: [Y] ずれ x: [OFFSETX] y: [OFFSETY] 混合: [MIX] %",
       "opcode": "pixelate",
       "blockType": "command",
       "implementation": {
@@ -2399,19 +2399,19 @@
         },
         {
           "id": "OFFSETX",
-          "label": "offsetx",
+          "label": "ずれx",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "OFFSETY",
-          "label": "offsety",
+          "label": "ずれy",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -2419,8 +2419,8 @@
     },
     {
       "id": "pixel-stretch",
-      "name": "pixelStretch",
-      "text": "pixel stretch type: [TYPE] position: [POSITION] size: [SIZE] sample width: [SAMPLE] center x: [CENTERX] y: [CENTERY] mix: [MIX] %",
+      "name": "ピクセルストレッチ",
+      "text": "ピクセルストレッチ 種類: [TYPE] 位置: [POSITION] 大きさ: [SIZE] サンプル幅: [SAMPLE] 中心 x: [CENTERX] y: [CENTERY] 混合: [MIX] %",
       "opcode": "pixelStretch",
       "blockType": "command",
       "implementation": {
@@ -2430,7 +2430,7 @@
       "inputs": [
         {
           "id": "TYPE",
-          "label": "type",
+          "label": "種類",
           "type": "menu",
           "items": [
             "x",
@@ -2442,37 +2442,37 @@
         },
         {
           "id": "POSITION",
-          "label": "position",
+          "label": "位置",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "SIZE",
-          "label": "size",
+          "label": "大きさ",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "SAMPLE",
-          "label": "sample",
+          "label": "サンプル",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "CENTERX",
-          "label": "centerx",
+          "label": "中心x",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "CENTERY",
-          "label": "centery",
+          "label": "中心y",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -2480,8 +2480,8 @@
     },
     {
       "id": "mirror",
-      "name": "mirror",
-      "text": "mirror type: [TYPE] center x: [X] y: [Y] mix: [MIX] %",
+      "name": "ミラー",
+      "text": "ミラー 種類: [TYPE] 中心 x: [X] y: [Y] 混合: [MIX] %",
       "opcode": "mirror",
       "blockType": "command",
       "implementation": {
@@ -2491,7 +2491,7 @@
       "inputs": [
         {
           "id": "TYPE",
-          "label": "type",
+          "label": "種類",
           "type": "menu",
           "items": [
             "x",
@@ -2514,7 +2514,7 @@
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -2522,8 +2522,8 @@
     },
     {
       "id": "transform",
-      "name": "transform",
-      "text": "transform x: [X] y: [Y] size: [SIZE] dir: [DIR] anchor x: [ANCHORX] y: [ANCHORY] mix: [MIX] %",
+      "name": "変形",
+      "text": "変形 x: [X] y: [Y] 大きさ: [SIZE] 向き: [DIR] 基準 x: [ANCHORX] y: [ANCHORY] 混合: [MIX] %",
       "opcode": "transform",
       "blockType": "command",
       "implementation": {
@@ -2545,31 +2545,31 @@
         },
         {
           "id": "SIZE",
-          "label": "size",
+          "label": "大きさ",
           "type": "number",
           "defaultValue": 100
         },
         {
           "id": "DIR",
-          "label": "dir",
+          "label": "向き",
           "type": "angle",
           "defaultValue": 0
         },
         {
           "id": "ANCHORX",
-          "label": "anchorx",
+          "label": "基準x",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "ANCHORY",
-          "label": "anchory",
+          "label": "基準y",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -2577,8 +2577,8 @@
     },
     {
       "id": "duplicate",
-      "name": "duplicate",
-      "text": "duplicate x: [X] y: [Y] size: [SIZE] dir: [DIR] anchor x: [ANCHORX] y: [ANCHORY] mix: [MIX] %",
+      "name": "複製",
+      "text": "複製 x: [X] y: [Y] 大きさ: [SIZE] 向き: [DIR] 基準 x: [ANCHORX] y: [ANCHORY] 混合: [MIX] %",
       "opcode": "duplicate",
       "blockType": "command",
       "implementation": {
@@ -2600,31 +2600,31 @@
         },
         {
           "id": "SIZE",
-          "label": "size",
+          "label": "大きさ",
           "type": "number",
           "defaultValue": 50
         },
         {
           "id": "DIR",
-          "label": "dir",
+          "label": "向き",
           "type": "angle",
           "defaultValue": 0
         },
         {
           "id": "ANCHORX",
-          "label": "anchorx",
+          "label": "基準x",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "ANCHORY",
-          "label": "anchory",
+          "label": "基準y",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -2632,8 +2632,8 @@
     },
     {
       "id": "pixel-sort",
-      "name": "pixelSort",
-      "text": "pixelsort [TYPE] span: [SPAN] min: [MIN] max: [MAX] invert mask: [INVERT] sort by: [SORTBY] reverse: [REVERSE] gamma: [GAMMA] center x: [CENTERX] y: [CENTERY] mix: [MIX] %",
+      "name": "ピクセルソート",
+      "text": "ピクセルソート [TYPE] 範囲: [SPAN] 最小: [MIN] 最大: [MAX] 反転マスク: [INVERT] 並べ替え: [SORTBY] 逆順: [REVERSE] ガンマ: [GAMMA] 中心 x: [CENTERX] y: [CENTERY] 混合: [MIX] %",
       "opcode": "pixelSort",
       "blockType": "command",
       "implementation": {
@@ -2643,7 +2643,7 @@
       "inputs": [
         {
           "id": "TYPE",
-          "label": "type",
+          "label": "種類",
           "type": "menu",
           "items": [
             "x",
@@ -2655,25 +2655,25 @@
         },
         {
           "id": "SPAN",
-          "label": "span",
+          "label": "範囲",
           "type": "number",
           "defaultValue": 64
         },
         {
           "id": "MIN",
-          "label": "min",
+          "label": "最小",
           "type": "number",
           "defaultValue": 0.4
         },
         {
           "id": "MAX",
-          "label": "max",
+          "label": "最大",
           "type": "number",
           "defaultValue": 0.72
         },
         {
           "id": "INVERT",
-          "label": "invert",
+          "label": "反転",
           "type": "menu",
           "items": [
             "false",
@@ -2683,7 +2683,7 @@
         },
         {
           "id": "SORTBY",
-          "label": "sortby",
+          "label": "並べ替え",
           "type": "menu",
           "items": [
             "luminance",
@@ -2694,7 +2694,7 @@
         },
         {
           "id": "REVERSE",
-          "label": "reverse",
+          "label": "逆順",
           "type": "menu",
           "items": [
             "false",
@@ -2704,25 +2704,25 @@
         },
         {
           "id": "GAMMA",
-          "label": "gamma",
+          "label": "ガンマ",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "CENTERX",
-          "label": "centerx",
+          "label": "中心x",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "CENTERY",
-          "label": "centery",
+          "label": "中心y",
           "type": "number",
           "defaultValue": 0
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -2730,8 +2730,8 @@
     },
     {
       "id": "color-adjustment",
-      "name": "colorAdjustment",
-      "text": "color adjustment add: [ADD] mul: [MUL] div: [DIV] mix: [MIX] %",
+      "name": "色調整",
+      "text": "色調整 加算: [ADD] 乗算: [MUL] 除算: [DIV] 混合: [MIX] %",
       "opcode": "colorAdjustment",
       "blockType": "command",
       "implementation": {
@@ -2741,25 +2741,25 @@
       "inputs": [
         {
           "id": "ADD",
-          "label": "add",
+          "label": "加算",
           "type": "color",
           "defaultValue": "#000000"
         },
         {
           "id": "MUL",
-          "label": "mul",
+          "label": "乗算",
           "type": "color",
           "defaultValue": "#ffffff"
         },
         {
           "id": "DIV",
-          "label": "div",
+          "label": "除算",
           "type": "color",
           "defaultValue": "#ffffff"
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -2767,8 +2767,8 @@
     },
     {
       "id": "displacement-map",
-      "name": "displacementMap",
-      "text": "displacement map costume: [COSTUME] value: [VALUE] type: [TYPE] channel: [CHANNEL] center: [CENTER] invert: [INVERT] mix: [MIX] %",
+      "name": "変位マップ",
+      "text": "変位マップ コスチューム: [COSTUME] 値: [VALUE] 種類: [TYPE] チャンネル: [CHANNEL] 中心: [CENTER] 反転: [INVERT] 混合: [MIX] %",
       "opcode": "displacementMap",
       "blockType": "command",
       "implementation": {
@@ -2779,18 +2779,18 @@
       "inputs": [
         {
           "id": "COSTUME",
-          "label": "costume",
+          "label": "コスチューム",
           "type": "costume"
         },
         {
           "id": "VALUE",
-          "label": "value",
+          "label": "値",
           "type": "number",
           "defaultValue": 10
         },
         {
           "id": "TYPE",
-          "label": "type",
+          "label": "種類",
           "type": "menu",
           "items": [
             "x",
@@ -2802,7 +2802,7 @@
         },
         {
           "id": "CHANNEL",
-          "label": "channel",
+          "label": "チャンネル",
           "type": "menu",
           "items": [
             "luminance",
@@ -2815,13 +2815,13 @@
         },
         {
           "id": "CENTER",
-          "label": "center",
+          "label": "中心",
           "type": "number",
           "defaultValue": 0.5
         },
         {
           "id": "INVERT",
-          "label": "invert",
+          "label": "反転",
           "type": "menu",
           "items": [
             "false",
@@ -2831,7 +2831,7 @@
         },
         {
           "id": "MIX",
-          "label": "mix",
+          "label": "混合",
           "type": "number",
           "defaultValue": 100
         }
@@ -2839,8 +2839,8 @@
     },
     {
       "id": "stack-current-drawing",
-      "name": "stackCurrentDrawing",
-      "text": "stack current drawing weight: [WEIGHT] max samples: [LIMIT]",
+      "name": "描画を重ねる",
+      "text": "描画を重ねる 重み: [WEIGHT] 最大: [LIMIT]",
       "opcode": "stackCurrentDrawing",
       "blockType": "command",
       "implementation": {
@@ -2851,13 +2851,13 @@
       "inputs": [
         {
           "id": "WEIGHT",
-          "label": "weight",
+          "label": "重み",
           "type": "number",
           "defaultValue": 1
         },
         {
           "id": "LIMIT",
-          "label": "limit",
+          "label": "最大",
           "type": "number",
           "defaultValue": 10
         }
@@ -2865,8 +2865,8 @@
     },
     {
       "id": "render-buffer-stack",
-      "name": "renderBufferStack",
-      "text": "render stacked drawings using [MODE] clear after: [CLEAR]",
+      "name": "重ねを表示",
+      "text": "重ねた描画を [MODE] で表示 消去: [CLEAR]",
       "opcode": "renderBufferStack",
       "blockType": "command",
       "implementation": {
@@ -2876,7 +2876,7 @@
       "inputs": [
         {
           "id": "MODE",
-          "label": "mode",
+          "label": "モード",
           "type": "menu",
           "items": [
             "average",
@@ -2888,7 +2888,7 @@
         },
         {
           "id": "CLEAR",
-          "label": "clear",
+          "label": "消去",
           "type": "menu",
           "items": [
             "false",
@@ -2900,8 +2900,8 @@
     },
     {
       "id": "clear-buffer-stack",
-      "name": "clearBufferStack",
-      "text": "clear drawing stack",
+      "name": "重ねを消去",
+      "text": "重ねを消去",
       "opcode": "clearBufferStack",
       "blockType": "command",
       "implementation": {
@@ -2911,8 +2911,8 @@
     },
     {
       "id": "buffer-stack-size",
-      "name": "bufferStackSize",
-      "text": "drawing stack samples",
+      "name": "重ねの数",
+      "text": "重ねの数",
       "opcode": "bufferStackSize",
       "blockType": "reporter",
       "implementation": {
@@ -2922,8 +2922,8 @@
     },
     {
       "id": "set-blend-mode",
-      "name": "setBlendMode",
-      "text": "use [TYPE] blending mode opacity: [OPACITY] %",
+      "name": "ブレンド",
+      "text": "ブレンド [TYPE] 不透明度: [OPACITY] %",
       "opcode": "setBlendMode",
       "blockType": "command",
       "implementation": {
@@ -2934,7 +2934,7 @@
       "inputs": [
         {
           "id": "TYPE",
-          "label": "type",
+          "label": "種類",
           "type": "menu",
           "items": [
             "normal",
@@ -2950,7 +2950,7 @@
         },
         {
           "id": "OPACITY",
-          "label": "opacity",
+          "label": "不透明度",
           "type": "number",
           "defaultValue": 100
         }

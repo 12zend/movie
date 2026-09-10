@@ -404,7 +404,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
         const numberArgument = defaultValue => ({type: ArgumentType.NUMBER, defaultValue});
         return {
             id: EXTENSION_ID,
-            name: 'Objects',
+            name: 'レイヤー',
             color1: PRIMARY,
             color2: SECONDARY,
             color3: TERTIARY,
@@ -412,7 +412,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                 {
                     opcode: 'draw',
                     blockType: BlockType.COMMAND,
-                    text: 'draw [ASSET]',
+                    text: '描画 [ASSET]',
                     arguments: {
                         SOURCE: {type: ArgumentType.STRING, defaultValue: 'costume'},
                         ASSET: {type: ArgumentType.STRING, defaultValue: ''},
@@ -440,7 +440,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                 {
                     opcode: 'shape',
                     blockType: BlockType.COMMAND,
-                    text: 'shape [SHAPE] n: [N] ratio: [RATIO] position x: [PX] y: [PY] z: [PZ] ' +
+                    text: '形状 [SHAPE] n: [N] ratio: [RATIO] position x: [PX] y: [PY] z: [PZ] ' +
                         'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
                         'radius: [INNER] [OUTER] width: [WIDTH] height: [HEIGHT] time: [T1] ~ [T2]\n' +
                         'color: [COLOR] opacity: [OPACITY] %',
@@ -470,7 +470,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                 {
                     opcode: 'arc',
                     blockType: BlockType.COMMAND,
-                    text: 'arc position x: [PX] y: [PY] z: [PZ] ' +
+                    text: '円弧 position x: [PX] y: [PY] z: [PZ] ' +
                         'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
                         'radius: [INNER] [OUTER] angle: [START] [END] width: [WIDTH] height: [HEIGHT] ' +
                         'time: [T1] ~ [T2]\ncolor: [COLOR] opacity: [OPACITY] %',
@@ -499,7 +499,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                 {
                     opcode: 'circularSegment',
                     blockType: BlockType.COMMAND,
-                    text: 'circular segment position x: [PX] y: [PY] z: [PZ] ' +
+                    text: '弓形 position x: [PX] y: [PY] z: [PZ] ' +
                         'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
                         'size: [OUTER] angle: [START] [END] width: [WIDTH] height: [HEIGHT] ' +
                         'time: [T1] ~ [T2]\ncolor: [COLOR] opacity: [OPACITY] %',
@@ -548,7 +548,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                     opcode: 'grouping',
                     blockType: BlockType.CONDITIONAL,
                     branchCount: 2,
-                    text: ['grouping', 'effects']
+                    text: ['グループ化', 'エフェクト']
                 },
                 {
                     opcode: 'scene',
@@ -575,7 +575,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                     opcode: 'transform',
                     blockType: BlockType.CONDITIONAL,
                     branchCount: 1,
-                    text: 'transform position x: [PX] y: [PY] z: [PZ] anchor x: [AX] y: [AY] z: [AZ] ' +
+                    text: '移動 position x: [PX] y: [PY] z: [PZ] anchor x: [AX] y: [AY] z: [AZ] ' +
                         'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ]',
                     arguments: {
                         PX: numberArgument(0),
@@ -596,7 +596,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                     opcode: 'composite',
                     blockType: BlockType.CONDITIONAL,
                     branchCount: 1,
-                    text: 'composite opacity: [OPACITY] % blend mode: [BLEND]',
+                    text: '合成 不透明度: [OPACITY] % ブレンド: [BLEND]',
                     arguments: {
                         OPACITY: numberArgument(100),
                         BLEND: {type: ArgumentType.STRING, menu: 'blendMode', defaultValue: 'normal'}
@@ -722,7 +722,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                 {
                     opcode: 'keyframeTime',
                     blockType: BlockType.REPORTER,
-                    text: 'keyframe [ID] time',
+                    text: 'キーフレームの [ID] 番目',
                     arguments: {
                         ID: numberArgument(1)
                     }
@@ -781,7 +781,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                 {
                     opcode: 'timeWithin',
                     blockType: BlockType.BOOLEAN,
-                    text: 'time within [T1] to [T2] sec',
+                    text: '[T1] から [T2] まで',
                     arguments: {
                         T1: numberArgument(0),
                         T2: numberArgument(1)

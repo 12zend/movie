@@ -16,7 +16,7 @@ const translate = (id, english) => {
 const motion = function (isInitialSetup, isStage, targetId, colors) {
     // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
-    <category name="Camera" id="motion" colour="${colors.primary}" secondaryColour="${colors.tertiary}">
+    <category name="カメラ" id="motion" colour="${colors.primary}" secondaryColour="${colors.tertiary}">
         <block type="motion_setcamerato">
             <value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
             <value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
@@ -778,7 +778,7 @@ const objects = function (costumeName) {
         `<value name="${name}"><shadow type="text"><field name="TEXT">${xmlEscape(value)}</field></shadow></value>`
     );
     return `
-    <category name="Objects" id="objects" colour="#4968D4" secondaryColour="#334A99">
+    <category name="レイヤー" id="objects" colour="#4968D4" secondaryColour="#334A99">
         <block type="objects_draw">
             <field name="SOURCE">costume</field>
             <field name="ASSET">${costumeName}</field>
@@ -803,36 +803,15 @@ const objects = function (costumeName) {
         <block type="objects_composite">
             ${number('OPACITY', 100)}<field name="BLEND">normal</field>
         </block>
-        <block type="objects_scene"/>
         <block type="objects_timeWithin">${number('T1', 0)}${number('T2', 1)}</block>
-        <block type="objects_timelineTime"/>
         <block type="objects_keyframeTime">${number('ID', 1)}</block>
-        <block type="objects_leftKeyframeTime">${number('FIRST', 1)}${number('SECOND', 2)}</block>
-        <block type="objects_posterizeTime">${number('FPS', 12)}</block>
-        <block type="objects_interpolateColor">
-            <value name="A"><shadow type="colour_picker"><field name="COLOUR">#ff3366</field></shadow></value>
-            <value name="B"><shadow type="colour_picker"><field name="COLOUR">#3366ff</field></shadow></value>
-            ${number('T1', 0)}${number('T2', 1)}<field name="EASING">Linear</field>
-        </block>
         <block type="objects_pass">
             ${text('POINTS', '')}
             <field name="COMPONENT">x</field>${number('TIME', 0)}
         </block>
-        <sep gap="36"/>
-        <!-- Lighting keeps its legacy opcode IDs so saved projects continue to load. -->
-        <block type="looks_clearlight"/>
-        <block type="looks_addpointlight">
-            ${number('X', 0)}${number('Y', 200)}${number('Z', 200)}${number('RADIUS', 1000)}
-            <value name="COLOR"><shadow type="colour_picker"><field name="COLOUR">#ffffff</field></shadow></value>
-            ${number('INTENSITY', 2)}${number('SHADOW', 1)}
-        </block>
-        <block type="looks_addlight">
-            ${number('X', 0)}${number('Y', 200)}${number('Z', 200)}${number('RADIUS', 1000)}
-            <value name="COLOR"><shadow type="colour_picker"><field name="COLOUR">#ffffff</field></shadow></value>
-            ${number('INTENSITY', 2)}
-            <value name="ANGLE"><shadow type="math_angle"><field name="NUM">45</field></shadow></value>
-            ${number('SHADOW', 1)}
-        </block>
+        <!-- objects_scene, objects_timelineTime, objects_leftKeyframeTime, objects_posterizeTime,
+             objects_interpolateColor, looks_clearlight, looks_addpointlight, looks_addlight are
+             hidden from the toolbox but remain loadable for project compatibility. -->
         <sep gap="36"/>
     </category>
     `;

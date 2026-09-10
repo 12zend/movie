@@ -80,7 +80,7 @@ describe('Objects blocks', () => {
             const block = {jsonInit: jest.fn()};
             ScratchBlocks.Blocks[opcode].init.call(block);
             expect(block.jsonInit).toHaveBeenCalledWith(expect.objectContaining({
-                category: 'Objects',
+                category: 'レイヤー',
                 colour: PRIMARY,
                 colourSecondary: SECONDARY,
                 colourTertiary: TERTIARY

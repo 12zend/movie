@@ -33,7 +33,7 @@ describe('built-in Pen FX category', () => {
         const info = new PenFX().getInfo();
 
         expect(info.id).toBe('penfx');
-        expect(info.name).toBe('Looks');
+        expect(info.name).toBe('エフェクト');
         expect(info.blockIconURI).toBeUndefined();
         expect(info.blocks.find(block => block.opcode === 'contrast')).toBeDefined();
         const vhs = info.blocks.find(block => block.opcode === 'vhs');

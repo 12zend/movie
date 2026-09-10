@@ -292,11 +292,11 @@ const installPenFXBlockDefinitions = ScratchBlocks => {
     ScratchBlocks.Blocks.penfx_gradationOverlay = {
         init: function () {
             this.appendDummyInput('GRADIENT_INPUT')
-                .appendField('gradation overlay')
+                .appendField('グラデーションオーバーレイ')
                 .appendField(new GradientField(), 'GRADIENT');
-            this.appendValueInput('DIR').appendField('dir:');
+            this.appendValueInput('DIR').appendField('向き:');
             this.appendValueInput('MIX')
-                .appendField('mix:')
+                .appendField('混合:')
                 .appendField('%');
             this.setInputsInline(true);
             this.setColour('#6b56d9', '#5945c2', '#46359f');
