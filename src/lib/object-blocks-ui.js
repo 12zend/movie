@@ -1131,25 +1131,19 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
             this.appendValueInput('FRAME').appendField('frame:');
             this.appendValueInput('SPEED').appendField('speed:');
             this.appendValueInput('VOLUME').appendField('volume:');
-            const position = this.appendValueInput('PX').appendField('position x:');
-            position.objectStartRow_ = true;
+            this.appendValueInput('PX').appendField('position x:');
             this.appendValueInput('PY').appendField('y:');
             this.appendValueInput('PZ').appendField('z:');
-            const rotation = this.appendValueInput('RX').appendField('rotation x:');
-            rotation.objectStartRow_ = true;
+            this.appendValueInput('RX').appendField('rotation x:');
             this.appendValueInput('RY').appendField('y:');
             this.appendValueInput('RZ').appendField('z:');
-            const scale = this.appendValueInput('SX').appendField('scale x:');
-            scale.objectStartRow_ = true;
+            this.appendValueInput('SX').appendField('scale x:');
             this.appendValueInput('SY').appendField('y:');
             this.appendValueInput('SZ').appendField('z:');
-            const size = this.appendValueInput('SIZE').appendField('size:');
-            size.objectStartRow_ = true;
-            const width = this.appendValueInput('WIDTH').appendField('width:');
-            width.objectStartRow_ = true;
+            this.appendValueInput('SIZE').appendField('size:');
+            this.appendValueInput('WIDTH').appendField('width:');
             this.appendValueInput('HEIGHT').appendField('height:');
-            const startTime = this.appendValueInput('T1').appendField('time:');
-            startTime.objectStartRow_ = true;
+            this.appendValueInput('T1').appendField('time:');
             this.appendValueInput('T2').appendField('~');
             this.setInputsInline(true);
             this.setColour(PRIMARY, SECONDARY, TERTIARY);
@@ -1288,29 +1282,22 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
                 );
             this.appendValueInput('N').appendField('n:');
             this.appendValueInput('RATIO').appendField('ratio:');
-            const position = this.appendValueInput('PX').appendField('position x:');
-            position.objectStartRow_ = true;
+            this.appendValueInput('PX').appendField('position x:');
             this.appendValueInput('PY').appendField('y:');
             this.appendValueInput('PZ').appendField('z:');
-            const rotation = this.appendValueInput('RX').appendField('rotation x:');
-            rotation.objectStartRow_ = true;
+            this.appendValueInput('RX').appendField('rotation x:');
             this.appendValueInput('RY').appendField('y:');
             this.appendValueInput('RZ').appendField('z:');
-            const scale = this.appendValueInput('SX').appendField('scale x:');
-            scale.objectStartRow_ = true;
+            this.appendValueInput('SX').appendField('scale x:');
             this.appendValueInput('SY').appendField('y:');
             this.appendValueInput('SZ').appendField('z:');
-            const radius = this.appendValueInput('INNER').appendField('radius:');
-            radius.objectStartRow_ = true;
+            this.appendValueInput('INNER').appendField('radius:');
             this.appendValueInput('OUTER');
-            const width = this.appendValueInput('WIDTH').appendField('width:');
-            width.objectStartRow_ = true;
+            this.appendValueInput('WIDTH').appendField('width:');
             this.appendValueInput('HEIGHT').appendField('height:');
-            const startTime = this.appendValueInput('T1').appendField('time:');
-            startTime.objectStartRow_ = true;
+            this.appendValueInput('T1').appendField('time:');
             this.appendValueInput('T2').appendField('~');
-            const color = this.appendValueInput('COLOR').appendField('color:');
-            color.objectStartRow_ = true;
+            this.appendValueInput('COLOR').appendField('color:');
             this.appendValueInput('OPACITY')
                 .appendField('opacity:')
                 .appendField('%');
@@ -1370,26 +1357,21 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
     };
 
     const addTransformInputs = block => {
-        const position = block.appendValueInput('PX').appendField('position x:');
-        position.objectStartRow_ = true;
+        block.appendValueInput('PX').appendField('position x:');
         block.appendValueInput('PY').appendField('y:');
         block.appendValueInput('PZ').appendField('z:');
-        const rotation = block.appendValueInput('RX').appendField('rotation x:');
-        rotation.objectStartRow_ = true;
+        block.appendValueInput('RX').appendField('rotation x:');
         block.appendValueInput('RY').appendField('y:');
         block.appendValueInput('RZ').appendField('z:');
-        const scale = block.appendValueInput('SX').appendField('scale x:');
-        scale.objectStartRow_ = true;
+        block.appendValueInput('SX').appendField('scale x:');
         block.appendValueInput('SY').appendField('y:');
         block.appendValueInput('SZ').appendField('z:');
     };
 
     const addShapeAppearanceInputs = block => {
-        const time = block.appendValueInput('T1').appendField('time:');
-        time.objectStartRow_ = true;
+        block.appendValueInput('T1').appendField('time:');
         block.appendValueInput('T2').appendField('~');
-        const color = block.appendValueInput('COLOR').appendField('color:');
-        color.objectStartRow_ = true;
+        block.appendValueInput('COLOR').appendField('color:');
         block.appendValueInput('OPACITY')
             .appendField('opacity:')
             .appendField('%');
@@ -1398,14 +1380,11 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
     installProceduralShapeBlock('objects_arc', function () {
         this.appendDummyInput('ARC_INPUT').appendField('円弧');
         addTransformInputs(this);
-        const radius = this.appendValueInput('INNER').appendField('radius:');
-        radius.objectStartRow_ = true;
+        this.appendValueInput('INNER').appendField('radius:');
         this.appendValueInput('OUTER');
-        const angle = this.appendValueInput('START').appendField('angle:');
-        angle.objectStartRow_ = true;
+        this.appendValueInput('START').appendField('angle:');
         this.appendValueInput('END');
-        const width = this.appendValueInput('WIDTH').appendField('width:');
-        width.objectStartRow_ = true;
+        this.appendValueInput('WIDTH').appendField('width:');
         this.appendValueInput('HEIGHT').appendField('height:');
         addShapeAppearanceInputs(this);
     });
@@ -1414,27 +1393,22 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
         this.appendDummyInput('SEGMENT_INPUT').appendField('弓形');
         addTransformInputs(this);
         this.appendValueInput('OUTER').appendField('size:');
-        const angle = this.appendValueInput('START').appendField('angle:');
-        angle.objectStartRow_ = true;
+        this.appendValueInput('START').appendField('angle:');
         this.appendValueInput('END');
-        const width = this.appendValueInput('WIDTH').appendField('width:');
-        width.objectStartRow_ = true;
+        this.appendValueInput('WIDTH').appendField('width:');
         this.appendValueInput('HEIGHT').appendField('height:');
         addShapeAppearanceInputs(this);
     });
 
     installProceduralShapeBlock('objects_line', function () {
         this.appendDummyInput('LINE_INPUT').appendField('line');
-        const position1 = this.appendValueInput('P1X').appendField('position1 x:');
-        position1.objectStartRow_ = true;
+        this.appendValueInput('P1X').appendField('position1 x:');
         this.appendValueInput('P1Y').appendField('y:');
         this.appendValueInput('P1Z').appendField('z:');
-        const position2 = this.appendValueInput('P2X').appendField('position2 x:');
-        position2.objectStartRow_ = true;
+        this.appendValueInput('P2X').appendField('position2 x:');
         this.appendValueInput('P2Y').appendField('y:');
         this.appendValueInput('P2Z').appendField('z:');
-        const thickness = this.appendValueInput('THICKNESS').appendField('thickness:');
-        thickness.objectStartRow_ = true;
+        this.appendValueInput('THICKNESS').appendField('thickness:');
         addShapeAppearanceInputs(this);
     });
     /* eslint-enable no-invalid-this */

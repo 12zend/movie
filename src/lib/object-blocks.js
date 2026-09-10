@@ -442,7 +442,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                     blockType: BlockType.COMMAND,
                     text: '形状 [SHAPE] n: [N] ratio: [RATIO] position x: [PX] y: [PY] z: [PZ] ' +
                         'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
-                        'radius: [INNER] [OUTER] width: [WIDTH] height: [HEIGHT] time: [T1] ~ [T2]\n' +
+                        'radius: [INNER] [OUTER] width: [WIDTH] height: [HEIGHT] time: [T1] ~ [T2] ' +
                         'color: [COLOR] opacity: [OPACITY] %',
                     arguments: {
                         SHAPE: {type: ArgumentType.STRING, menu: 'shapeType', defaultValue: 'polygon'},
@@ -473,7 +473,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                     text: '円弧 position x: [PX] y: [PY] z: [PZ] ' +
                         'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
                         'radius: [INNER] [OUTER] angle: [START] [END] width: [WIDTH] height: [HEIGHT] ' +
-                        'time: [T1] ~ [T2]\ncolor: [COLOR] opacity: [OPACITY] %',
+                        'time: [T1] ~ [T2] color: [COLOR] opacity: [OPACITY] %',
                     arguments: {
                         PX: numberArgument(0),
                         PY: numberArgument(0),
@@ -502,7 +502,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                     text: '弓形 position x: [PX] y: [PY] z: [PZ] ' +
                         'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
                         'size: [OUTER] angle: [START] [END] width: [WIDTH] height: [HEIGHT] ' +
-                        'time: [T1] ~ [T2]\ncolor: [COLOR] opacity: [OPACITY] %',
+                        'time: [T1] ~ [T2] color: [COLOR] opacity: [OPACITY] %',
                     arguments: {
                         PX: numberArgument(0),
                         PY: numberArgument(0),
@@ -529,7 +529,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                     blockType: BlockType.COMMAND,
                     text: 'line position1 x: [P1X] y: [P1Y] z: [P1Z] ' +
                         'position2 x: [P2X] y: [P2Y] z: [P2Z] thickness: [THICKNESS] ' +
-                        'time: [T1] ~ [T2]\ncolor: [COLOR] opacity: [OPACITY] %',
+                        'time: [T1] ~ [T2] color: [COLOR] opacity: [OPACITY] %',
                     arguments: {
                         P1X: numberArgument(0),
                         P1Y: numberArgument(0),

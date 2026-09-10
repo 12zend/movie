@@ -519,7 +519,8 @@ describe('Objects blocks', () => {
         expect(info.menus.easing.items).toEqual(ANIMATION_EASING_TYPES);
         expect(info.menus.matteMode.items).toEqual(MATTE_MODES);
         expect(info.menus.pathComponent.items).toEqual(['x', 'y']);
-        expect(info.blocks[1].text).toContain('\ncolor: [COLOR] opacity: [OPACITY] %');
+        expect(info.blocks[1].text).toContain('time: [T1] ~ [T2] color: [COLOR] opacity: [OPACITY] %');
+        expect(info.blocks[1].text).not.toContain('\n');
         expect(info.blocks[0].arguments.T2.defaultValue).toBe(Infinity);
         expect(info.blocks[1].arguments.T2.defaultValue).toBe(Infinity);
         expect(info.blocks[2].arguments).toEqual(expect.objectContaining({
