@@ -1,4 +1,3 @@
-import analyzeMovieFrames from './movie-frame-analysis';
 import {
     TIMELINE_DEFAULT_DURATION,
     TIMELINE_MAX_DURATION
@@ -89,9 +88,7 @@ const MovieAssetManagerTimelineMethods = {
         if (hasSettings) {
             this.vm.setFramerate(this.timeline.framerate);
         }
-        this.timelineDiagnostics = null;
         this.emitTimelineChanged();
-        this.emitTimelineDiagnosticsChanged(true);
     },
 
     normalizeTimelineDuration (value) {
@@ -122,26 +119,6 @@ const MovieAssetManagerTimelineMethods = {
             sound: this.timeline.sound,
             width: this.timeline.width
         };
-    },
-
-    getTimelineDiagnostics (force = false) {
-        if (force || !this.timelineDiagnostics) {
-            this.timelineDiagnostics = analyzeMovieFrames(this.runtime, {
-                currentTime: this.timeline.currentTime,
-                duration: this.timeline.duration,
-                framerate: this.timeline.framerate
-            });
-        }
-        return {
-            ...this.timelineDiagnostics,
-            currentTime: this.timeline.currentTime,
-            ranges: this.timelineDiagnostics.ranges.map(range => ({...range})),
-            warnings: this.timelineDiagnostics.warnings.map(warning => ({...warning}))
-        };
-    },
-
-    emitTimelineDiagnosticsChanged (force = false) {
-        this.emit('timelineDiagnosticsChanged', this.getTimelineDiagnostics(force));
     },
 
     emitTimelineChanged () {
@@ -281,7 +258,6 @@ const MovieAssetManagerTimelineMethods = {
         this.timeline.waitingForVideo = false;
         if (wasPlaying) this.playTimelineSounds(this.timeline.currentTime);
         this.emitTimelineChanged();
-        this.emitTimelineDiagnosticsChanged();
     },
 
     requestTimelinePreviewRefresh () {
@@ -301,8 +277,6 @@ const MovieAssetManagerTimelineMethods = {
         this.renderCacheGeneration = (Number(this.renderCacheGeneration) || 0) + 1;
         if (this.renderingFrameCache instanceof Map) this.renderingFrameCache.clear();
         if (this.renderingSoundEventCache instanceof Map) this.renderingSoundEventCache.clear();
-        this.timelineDiagnostics = null;
-        this.emitTimelineDiagnosticsChanged(true);
         this.requestTimelinePreviewRefresh();
     },
 
@@ -350,8 +324,6 @@ const MovieAssetManagerTimelineMethods = {
                 remote: options.remote === true
             });
         }
-        this.timelineDiagnostics = null;
-        this.emitTimelineDiagnosticsChanged(true);
         if (settingsChanged) this.runtime.emitProjectChanged();
     },
 

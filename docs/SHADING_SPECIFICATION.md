@@ -272,7 +272,6 @@ PenFX は `penfx` extension として登録され、ツールボックス上で�
 - タイムライン表示のズーム
 - 720p preview、1080p final、4K final のプリセット
 - 書き出し範囲、解像度、FPS、形式、frame 再利用の設定
-- timeline diagnostics の警告から該当ブロックへのフォーカス
 
 現行プリセットは次のとおり。
 

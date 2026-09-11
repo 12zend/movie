@@ -60,20 +60,6 @@
     font-size: 0.6875rem;
 }
 
-.title-group .frame-safety {
-    border-radius: 999px;
-    padding: 0.125rem 0.375rem;
-    background: $ui-secondary;
-    color: $motion-primary;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.title-group .frame-safety.has-warnings {
-    background: $error-transparent;
-    color: $error-primary;
-}
-
 .header-actions {
     display: flex;
     align-items: center;
@@ -230,8 +216,8 @@
 .timeline-viewport {
     position: relative;
     width: 100%;
-    max-height: 13rem;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
     border: 1px solid $ui-black-transparent;
     border-radius: $form-radius;
     background: $ui-secondary;
@@ -260,84 +246,6 @@
     min-height: 4.25rem;
     min-width: 100%;
     user-select: none;
-}
-
-.code-ranges {
-    position: absolute;
-    z-index: 4;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-}
-
-.code-range {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.375rem;
-    height: 1rem;
-    min-width: 2px;
-    overflow: hidden;
-    border: 0;
-    border-radius: 0.1875rem;
-    padding: 0 0.3125rem;
-    background: $looks-light-transparent;
-    color: $text-primary;
-    cursor: pointer;
-    font: inherit;
-    font-size: 0.625rem;
-    opacity: 0.72;
-    pointer-events: auto;
-    text-align: left;
-    white-space: nowrap;
-}
-
-.code-range.visual {
-    background: $looks-transparent;
-    color: $ui-white;
-}
-
-.code-range.event {
-    background: $sound-tertiary;
-    color: $ui-white;
-}
-
-.code-range.range {
-    background: $motion-tertiary;
-    color: $ui-white;
-}
-
-.code-range.simulation {
-    background: $data-primary;
-    color: $ui-white;
-}
-
-.code-range:hover,
-.code-range.is-active-range {
-    opacity: 1;
-}
-
-.code-range.is-active-range {
-    box-shadow: 0 1px 4px $shadow;
-    font-weight: 600;
-}
-
-.code-range:focus-visible {
-    outline: 2px solid $looks-secondary;
-    outline-offset: 1px;
-}
-
-.code-range span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.code-range small {
-    font-size: 0.5625rem;
-    font-variant-numeric: tabular-nums;
 }
 
 .keyframe-markers {
@@ -568,43 +476,6 @@
     opacity: 0.45;
 }
 
-.diagnostics {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    min-width: 0;
-    margin-top: 0.5rem;
-    color: $error-primary;
-    font-size: 0.6875rem;
-}
-
-.diagnostics strong {
-    flex: 0 0 auto;
-}
-
-.diagnostics button {
-    min-width: 0;
-    overflow: hidden;
-    border: 0;
-    padding: 0;
-    background: transparent;
-    color: $error-primary;
-    cursor: pointer;
-    font: inherit;
-    text-decoration: underline;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.diagnostics button:focus-visible {
-    outline: 2px solid $looks-secondary;
-    outline-offset: 2px;
-}
-
-.diagnostics > span {
-    flex: 0 0 auto;
-}
-
 .stop-button span {
     width: 0.625rem;
     height: 0.625rem;
@@ -636,15 +507,6 @@
 .timeline.is-compact .title-group span,
 .timeline.is-compact .status,
 .timeline.is-compact .frame-count {
-    display: none;
-}
-
-.timeline.is-compact .title-group .frame-safety {
-    display: inline;
-}
-
-.timeline.is-compact .diagnostics button,
-.timeline.is-compact .diagnostics > span {
     display: none;
 }
 

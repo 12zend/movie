@@ -45,7 +45,6 @@ import {gentlyRequestPersistentStorage} from '../lib/tw-persistent-storage.js';
 import {SOUND_FILE_ACCEPT} from '../lib/sound-upload-formats.js';
 import installObjectBlockDefinitions from '../lib/object-blocks-ui';
 import installPenFXBlockDefinitions from '../lib/pen-fx-ui';
-import installMovieAssetManager from '../lib/movie-asset-manager';
 
 // TW: Strings we add to scratch-blocks are localized here
 const messages = defineMessages({
@@ -127,9 +126,7 @@ class Blocks extends React.Component {
             'setBlocks',
             'setSoundFileInput',
             'setLocale',
-            'handleEnableProcedureReturns',
-            'handleMovieDiagnosticsChanged',
-            'handleMovieBlockFocus'
+            'handleEnableProcedureReturns'
         ]);
         this.ScratchBlocks.prompt = this.handlePromptStart;
         this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
@@ -174,10 +171,6 @@ class Blocks extends React.Component {
         );
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
         AddonHooks.blocklyWorkspace = this.workspace;
-        this.movieAssetManager = installMovieAssetManager(this.props.vm);
-        this.movieAssetManager.on('timelineDiagnosticsChanged', this.handleMovieDiagnosticsChanged);
-        this.movieAssetManager.on('focusMovieBlock', this.handleMovieBlockFocus);
-        this.handleMovieDiagnosticsChanged(this.movieAssetManager.getTimelineDiagnostics());
 
         // Register buttons under new callback keys for creating variables,
         // lists, and procedures from extensions.
@@ -301,10 +294,6 @@ class Blocks extends React.Component {
     componentWillUnmount () {
         this.detachVM();
         this.unmounted = true;
-        if (this.movieAssetManager) {
-            this.movieAssetManager.removeListener('timelineDiagnosticsChanged', this.handleMovieDiagnosticsChanged);
-            this.movieAssetManager.removeListener('focusMovieBlock', this.handleMovieBlockFocus);
-        }
         this.workspace.dispose();
         clearTimeout(this.toolboxUpdateTimeout);
 
@@ -460,42 +449,6 @@ class Blocks extends React.Component {
     onVisualReport (data) {
         this.workspace.reportValue(data.id, data.value);
     }
-    handleMovieDiagnosticsChanged (diagnostics) {
-        if (!this.workspace) return;
-        const warningId = 'movie-determinism';
-        for (const blockId of this.movieWarningBlockIds || []) {
-            const block = this.workspace.getBlockById(blockId);
-            if (block && typeof block.setWarningText === 'function') block.setWarningText(null, warningId);
-        }
-        this.movieWarningBlockIds = new Set();
-        const target = this.props.vm.editingTarget;
-        if (!target) return;
-        const messagesByBlock = new Map();
-        for (const warning of (diagnostics && diagnostics.warnings) || []) {
-            if (warning.targetId !== target.id) continue;
-            const warningMessages = messagesByBlock.get(warning.blockId) || [];
-            warningMessages.push(warning.message);
-            messagesByBlock.set(warning.blockId, warningMessages);
-        }
-        for (const [blockId, warningMessages] of messagesByBlock) {
-            const block = this.workspace.getBlockById(blockId);
-            if (!block || typeof block.setWarningText !== 'function') continue;
-            block.setWarningText(warningMessages.join('\n\n'), warningId);
-            this.movieWarningBlockIds.add(blockId);
-        }
-    }
-    handleMovieBlockFocus (range) {
-        if (!range || !range.blockId) return;
-        if (this.props.vm.editingTarget && range.targetId && this.props.vm.editingTarget.id !== range.targetId) {
-            this.pendingMovieBlockFocus = range;
-            this.props.vm.setEditingTarget(range.targetId);
-            return;
-        }
-        const block = this.workspace && this.workspace.getBlockById(range.blockId);
-        if (!block) return;
-        if (typeof this.workspace.centerOnBlock === 'function') this.workspace.centerOnBlock(range.blockId);
-        if (typeof block.select === 'function') block.select();
-    }
     getToolboxXML () {
         // Use try/catch because this requires digging pretty deep into the VM
         // Code inside intentionally ignores several error situations (no stage, etc.)
@@ -568,14 +521,6 @@ class Blocks extends React.Component {
         // fresh workspace and we don't want any changes made to another sprites
         // workspace to be 'undone' here.
         this.workspace.clearUndo();
-        this.handleMovieDiagnosticsChanged(
-            this.movieAssetManager ? this.movieAssetManager.getTimelineDiagnostics(true) : null
-        );
-        if (this.pendingMovieBlockFocus) {
-            const pendingFocus = this.pendingMovieBlockFocus;
-            this.pendingMovieBlockFocus = null;
-            this.handleMovieBlockFocus(pendingFocus);
-        }
     }
     handleMonitorsUpdate (monitors) {
         // Update the checkboxes of the relevant monitors.

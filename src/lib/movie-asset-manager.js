@@ -59,7 +59,6 @@ class MovieAssetManager extends EventEmitter {
         this.objectVideoAudio = new Map();
         this.objectVideoAudioSeen = new Set();
         this.previewRendererSize = null;
-        this.timelineDiagnostics = null;
         this.modelRenderer = null;
         this.flatDepthVersion = 0;
         this.depthResourceGeneration = 0;

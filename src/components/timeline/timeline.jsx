@@ -4,7 +4,6 @@ import React from 'react';
 import VM from 'scratch-vm';
 
 import installMovieAssetManager from '../../lib/movie-asset-manager';
-import {evaluateTimeScopes} from '../../lib/object-animation';
 
 import {GearIcon, PauseIcon, PlayIcon, ZoomInIcon, ZoomOutIcon} from './icons.jsx';
 import styles from './timeline.css';
@@ -47,7 +46,6 @@ class Timeline extends React.Component {
         super(props);
         this.state = {
             draft: null,
-            diagnostics: {ranges: [], warnings: []},
             exporting: false,
             exportError: '',
             pixelsPerSecond: DEFAULT_PIXELS_PER_SECOND,
@@ -69,7 +67,6 @@ class Timeline extends React.Component {
         };
         this.handleTimelineChanged = this.handleTimelineChanged.bind(this);
         this.handleRenderingFramesChanged = this.handleRenderingFramesChanged.bind(this);
-        this.handleTimelineDiagnosticsChanged = this.handleTimelineDiagnosticsChanged.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handlePlayPause = this.handlePlayPause.bind(this);
         this.handleStepFrame = this.handleStepFrame.bind(this);
@@ -82,8 +79,6 @@ class Timeline extends React.Component {
         this.handleAddKeyframe = this.handleAddKeyframe.bind(this);
         this.handleDeleteKeyframe = this.handleDeleteKeyframe.bind(this);
         this.handleKeyframeClick = this.handleKeyframeClick.bind(this);
-        this.handleRangeClick = this.handleRangeClick.bind(this);
-        this.handleWarningClick = this.handleWarningClick.bind(this);
         this.handleRulerMouseDown = this.handleRulerMouseDown.bind(this);
         this.handleScrubEnd = this.handleScrubEnd.bind(this);
         this.handleScrubMove = this.handleScrubMove.bind(this);
@@ -99,7 +94,6 @@ class Timeline extends React.Component {
         this.manager = installMovieAssetManager(this.props.vm);
         this.manager.on('timelineChanged', this.handleTimelineChanged);
         this.manager.on('renderingFramesChanged', this.handleRenderingFramesChanged);
-        this.manager.on('timelineDiagnosticsChanged', this.handleTimelineDiagnosticsChanged);
         document.addEventListener('keydown', this.handleKeyDown);
         if (typeof ResizeObserver === 'function') {
             this.resizeObserver = new ResizeObserver(this.measureTimelineViewport);
@@ -109,7 +103,6 @@ class Timeline extends React.Component {
         }
         this.measureTimelineViewport();
         this.handleTimelineChanged(this.manager.getTimelineState());
-        this.handleTimelineDiagnosticsChanged(this.manager.getTimelineDiagnostics(true));
     }
 
     componentDidUpdate (prevProps, prevState) {
@@ -124,7 +117,6 @@ class Timeline extends React.Component {
         if (!this.manager) return;
         this.manager.removeListener('timelineChanged', this.handleTimelineChanged);
         this.manager.removeListener('renderingFramesChanged', this.handleRenderingFramesChanged);
-        this.manager.removeListener('timelineDiagnosticsChanged', this.handleTimelineDiagnosticsChanged);
         document.removeEventListener('keydown', this.handleKeyDown);
         document.removeEventListener('mousemove', this.handleScrubMove);
         document.removeEventListener('mouseup', this.handleScrubEnd);
@@ -157,12 +149,6 @@ class Timeline extends React.Component {
         this.setState(state => ({
             timeline: Object.assign({}, state.timeline, {frameCount})
         }));
-    }
-
-    handleTimelineDiagnosticsChanged (diagnostics) {
-        this.setState({
-            diagnostics: diagnostics || {ranges: [], warnings: []}
-        });
     }
 
     handleKeyDown (event) {
@@ -283,18 +269,6 @@ class Timeline extends React.Component {
         this.manager.seekTimeline(time);
     }
 
-    handleRangeClick (event) {
-        event.stopPropagation();
-        const index = Number(event.currentTarget.value);
-        const range = this.state.diagnostics.ranges[index];
-        if (range) this.manager.emit('focusMovieBlock', range);
-    }
-
-    handleWarningClick (event) {
-        const warning = this.state.diagnostics.warnings[Number(event.currentTarget.value)];
-        if (warning) this.manager.emit('focusMovieBlock', warning);
-    }
-
     handleMarkerMouseDown (event) {
         event.stopPropagation();
     }
@@ -314,9 +288,6 @@ class Timeline extends React.Component {
             );
             return;
         }
-        const hasVerticalOverflow =
-            this.viewportElement.scrollHeight > this.viewportElement.clientHeight;
-        if (hasVerticalOverflow) return;
         if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
             event.preventDefault();
             this.viewportElement.scrollLeft += event.deltaY;
@@ -624,13 +595,8 @@ class Timeline extends React.Component {
         const zoomPercent = Math.round(
             (this.state.pixelsPerSecond / DEFAULT_PIXELS_PER_SECOND) * 100
         );
-        const diagnosticRanges = (this.state.diagnostics.ranges || []).filter(range => (
-            range.end >= 0 && range.start <= timeline.duration
-        ));
-        const warnings = this.state.diagnostics.warnings || [];
         const keyframes = Array.isArray(timeline.keyframes) ? timeline.keyframes : [];
-        const laneHeight = 22;
-        const timelineCanvasHeight = Math.max(68, 38 + (diagnosticRanges.length * laneHeight));
+        const timelineCanvasHeight = 68;
         return (
             <section
                 aria-label="Timeline"
@@ -720,51 +686,6 @@ class Timeline extends React.Component {
                                         {tick.major ? <span>{formatRulerTime(tick.time)}</span> : null}
                                     </span>
                                 ))}
-                            </div>
-                            <div
-                                aria-label="Code-derived active ranges"
-                                className={styles.codeRanges}
-                            >
-                                {diagnosticRanges.map((range, index) => {
-                                    const start = clamp(range.start, 0, timeline.duration);
-                                    const end = clamp(range.end, start, timeline.duration);
-                                    const active = timeline.currentTime >= start && timeline.currentTime <= end;
-                                    const localTime = Array.isArray(range.timeScopes) ?
-                                        evaluateTimeScopes(timeline.currentTime, range.timeScopes) :
-                                        (Number.isFinite(range.localTime) ?
-                                            range.localTime : timeline.currentTime - start);
-                                    const hiddenReason = timeline.currentTime < start ?
-                                        `Starts at ${formatTime(start)}` :
-                                        (timeline.currentTime > end ? `Ended at ${formatTime(end)}` :
-                                            `Local time ${localTime.toFixed(2)}s`);
-                                    const width = Math.max(2, (end - start) * this.state.pixelsPerSecond);
-                                    const rangeAriaLabel = `${range.label}, ${formatTime(start)} to ${formatTime(end)}`;
-                                    const rangeKey = `${range.targetId}:${range.blockId}:${index}`;
-                                    const rangeTitle = `${range.label} · ${hiddenReason} · Click to show block`;
-                                    const localTimeLabel = `${localTime.toFixed(2)}s`;
-                                    return (
-                                        <button
-                                            aria-label={rangeAriaLabel}
-                                            className={classNames(styles.codeRange, styles[range.kind], {
-                                                [styles.isActiveRange]: active
-                                            })}
-                                            key={rangeKey}
-                                            style={{
-                                                left: `${start * this.state.pixelsPerSecond}px`,
-                                                top: `${36 + (index * laneHeight)}px`,
-                                                width: `${width}px`
-                                            }}
-                                            title={rangeTitle}
-                                            type="button"
-                                            value={this.state.diagnostics.ranges.indexOf(range)}
-                                            onClick={this.handleRangeClick}
-                                            onMouseDown={this.handleMarkerMouseDown}
-                                        >
-                                            <span>{range.label}</span>
-                                            {active && width > 108 ? <small>{localTimeLabel}</small> : null}
-                                        </button>
-                                    );
-                                })}
                             </div>
                             <div
                                 aria-label="Timeline keyframes"
@@ -877,28 +798,6 @@ class Timeline extends React.Component {
                         ><ZoomInIcon /></button>
                     </div>
                 </div>
-                {warnings.length ? (
-                    <div
-                        aria-label="Frame determinism warnings"
-                        className={styles.diagnostics}
-                        role="status"
-                    >
-                        <strong>{'Direct seeking may differ'}</strong>
-                        {warnings.slice(0, 2).map((warning, index) => {
-                            const warningKey = `${warning.targetId}:${warning.blockId}:${index}`;
-                            return (
-                                <button
-                                    key={warningKey}
-                                    title={warning.message}
-                                    type="button"
-                                    value={this.state.diagnostics.warnings.indexOf(warning)}
-                                    onClick={this.handleWarningClick}
-                                >{warning.message}</button>
-                            );
-                        })}
-                        {warnings.length > 2 ? <span>{`+${warnings.length - 2} more`}</span> : null}
-                    </div>
-                ) : null}
             </section>
         );
     }

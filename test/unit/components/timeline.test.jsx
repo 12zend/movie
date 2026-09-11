@@ -69,16 +69,16 @@ describe('Timeline keyboard controls', () => {
         expect(component.find('[data-movie-timeline-addons]')).toHaveLength(1);
     });
 
-    test('keeps playback controls in the header above the layer viewport', () => {
+    test('keeps playback controls in the header above the timeline track', () => {
         const playbackControls = component.find('[data-movie-timeline-playback]');
         const renderedMarkup = component.debug();
         const playbackIndex = renderedMarkup.indexOf('data-movie-timeline-playback');
-        const layerViewportIndex = renderedMarkup.indexOf('aria-label="Current timeline position"');
+        const timelineTrackIndex = renderedMarkup.indexOf('aria-label="Current timeline position"');
 
         expect(playbackControls).toHaveLength(1);
         expect(playbackIndex).toBeGreaterThan(-1);
-        expect(layerViewportIndex).toBeGreaterThan(-1);
-        expect(playbackIndex).toBeLessThan(layerViewportIndex);
+        expect(timelineTrackIndex).toBeGreaterThan(-1);
+        expect(playbackIndex).toBeLessThan(timelineTrackIndex);
     });
 
     test('space does not toggle playback while editing text', () => {
@@ -181,6 +181,11 @@ describe('Timeline keyboard controls', () => {
         expect(component.find('[aria-label="Timeline zoom"]')).toHaveLength(1);
     });
 
+    test('does not render code ranges or determinism diagnostics', () => {
+        expect(component.find('[aria-label="Code-derived active ranges"]')).toHaveLength(0);
+        expect(component.find('[aria-label="Frame determinism warnings"]')).toHaveLength(0);
+    });
+
     test('adds, selects, seeks to, and deletes time-ordered keyframes', () => {
         component.setState({
             timeline: Object.assign({}, instance.state.timeline, {
@@ -232,27 +237,7 @@ describe('Timeline keyboard controls', () => {
         expect(manager.seekTimeline).toHaveBeenCalledWith(3);
     });
 
-    test('vertical wheel input scrolls layers when they overflow the viewport', () => {
-        instance.viewportElement = {
-            clientHeight: 120,
-            scrollHeight: 240,
-            scrollLeft: 144
-        };
-        const event = {
-            ctrlKey: false,
-            deltaX: 0,
-            deltaY: 40,
-            metaKey: false,
-            preventDefault: jest.fn()
-        };
-
-        instance.handleTimelineWheel(event);
-
-        expect(event.preventDefault).not.toHaveBeenCalled();
-        expect(instance.viewportElement.scrollLeft).toBe(144);
-    });
-
-    test('vertical wheel input scrolls time horizontally when layers fit the viewport', () => {
+    test('vertical wheel input scrolls time horizontally', () => {
         instance.viewportElement = {
             clientHeight: 120,
             scrollHeight: 120,
