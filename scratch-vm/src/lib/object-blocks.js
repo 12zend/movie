@@ -64,6 +64,8 @@ const REPORTER_STACK_CLICK_GUARD = '__movieObjectReporterStackClickGuard';
 const PROCEDURE_PARAMETER_CONTEXT = '__movieObjectProcedureParameterContext';
 const PROCEDURE_PARAMETER_CONTEXT_WRAPPED = '__movieObjectProcedureParameterContextWrapped';
 const PROCEDURE_PARAMETER_CONTEXT_PATCH = '__movieObjectProcedureParameterContextPatch';
+const GROUPING_STATE = '__movieObjectGroupingState';
+const GROUPING_STACK = 'objectGroupingStack';
 
 const encodeDrawAsset = (source, asset) => `${source}:${asset}`;
 
@@ -257,20 +259,54 @@ const installProcedureParameterContext = () => {
     Thread.prototype[PROCEDURE_PARAMETER_CONTEXT_PATCH] = true;
 };
 
+const beginGroupingEffectCapture = state => {
+    if (!state || state.effectCapture || state.phase !== 2) return;
+    const penFX = state.penFX;
+    if (penFX && typeof penFX.beginEffectCapture === 'function' &&
+        typeof penFX.endEffectCapture === 'function') {
+        penFX.beginEffectCapture();
+        state.effectCapture = true;
+    }
+};
+
 const trackPendingDraw = (pendingDraw, util, manager) => {
     if (!pendingDraw || typeof pendingDraw.then !== 'function') return;
     if (!util || !util.thread) {
         if (manager && typeof manager.runWithoutWaiting === 'function') manager.runWithoutWaiting(pendingDraw);
         return;
     }
-    if (!Array.isArray(util.thread.objectPendingDraws)) util.thread.objectPendingDraws = [];
-    util.thread.objectPendingDraws.push(pendingDraw);
+    const thread = util.thread;
+    if (!Array.isArray(thread.objectPendingDraws)) thread.objectPendingDraws = [];
+    thread.objectPendingDraws.push(pendingDraw);
+    for (let grouping = thread[GROUPING_STACK]; grouping; grouping = grouping.parentGrouping) {
+        if (!grouping.pendingDraws) grouping.pendingDraws = [];
+        if (!grouping.pendingDraws.includes(pendingDraw)) grouping.pendingDraws.push(pendingDraw);
+        if (grouping.phase === 2) beginGroupingEffectCapture(grouping);
+    }
     const removePending = () => {
-        const index = util.thread.objectPendingDraws.indexOf(pendingDraw);
-        if (index >= 0) util.thread.objectPendingDraws.splice(index, 1);
+        const index = thread.objectPendingDraws.indexOf(pendingDraw);
+        if (index >= 0) thread.objectPendingDraws.splice(index, 1);
     };
     pendingDraw.then(removePending, removePending);
     if (manager && typeof manager.runWithoutWaiting === 'function') manager.runWithoutWaiting(pendingDraw);
+};
+
+const pushGroupingState = (thread, state) => {
+    state.parentGrouping = thread[GROUPING_STACK] || null;
+    thread[GROUPING_STACK] = state;
+};
+
+const removeGroupingState = (thread, state) => {
+    if (!thread) return;
+    if (thread[GROUPING_STACK] === state) {
+        if (state.parentGrouping) thread[GROUPING_STACK] = state.parentGrouping;
+        else delete thread[GROUPING_STACK];
+        return;
+    }
+    let grouping = thread[GROUPING_STACK];
+    while (grouping && grouping.parentGrouping !== state) grouping = grouping.parentGrouping;
+    if (grouping) grouping.parentGrouping = state.parentGrouping;
+    if (!thread[GROUPING_STACK]) delete thread[GROUPING_STACK];
 };
 
 const getGroupingContext = util => {
@@ -399,6 +435,134 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
         const manager = this.runtime.movieAssetManager;
         if (!manager || typeof manager.createFrameGraphNode !== 'function') return null;
         return manager.createFrameGraphNode(type, properties, context && context.objectFrameGraphParent);
+    }
+
+    registerPendingGrouping (pendingGrouping, util) {
+        this.pendingGrouping = pendingGrouping;
+        const clearPendingGrouping = () => {
+            if (this.pendingGrouping === pendingGrouping) this.pendingGrouping = null;
+        };
+        pendingGrouping.then(clearPendingGrouping, clearPendingGrouping);
+        trackPendingDraw(pendingGrouping, util, this.runtime.movieAssetManager);
+    }
+
+    finishInlineGrouping (state, stackFrame, util) {
+        const manager = this.runtime.movieAssetManager;
+        const penFX = this.runtime.penFX;
+        const generationIsCurrent = () => state.generation === this.groupingGeneration;
+        const pendingDraws = state.pendingDraws ? state.pendingDraws.slice() : [];
+        let effects = null;
+
+        if (state.effectCapture) {
+            effects = penFX.endEffectCapture();
+            if (state.node) state.node.effects = effects;
+        }
+
+        removeGroupingState(state.thread, state);
+        if (state.frameGraphParentPushed && manager && Array.isArray(manager.frameGraphCollectionParents)) {
+            const parentIndex = manager.frameGraphCollectionParents.lastIndexOf(state.node);
+            if (parentIndex >= 0) manager.frameGraphCollectionParents.splice(parentIndex, 1);
+        }
+        if (state.hadFrameGraphParent) {
+            state.thread.objectFrameGraphParent = state.previousFrameGraphParent;
+        } else {
+            delete state.thread.objectFrameGraphParent;
+        }
+        delete stackFrame[GROUPING_STATE];
+
+        if (state.node) return;
+
+        const endGroup = () => {
+            if (generationIsCurrent() && penFX && typeof penFX.endGroup === 'function') penFX.endGroup();
+        };
+        if (pendingDraws.length && state.effectCapture) {
+            const finishGroup = Promise.all(pendingDraws)
+                .then(() => {
+                    if (generationIsCurrent() && typeof penFX.applyCapturedEffects === 'function') {
+                        penFX.applyCapturedEffects(effects);
+                    }
+                })
+                .finally(endGroup);
+            this.registerPendingGrouping(finishGroup, util);
+            return;
+        }
+
+        if (state.effectCapture && typeof penFX.applyCapturedEffects === 'function') {
+            penFX.applyCapturedEffects(effects);
+        }
+        endGroup();
+    }
+
+    runInlineGrouping (util) {
+        const thread = util && util.thread;
+        const stackFrame = util && util.stackFrame;
+        if (!thread || !stackFrame || typeof util.startBranch !== 'function') return false;
+
+        const manager = this.runtime.movieAssetManager;
+        const graphCollecting = manager && typeof manager.isCollectingFrameGraph === 'function' &&
+            manager.isCollectingFrameGraph();
+        const groupingStack = thread[GROUPING_STACK];
+        const hasActiveGrouping = Boolean(groupingStack);
+        // A previous asynchronous grouping on another thread still owns the Pen transaction. Keep the old
+        // deferred path for this uncommon collision; nested grouping on the current thread remains inline.
+        if (this.pendingGrouping && !hasActiveGrouping && !graphCollecting) return false;
+
+        const blockId = typeof thread.peekStack === 'function' ? thread.peekStack() : null;
+        let state = stackFrame[GROUPING_STATE];
+        if (state && (state.thread !== thread || state.blockId !== blockId)) {
+            delete stackFrame[GROUPING_STATE];
+            state = null;
+        }
+
+        if (!state) {
+            const previousFrameGraphParent = thread.objectFrameGraphParent;
+            const hadFrameGraphParent = Object.prototype.hasOwnProperty.call(thread, 'objectFrameGraphParent');
+            const penFX = this.runtime.penFX;
+            const node = manager && typeof manager.createFrameGraphNode === 'function' ?
+                manager.createFrameGraphNode(
+                    FRAME_GRAPH_NODE_TYPES.COMPOSITE,
+                    {effects: [], operation: 'effects'},
+                    previousFrameGraphParent
+                ) : null;
+            state = {
+                blockId,
+                effectCapture: false,
+                frameGraphParentPushed: false,
+                generation: this.groupingGeneration,
+                hadFrameGraphParent,
+                node,
+                pendingDraws: null,
+                phase: 1,
+                penFX,
+                previousFrameGraphParent,
+                thread
+            };
+            stackFrame[GROUPING_STATE] = state;
+            pushGroupingState(thread, state);
+
+            if (node) {
+                thread.objectFrameGraphParent = node;
+                if (manager && Array.isArray(manager.frameGraphCollectionParents)) {
+                    manager.frameGraphCollectionParents.push(node);
+                    state.frameGraphParentPushed = true;
+                }
+            } else if (penFX && typeof penFX.beginGroup === 'function') {
+                penFX.beginGroup();
+            }
+
+            util.startBranch(1, true, true);
+            return true;
+        }
+
+        if (state.phase === 1) {
+            state.phase = 2;
+            if (state.node || state.pendingDraws) beginGroupingEffectCapture(state);
+            util.startBranch(2, true, true);
+            return true;
+        }
+
+        this.finishInlineGrouping(state, stackFrame, util);
+        return true;
     }
 
     getInfo () {
@@ -1114,13 +1278,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
         const pendingGrouping = this.pendingGrouping ?
             this.pendingGrouping.then(runGrouping, runGrouping) : runGrouping();
         if (!pendingGrouping || typeof pendingGrouping.then !== 'function') return;
-
-        this.pendingGrouping = pendingGrouping;
-        const clearPendingGrouping = () => {
-            if (this.pendingGrouping === pendingGrouping) this.pendingGrouping = null;
-        };
-        pendingGrouping.then(clearPendingGrouping, clearPendingGrouping);
-        trackPendingDraw(pendingGrouping, util, this.runtime.movieAssetManager);
+        this.registerPendingGrouping(pendingGrouping, util);
     }
 
     composite (args, util) {
@@ -1459,6 +1617,8 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
     }
 
     grouping (args, util) {
+        if (this.runInlineGrouping(util)) return;
+
         const context = getGroupingContext(util);
         const generation = this.groupingGeneration;
         const node = this.createFrameGraphNode(FRAME_GRAPH_NODE_TYPES.COMPOSITE, {

@@ -146,9 +146,11 @@ const executeInCompatibilityLayer = function*(inputs, blockFunction, isWarp, use
         if (branchInfo) {
             if (typeof returnValue === 'undefined' && blockUtility._startedBranch) {
                 branchInfo.isLoop = blockUtility._startedBranch[1];
+                branchInfo.atomic = Boolean(blockUtility._startedBranch[2]);
                 return blockUtility._startedBranch[0];
             }
             branchInfo.isLoop = branchInfo.defaultIsLoop;
+            branchInfo.atomic = false;
             return returnValue;
         }
         return returnValue;
@@ -211,6 +213,7 @@ const executeInCompatibilityLayer = function*(inputs, blockFunction, isWarp, use
 runtimeFunctions.createBranchInfo = `const createBranchInfo = (isLoop) => ({
     defaultIsLoop: isLoop,
     isLoop: false,
+    atomic: false,
     branch: 0,
     stackFrame: {}
 });`;

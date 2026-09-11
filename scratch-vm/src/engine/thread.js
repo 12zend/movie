@@ -22,6 +22,12 @@ class _StackFrame {
         this.isLoop = false;
 
         /**
+         * Whether a loop branch must be completed without yielding between the branch and its parent.
+         * @type {boolean}
+         */
+        this.atomic = false;
+
+        /**
          * Whether this level is in warp mode.  Is set by some legacy blocks and
          * "turbo mode"
          * @type {boolean}
@@ -80,6 +86,7 @@ class _StackFrame {
     reset () {
 
         this.isLoop = false;
+        this.atomic = false;
         this.warpMode = false;
         this.justReported = null;
         this.reported = null;

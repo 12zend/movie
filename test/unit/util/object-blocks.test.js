@@ -1153,7 +1153,7 @@ describe('Objects blocks', () => {
         expect(manager.runWithoutWaiting).toHaveBeenCalledWith(pending);
     });
 
-    test('runs both grouping branches atomically and scopes Pen FX without returning a promise', () => {
+    test('runs both grouping branches atomically on the current thread', () => {
         const penFX = {beginGroup: jest.fn(), endGroup: jest.fn()};
         const harness = makeGroupingHarness();
         harness.runtime.penFX = penFX;
@@ -1164,14 +1164,59 @@ describe('Objects blocks', () => {
 
         expect(blocks.grouping({}, util)).toBeUndefined();
         expect(penFX.beginGroup).toHaveBeenCalledTimes(1);
+        expect(penFX.endGroup).not.toHaveBeenCalled();
+        expect(util.startBranch).toHaveBeenNthCalledWith(1, 1, true, true);
+        expect(harness.sequencer.stepThread).not.toHaveBeenCalled();
+
+        blocks.grouping({}, util);
+        expect(util.startBranch).toHaveBeenNthCalledWith(2, 2, true, true);
+
+        blocks.grouping({}, util);
         expect(penFX.endGroup).toHaveBeenCalledTimes(1);
-        expect(harness.sequencer.stepThread.mock.calls.map(call => call[0].topBlock)).toEqual([
-            'objects-branch',
-            'effects-branch'
-        ]);
-        expect(harness.sequencer.stepThread.mock.calls.every(call => call[0].peekStackFrame().warpMode)).toBe(true);
         expect(harness.sequencer.activeThread).toBe(harness.originalActiveThread);
-        expect(util.startBranch).not.toHaveBeenCalled();
+    });
+
+    test('keeps an inline grouping under one frame graph node', () => {
+        const frameGraph = new MovieFrameGraphRenderer({}, jest.fn());
+        const manager = {
+            frameGraphCollectionParents: [],
+            createFrameGraphNode: (type, properties, parent) => frameGraph.append(type, properties, parent),
+            drawObject: (target, configuration, parent) => frameGraph.append(
+                FRAME_GRAPH_NODE_TYPES.DRAW,
+                {configuration, drawKind: 'object', target},
+                parent
+            ),
+            isCollectingFrameGraph: () => frameGraph.collecting,
+            runWithoutWaiting: jest.fn()
+        };
+        const penFX = {
+            beginEffectCapture: jest.fn(),
+            endEffectCapture: jest.fn(() => [])
+        };
+        const target = {id: 'sprite', blocks: {}};
+        const thread = {peekStack: jest.fn(() => 'grouping'), target};
+        const util = {
+            stackFrame: {},
+            startBranch: jest.fn(),
+            target,
+            thread
+        };
+        const runtime = {movieAssetManager: manager, penFX};
+        const ObjectBlocks = createObjectBlocksClass({runtime});
+        const objectBlocks = new ObjectBlocks();
+        frameGraph.beginFrame();
+
+        objectBlocks.grouping({}, util);
+        objectBlocks.draw({ASSET: 'costume:Logo', SOURCE: 'costume'}, util);
+        objectBlocks.grouping({}, util);
+        objectBlocks.grouping({}, util);
+
+        const groupingNode = frameGraph.currentFrame.children[0];
+        expect(groupingNode.type).toBe(FRAME_GRAPH_NODE_TYPES.COMPOSITE);
+        expect(groupingNode.children).toHaveLength(1);
+        expect(groupingNode.children[0].type).toBe(FRAME_GRAPH_NODE_TYPES.DRAW);
+        expect(manager.frameGraphCollectionParents).toHaveLength(0);
+        expect(thread).not.toHaveProperty('objectFrameGraphParent');
     });
 
     test('runs a scene branch atomically and queues one z-buffer render without returning a promise', () => {
@@ -1427,6 +1472,64 @@ describe('Objects blocks', () => {
         expect(runtime.penFX.endGroup).toHaveBeenCalledTimes(1);
     });
 
+    test('finishes grouping and the following block in one interpreter VM step', () => {
+        const vm = new VM();
+        installObjectBlocks(vm);
+        const runtime = vm.runtime;
+        runtime.compilerOptions.enabled = false;
+        const stageSprite = new Sprite(null, runtime);
+        stageSprite.name = 'Stage';
+        const stage = new RenderedTarget(stageSprite, runtime);
+        stage.isStage = true;
+        const sprite = new Sprite(null, runtime);
+        sprite.name = 'Sprite';
+        const target = new RenderedTarget(sprite, runtime);
+        runtime.targets = [stage, target];
+        const groupBoundaries = [];
+        runtime.penFX = {
+            beginGroup: jest.fn(() => groupBoundaries.push(['begin', runtime.ext_scratch3_control.getCounter()])),
+            endGroup: jest.fn(() => groupBoundaries.push(['end', runtime.ext_scratch3_control.getCounter()]))
+        };
+
+        target.blocks.createBlock({
+            id: 'grouping',
+            opcode: 'objects_grouping',
+            inputs: {
+                SUBSTACK: {name: 'SUBSTACK', block: 'objects-branch', shadow: null},
+                SUBSTACK2: {name: 'SUBSTACK2', block: 'effects-branch', shadow: null}
+            },
+            fields: {},
+            next: 'after-grouping',
+            parent: null,
+            shadow: false,
+            topLevel: true
+        });
+        for (const [id, parent] of [
+            ['objects-branch', 'grouping'],
+            ['effects-branch', 'grouping'],
+            ['after-grouping', 'grouping']
+        ]) {
+            target.blocks.createBlock({
+                id,
+                opcode: 'control_incr_counter',
+                inputs: {},
+                fields: {},
+                next: null,
+                parent,
+                shadow: false,
+                topLevel: false
+            });
+        }
+
+        runtime.ext_scratch3_control.clearCounter();
+        const thread = runtime._pushThread('grouping', target);
+        expect(thread.isCompiled).toBe(false);
+        runtime.sequencer.stepThread(thread);
+
+        expect(runtime.ext_scratch3_control.getCounter()).toBe(3);
+        expect(groupBoundaries).toEqual([['begin', 0], ['end', 2]]);
+    });
+
     test('preserves custom procedure arguments for draws inside a grouping', () => {
         const vm = new VM();
         installObjectBlocks(vm);
@@ -1477,6 +1580,85 @@ describe('Objects blocks', () => {
         createBlock('draw', 'objects_draw', {
             inputs: {PX: {name: 'PX', block: 'argument', shadow: null}},
             parent: 'grouping'
+        });
+        createBlock('argument', 'argument_reporter_string_number', {
+            fields: {VALUE: {name: 'VALUE', value: 'x'}},
+            parent: 'draw'
+        });
+        createBlock('call', 'procedures_call', {
+            inputs: {x: {name: 'x', block: 'value', shadow: null}},
+            mutation: {argumentids: '["x"]', proccode: 'paint %s'},
+            topLevel: true
+        });
+        createBlock('value', 'text', {
+            fields: {TEXT: {name: 'TEXT', value: '10'}},
+            parent: 'call'
+        });
+
+        const thread = runtime._pushThread('call', target);
+        runtime.sequencer.stepThread(thread);
+
+        expect(drawObject).toHaveBeenCalledWith(target, expect.objectContaining({
+            position: expect.objectContaining({x: 10})
+        }));
+    });
+
+    test('preserves custom procedure arguments through nested groupings', () => {
+        const vm = new VM();
+        installObjectBlocks(vm);
+        const runtime = vm.runtime;
+        const stageSprite = new Sprite(null, runtime);
+        stageSprite.name = 'Stage';
+        const stage = new RenderedTarget(stageSprite, runtime);
+        stage.isStage = true;
+        const sprite = new Sprite(null, runtime);
+        sprite.name = 'Sprite';
+        const target = new RenderedTarget(sprite, runtime);
+        runtime.targets = [stage, target];
+        const drawObject = jest.fn();
+        runtime.movieAssetManager = {drawObject, runWithoutWaiting: jest.fn()};
+
+        const createBlock = (id, opcode, properties = {}) => target.blocks.createBlock({
+            fields: {},
+            id,
+            inputs: {},
+            next: null,
+            parent: null,
+            shadow: false,
+            topLevel: false,
+            opcode,
+            ...properties
+        });
+        createBlock('definition', 'procedures_definition', {
+            inputs: {custom_block: {block: 'prototype'}},
+            next: 'outer'
+        });
+        createBlock('prototype', 'procedures_prototype', {
+            mutation: {
+                argumentdefaults: '[0]',
+                argumentids: '["x"]',
+                argumentnames: '["x"]',
+                proccode: 'paint %s'
+            },
+            parent: 'definition'
+        });
+        createBlock('outer', 'objects_grouping', {
+            inputs: {
+                SUBSTACK: {name: 'SUBSTACK', block: 'inner', shadow: null},
+                SUBSTACK2: {name: 'SUBSTACK2', block: null, shadow: null}
+            },
+            parent: 'definition'
+        });
+        createBlock('inner', 'objects_grouping', {
+            inputs: {
+                SUBSTACK: {name: 'SUBSTACK', block: 'draw', shadow: null},
+                SUBSTACK2: {name: 'SUBSTACK2', block: null, shadow: null}
+            },
+            parent: 'outer'
+        });
+        createBlock('draw', 'objects_draw', {
+            inputs: {PX: {name: 'PX', block: 'argument', shadow: null}},
+            parent: 'inner'
         });
         createBlock('argument', 'argument_reporter_string_number', {
             fields: {VALUE: {name: 'VALUE', value: 'x'}},
@@ -1632,7 +1814,10 @@ describe('Objects blocks', () => {
             endEffectCapture: jest.fn(() => effects),
             endGroup: jest.fn()
         };
-        const manager = {runWithoutWaiting: jest.fn()};
+        const manager = {
+            drawObject: jest.fn(() => pendingDraw),
+            runWithoutWaiting: jest.fn()
+        };
         const harness = makeGroupingHarness(thread => {
             if (thread.topBlock === 'objects-branch') thread.objectPendingDraws = [pendingDraw];
         });
@@ -1643,14 +1828,84 @@ describe('Objects blocks', () => {
         const util = harness.util;
 
         expect(blocks.grouping({}, util)).toBeUndefined();
+        blocks.draw({ASSET: 'video:clip', SOURCE: 'video'}, util);
+        blocks.grouping({}, util);
+        blocks.grouping({}, util);
         expect(penFX.beginEffectCapture).toHaveBeenCalledTimes(1);
         expect(penFX.applyCapturedEffects).not.toHaveBeenCalled();
-        const finishGroup = manager.runWithoutWaiting.mock.calls[0][0];
+        expect(harness.sequencer.stepThread).not.toHaveBeenCalled();
+        const finishGroup = manager.runWithoutWaiting.mock.calls[1][0];
         resolveDraw();
         await finishGroup;
         expect(penFX.applyCapturedEffects).toHaveBeenCalledWith(effects);
         expect(penFX.endGroup).toHaveBeenCalledTimes(1);
         expect(manager.runWithoutWaiting).toHaveBeenCalledWith(expect.any(Promise));
+    });
+
+    test('keeps nested inline groupings in one thread until every asynchronous draw finishes', async () => {
+        let resolveVideo;
+        const pendingVideo = new Promise(resolve => {
+            resolveVideo = resolve;
+        });
+        const effects = [{callback: jest.fn()}];
+        const manager = {
+            drawObject: jest.fn(() => pendingVideo),
+            runWithoutWaiting: jest.fn()
+        };
+        const penFX = {
+            applyCapturedEffects: jest.fn(),
+            beginEffectCapture: jest.fn(),
+            beginGroup: jest.fn(),
+            endEffectCapture: jest.fn(() => effects),
+            endGroup: jest.fn()
+        };
+        const blocksContainer = {};
+        const target = {id: 'sprite', blocks: blocksContainer};
+        const thread = {
+            blockContainer: blocksContainer,
+            peekStack: jest.fn(() => 'outer'),
+            target
+        };
+        const outerFrame = {};
+        const innerFrame = {};
+        const util = {
+            stackFrame: outerFrame,
+            startBranch: jest.fn(),
+            target,
+            thread
+        };
+        const runtime = {movieAssetManager: manager, penFX, sequencer: {stepThread: jest.fn()}};
+        const ObjectBlocks = createObjectBlocksClass({runtime});
+        const objectBlocks = new ObjectBlocks();
+
+        objectBlocks.grouping({}, util);
+        util.stackFrame = innerFrame;
+        thread.peekStack.mockReturnValue('inner');
+        objectBlocks.grouping({}, util);
+        objectBlocks.draw({ASSET: 'video:clip', SOURCE: 'video'}, util);
+        objectBlocks.grouping({}, util);
+        objectBlocks.grouping({}, util);
+
+        util.stackFrame = outerFrame;
+        thread.peekStack.mockReturnValue('outer');
+        objectBlocks.grouping({}, util);
+        objectBlocks.grouping({}, util);
+
+        expect(runtime.sequencer.stepThread).not.toHaveBeenCalled();
+        expect(util.startBranch.mock.calls).toEqual([
+            [1, true, true],
+            [1, true, true],
+            [2, true, true],
+            [2, true, true]
+        ]);
+        expect(manager.runWithoutWaiting).toHaveBeenCalledTimes(3);
+        expect(penFX.endGroup).not.toHaveBeenCalled();
+
+        resolveVideo();
+        await Promise.all(manager.runWithoutWaiting.mock.calls.slice(1).map(call => call[0]));
+
+        expect(penFX.applyCapturedEffects).toHaveBeenCalledTimes(2);
+        expect(penFX.endGroup).toHaveBeenCalledTimes(2);
     });
 
     test('keeps an outer grouping open for an asynchronous video draw in a nested grouping', async () => {

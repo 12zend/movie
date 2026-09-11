@@ -265,8 +265,8 @@ class Sequencer {
                     // Return to yield for the frame/tick in general.
                     // Unless we're in warp mode - then only return if the
                     // warp timer is up.
-                    if (!isWarpMode ||
-                        thread.warpTimer.timeElapsed() > Sequencer.WARP_TIME) {
+                    if ((!isWarpMode && !stackFrame.atomic) ||
+                        (isWarpMode && thread.warpTimer.timeElapsed() > Sequencer.WARP_TIME)) {
                         // Don't do anything to the stack, since loops need
                         // to be re-executed.
                         return;
@@ -292,8 +292,9 @@ class Sequencer {
      * @param {!Thread} thread Thread object to step to branch.
      * @param {number} branchNum Which branch to step to (i.e., 1, 2).
      * @param {boolean} isLoop Whether this block is a loop.
+     * @param {boolean} isAtomic Whether the branch must be completed without a VM yield.
      */
-    stepToBranch (thread, branchNum, isLoop) {
+    stepToBranch (thread, branchNum, isLoop, isAtomic = false) {
         if (!branchNum) {
             branchNum = 1;
         }
@@ -303,6 +304,7 @@ class Sequencer {
             branchNum
         );
         thread.peekStackFrame().isLoop = isLoop;
+        thread.peekStackFrame().atomic = Boolean(isAtomic);
         if (branchId) {
             // Push branch ID to the thread's stack.
             thread.pushStack(branchId);

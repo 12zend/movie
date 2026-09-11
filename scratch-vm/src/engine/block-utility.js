@@ -119,9 +119,10 @@ class BlockUtility {
      * Start a branch in the current block.
      * @param {number} branchNum Which branch to step to (i.e., 1, 2).
      * @param {boolean} isLoop Whether this block is a loop.
+     * @param {boolean} isAtomic Whether the branch must be completed without a VM yield.
      */
-    startBranch (branchNum, isLoop) {
-        this.sequencer.stepToBranch(this.thread, branchNum, isLoop);
+    startBranch (branchNum, isLoop, isAtomic = false) {
+        this.sequencer.stepToBranch(this.thread, branchNum, isLoop, isAtomic);
     }
 
     /**

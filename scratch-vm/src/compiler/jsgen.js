@@ -534,7 +534,9 @@ class JSGenerator {
                 }
                 this.source += '}\n'; // close switch
                 this.source += `if (!${branchVariable}.isLoop) break;\n`;
+                this.source += `if (!${branchVariable}.atomic) {\n`;
                 this.yieldLoop();
+                this.source += '}\n';
                 this.source += '}\n'; // close while
             } else {
                 throw new Error(`Unknown block type: ${blockType}`);
