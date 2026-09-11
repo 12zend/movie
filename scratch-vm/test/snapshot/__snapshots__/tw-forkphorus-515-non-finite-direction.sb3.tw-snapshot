@@ -1,0 +1,27 @@
+// TW Snapshot
+// Input SHA-256: 1fa5a314682ce218a097be41607e4eb456a2b046a47ca46d01a1033323afa544
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = runtime.getOpcodeFunction("motion_pointtowards");
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 4", target);
+target.setDirection(95);
+if ((target.direction === 95)) {
+runtime.ext_scratch3_looks._say("pass 1", target);
+}
+target.setDirection((1 / 0));
+if ((target.direction === 95)) {
+runtime.ext_scratch3_looks._say("pass 2", target);
+}
+target.setDirection(toNotNaN((0 / 0)));
+if ((target.direction === 0)) {
+runtime.ext_scratch3_looks._say("pass 3", target);
+}
+yield* executeInCompatibilityLayer({"TOWARDS":"Sprite2",}, b0, false, false, "g", null);
+if ((target.direction === 90)) {
+runtime.ext_scratch3_looks._say("pass 4", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })

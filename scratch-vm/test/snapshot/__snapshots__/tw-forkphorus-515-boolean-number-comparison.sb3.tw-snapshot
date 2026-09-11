@@ -1,0 +1,22 @@
+// TW Snapshot
+// Input SHA-256: fd48053df5e75de0ec56ac106699076335b2bd46266f8da4e4d81d52e29f5c29
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 4", target);
+if (compareGreaterThan(("something".toLowerCase() === "something".toLowerCase()), ("0" + ""))) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (compareLessThan(("something".toLowerCase() === "else".toLowerCase()), ("1" + ""))) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((+("something".toLowerCase() === "something".toLowerCase())) > (0 + 0))) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((+("something".toLowerCase() === "else".toLowerCase())) < (1 + 0))) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })

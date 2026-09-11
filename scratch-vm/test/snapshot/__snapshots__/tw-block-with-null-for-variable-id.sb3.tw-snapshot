@@ -1,0 +1,36 @@
+// TW Snapshot
+// Input SHA-256: 99bb22ac4fb2542ce3c21fa7d2025f03d15392a33850585a4d12f4ec558663ac
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+const b1 = stage.variables[")|GMR5fz;%F_H,c0wGVM"];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 2", target);
+b0.value = 1;
+b1.value = 2;
+yield* waitThreads(startHats("event_whenbroadcastreceived", { BROADCAST_OPTION: "check 1" }));
+yield* waitThreads(startHats("event_whenbroadcastreceived", { BROADCAST_OPTION: "check 2" }));
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function* genXYZ () {
+if ((toNotNaN(+b0.value) === 1)) {
+runtime.ext_scratch3_looks._say("pass variable 1", target);
+}
+retire(); return;
+}; })
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables[")|GMR5fz;%F_H,c0wGVM"];
+return function* genXYZ () {
+if ((toNotNaN(+b0.value) === 2)) {
+runtime.ext_scratch3_looks._say("pass variable 2", target);
+}
+retire(); return;
+}; })

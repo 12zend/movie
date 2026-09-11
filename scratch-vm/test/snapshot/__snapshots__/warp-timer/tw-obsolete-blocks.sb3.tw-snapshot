@@ -1,0 +1,32 @@
+// TW Snapshot
+// Input SHA-256: 58dd6f369897907ea46fffbb8210d8bc15db59f26ce117ff4211035afff17f23
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+const b1 = runtime.getOpcodeFunction("sensing_userid");
+const b2 = runtime.getOpcodeFunction("motion_xscroll");
+const b3 = runtime.getOpcodeFunction("motion_yscroll");
+const b4 = runtime.getOpcodeFunction("motion_scroll_right");
+const b5 = runtime.getOpcodeFunction("motion_scroll_up");
+const b6 = runtime.getOpcodeFunction("motion_align_scene");
+const b7 = runtime.getOpcodeFunction("looks_setstretchto");
+const b8 = runtime.getOpcodeFunction("looks_changestretchby");
+const b9 = runtime.getOpcodeFunction("looks_hideallsprites");
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 1", target);
+b0.value = (yield* executeInCompatibilityLayer({}, b1, false, false, "X[|X;C.(v[|^i|@0Eqy4", null));
+b0.value = (yield* executeInCompatibilityLayer({}, b2, false, false, "z;H$hVK7X;MZSyO9U/#1", null));
+b0.value = (yield* executeInCompatibilityLayer({}, b3, false, false, ";Q94_J}Jv36TqTll;ji*", null));
+yield* executeInCompatibilityLayer({"DISTANCE":10,}, b4, false, false, "_TLJeW5hG9gAtYO2c*D9", null);
+yield* executeInCompatibilityLayer({"DISTANCE":10,}, b5, false, false, "o=l#1WJR!L37RN`q:`8E", null);
+yield* executeInCompatibilityLayer({"ALIGNMENT":"bottom-left",}, b6, false, false, "idkZ9I+=Q:@xXm;N-2Oy", null);
+yield* executeInCompatibilityLayer({"STRETCH":100,}, b7, false, false, "AMs-%pRGK*v6a[.XifN1", null);
+yield* executeInCompatibilityLayer({"STRETCH":100,}, b7, false, false, "g+bBVCHp+A[-X2E7-7#|", null);
+yield* executeInCompatibilityLayer({"CHANGE":10,}, b8, false, false, "ZN24~,cX56Dc2k4vt}HB", null);
+yield* executeInCompatibilityLayer({"CHANGE":10,}, b8, false, false, "Zjds+5Is*:nb7wnX{rYN", null);
+yield* executeInCompatibilityLayer({}, b9, false, false, "8X_d`@6,B7%wzr7.xE}t", null);
+runtime.ext_scratch3_looks._say("pass", target);
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })

@@ -1,0 +1,38 @@
+// TW Snapshot
+// Input SHA-256: 70cf221f35f1459c3b81ece31ed7b377098ff26eeafb66eba3788dd82c90bdd5
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["{vwNMZe-LO,q/k3(A,.`"];
+const b1 = stage.variables["DKX$)W98mALB-eeMoj(d"];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 8", target);
+if (!("true".toLowerCase() === "1".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (!("1".toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((+(2 === 2)) === 1)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if ((1 === (+(2 === 2)))) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+b0.value = (2 === 2);
+b1.value = ("tr" + "ue");
+if (!(toNotNaN(+b1.value) === 1)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (!(1 === toNotNaN(+b1.value))) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((+b0.value) === 1)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if ((1 === (+b0.value))) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })

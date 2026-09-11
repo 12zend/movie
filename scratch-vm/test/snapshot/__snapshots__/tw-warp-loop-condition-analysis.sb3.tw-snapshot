@@ -1,0 +1,38 @@
+// TW Snapshot
+// Input SHA-256: 95d4c128e84ee992b48ed20653ba70b0f6c2d404c4f7088fa654676cd6b7c53c
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables[";~q(!vt3c.Jrz2M]ZMy]"];
+const b1 = stage.variables[",23fjp~KN1aMG|;66K@Z"];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 1", target);
+b0.value = [];
+b0.value.push((1 + 2));
+b0._monitorUpToDate = false;
+b0.value.push((3 + 4));
+b0._monitorUpToDate = false;
+b0.value.push("final");
+b0._monitorUpToDate = false;
+thread.procedures["Wtest"]();
+if ((b1.value === 4)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite1 Wtest
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+const b1 = stage.variables[",23fjp~KN1aMG|;66K@Z"];
+const b2 = stage.variables[";~q(!vt3c.Jrz2M]ZMy]"];
+return function funXYZ_test () {
+b0.value = "";
+b1.value = 1;
+while (!(("" + b0.value).toLowerCase() === "final".toLowerCase())) {
+b0.value = (b2.value[b1.value - 1] ?? "");
+b1.value = (b1.value + 1);
+}
+return "";
+}; })

@@ -1,0 +1,29 @@
+// TW Snapshot
+// Input SHA-256: 7f99a41ef716935ae486087d8adf955cbd853c893bc94e58e4cc1c46ad1a7883
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["KMKx1gRubgLz,!L]^TBS"];
+const b1 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 1", target);
+thread.procedures["Wtest"]();
+if ((("" + listGet(b0.value, b1.value)).toLowerCase() === "thing".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite1 Wtest
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["yz}9Y:gLL0ZWEs}l)s+Q"];
+const b1 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function funXYZ_test () {
+if ((("" + b0.value).toLowerCase() === "true".toLowerCase())) {
+b1.value = "last";
+return "";
+}
+b1.value = (1 + 2);
+return "";
+}; })

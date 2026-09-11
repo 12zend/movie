@@ -1,0 +1,37 @@
+// TW Snapshot
+// Input SHA-256: a4ae71d2c1b70f29a667c2d582b24702068f1d128512b7aee53b2feddd274527
+
+// Sprite2 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["eFlmP1{XC+I1:h0Yln.K"];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 7", target);
+b0.value = [];
+listInsert(b0, "any", "a");
+listInsert(b0, "any", "b");
+listInsert(b0, "any", "c");
+if ((b0.value.length === 3)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (listContains(b0, "a")) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (listContains(b0, "b")) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (listContains(b0, "c")) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (listContains(b0, listGet(b0.value, "any"))) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+listDelete(b0, "any");
+if ((b0.value.length === 2)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if ((("" + listGet(b0.value, "*")).toLowerCase() === "".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })

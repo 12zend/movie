@@ -1,0 +1,73 @@
+// TW Snapshot
+// Input SHA-256: 7916f21ea252ad0887060c6eb7ade266b41077b30ed849ad33947e01e6f73514
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 21", target);
+if (!(("" + (0 / 0)).toLowerCase() === "0".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if ((("" + (0 * Infinity)).toLowerCase() === "NaN".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((toNotNaN((0 * Infinity)) * 1) === 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if ((("" + ((Math.acos(1.01) * 180) / Math.PI)).toLowerCase() === "NaN".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((toNotNaN(((Math.acos(1.01) * 180) / Math.PI)) * 1) === 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if ((("" + ((Math.asin(1.01) * 180) / Math.PI)).toLowerCase() === "NaN".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((toNotNaN(((Math.asin(1.01) * 180) / Math.PI)) * 1) === 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if ((("" + (0 / 0)).toLowerCase() === "NaN".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((toNotNaN((0 / 0)) * 1) === 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if ((("" + Math.sqrt(-1)).toLowerCase() === "NaN".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((toNotNaN(Math.sqrt(-1)) * 1) === 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if ((("" + mod(0, 0)).toLowerCase() === "NaN".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((toNotNaN(mod(0, 0)) * 1) === 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if ((("" + Math.log(-1)).toLowerCase() === "NaN".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((toNotNaN(Math.log(-1)) * 1) === 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if ((("" + (Math.log(-1) / Math.LN10)).toLowerCase() === "NaN".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((toNotNaN((Math.log(-1) / Math.LN10)) * 1) === 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((toNotNaN((Math.round(Math.sin((Math.PI * (1 / 0)) / 180) * 1e10) / 1e10)) * 1) === 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((toNotNaN((Math.round(Math.cos((Math.PI * (1 / 0)) / 180) * 1e10) / 1e10)) * 1) === 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((toNotNaN(tan((1 / 0))) * 1) === 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+if (((toNotNaN(runtime.ext_scratch3_operators._random((-1 / 0), (1 / 0))) * 1) === 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })

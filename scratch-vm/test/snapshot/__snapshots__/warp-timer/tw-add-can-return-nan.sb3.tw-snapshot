@@ -1,0 +1,13 @@
+// TW Snapshot
+// Input SHA-256: b435d9356099286cb062435cc2eb968544bcbcd9213e2b6da902eb3bb689f425
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 1", target);
+if (!((Infinity + -Infinity) <= 0)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })

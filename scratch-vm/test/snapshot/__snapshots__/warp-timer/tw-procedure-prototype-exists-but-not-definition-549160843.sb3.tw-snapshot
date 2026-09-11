@@ -1,0 +1,10 @@
+// TW Snapshot
+// Input SHA-256: 9805621c896afb4a8ed71236417a0311e5f4f38378214914625248b6157178b4
+
+// Apple script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 0", target);
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })

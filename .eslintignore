@@ -9,3 +9,10 @@ src/addons/addons
 src/addons/libraries
 src/addons/api-libraries
 src/addons/generated
+
+# Files vendored from the integrated scratch-vm repository
+/scratch-vm/coverage/*
+/scratch-vm/dist/*
+/scratch-vm/node_modules/*
+/scratch-vm/playground/*
+/scratch-vm/benchmark/*

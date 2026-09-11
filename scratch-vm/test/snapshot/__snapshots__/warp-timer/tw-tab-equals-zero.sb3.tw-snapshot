@@ -1,0 +1,38 @@
+// TW Snapshot
+// Input SHA-256: 86c1734c101ee85e6f737f891d6ca338d72b17026ab60d289ea7861351c65124
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["Kl,Own0m6{^v3$E{Wsc="];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 6", target);
+b0.value = "\t";
+startHats("event_whenbroadcastreceived", { BROADCAST_OPTION: "message1" });
+retire(); return;
+}; })
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["Kl,Own0m6{^v3$E{Wsc="];
+return function* genXYZ () {
+if (compareEqual(b0.value, ("0" + ""))) {
+runtime.ext_scratch3_looks._say("pass \\t in a variable = string 0", target);
+}
+if (compareEqual("\t", ("0" + ""))) {
+runtime.ext_scratch3_looks._say("pass literal \\t = string 0", target);
+}
+if (compareEqual(("    " + ("" + b0.value)), ("0" + ""))) {
+runtime.ext_scratch3_looks._say("pass \\t and other spaces = string 0", target);
+}
+if (compareEqual(b0.value, (0 + 0))) {
+runtime.ext_scratch3_looks._say("pass \\t in a variable = number 0", target);
+}
+if ((0 === (0 + 0))) {
+runtime.ext_scratch3_looks._say("pass literal \\t = number 0", target);
+}
+if (compareEqual(("    " + ("" + b0.value)), (0 + 0))) {
+runtime.ext_scratch3_looks._say("pass \\t and other spaces = number 0", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })

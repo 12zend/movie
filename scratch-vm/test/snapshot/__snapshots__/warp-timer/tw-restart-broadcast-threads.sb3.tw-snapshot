@@ -1,0 +1,33 @@
+// TW Snapshot
+// Input SHA-256: 128cc735fefc374c5935e2c3d9c28b7d07c03d58cd0d6abec4e879c41f4afb1c
+
+// Sprite2 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 1", target);
+b0.value = 0;
+startHats("event_whenbroadcastreceived", { BROADCAST_OPTION: "message1" });
+startHats("event_whenbroadcastreceived", { BROADCAST_OPTION: "message1" });
+thread.timer = timer();
+var a0 = Math.max(0, 1000 * 0);
+runtime.requestRedraw();
+yield;
+while (thread.timer.timeElapsed() < a0) {
+yield;
+}
+thread.timer = null;
+if ((toNotNaN(+b0.value) === 1)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite2 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function* genXYZ () {
+b0.value = (toNotNaN(+b0.value) + 1);
+retire(); return;
+}; })

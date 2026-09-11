@@ -1,0 +1,83 @@
+// TW Snapshot
+// Input SHA-256: badd564b5bce22a82223511c91ba701da5314e5ad83e46a08ea5f401a4338b20
+
+// Sprite2 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables[",OktMIwz{~bdgWnPEa8u"];
+const b1 = stage.variables["yfy(G`K5K^fJcXAfiN4i"];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 14", target);
+if ((10 === 10)) {
+runtime.ext_scratch3_looks._say("pass 1", target);
+}
+if ((10 === 10)) {
+runtime.ext_scratch3_looks._say("pass 2", target);
+}
+b0.value = 10;
+if ((b0.value === 10)) {
+runtime.ext_scratch3_looks._say("pass 3", target);
+}
+if ((b0.value === 10)) {
+runtime.ext_scratch3_looks._say("pass 4", target);
+}
+if ((b0.value === 10)) {
+runtime.ext_scratch3_looks._say("pass 5", target);
+}
+for (var a0 = 1; a0 > 0; a0--) {
+if ((toNotNaN(+b0.value) === 10)) {
+runtime.ext_scratch3_looks._say("pass 6", target);
+}
+if ((toNotNaN(+b0.value) === 10)) {
+runtime.ext_scratch3_looks._say("pass 7", target);
+}
+if ((toNotNaN(+b0.value) === 10)) {
+runtime.ext_scratch3_looks._say("pass 8", target);
+}
+yield;
+}
+b1.value = "010";
+if ((toNotNaN(+b1.value) === 10)) {
+runtime.ext_scratch3_looks._say("pass 9", target);
+}
+if ((toNotNaN(+b1.value) === 10)) {
+runtime.ext_scratch3_looks._say("pass 10", target);
+}
+if ((toNotNaN(+b1.value) === 10)) {
+runtime.ext_scratch3_looks._say("pass 11", target);
+}
+for (var a1 = 1; a1 > 0; a1--) {
+if ((toNotNaN(+b1.value) === 10)) {
+runtime.ext_scratch3_looks._say("pass 12", target);
+}
+if ((toNotNaN(+b1.value) === 10)) {
+runtime.ext_scratch3_looks._say("pass 13", target);
+}
+if ((toNotNaN(+b1.value) === 10)) {
+runtime.ext_scratch3_looks._say("pass 14", target);
+}
+yield;
+}
+if (("".toLowerCase() === "1".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail", target);
+}
+if (("1".toLowerCase() === "".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail", target);
+}
+if ((" ".toLowerCase() === "1".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail", target);
+}
+if ((" ".toLowerCase() === "0".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail", target);
+}
+if (("0".toLowerCase() === " ".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail", target);
+}
+if (("".toLowerCase() === "0".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail", target);
+}
+if (("0".toLowerCase() === "".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })

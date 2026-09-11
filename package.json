@@ -102,7 +102,7 @@
     "scratch-blocks": "github:TurboWarp/scratch-blocks#develop-builds",
     "scratch-paint": "github:PenguinMod/PenguinMod-Paint#develop",
     "scratch-render": "github:TurboWarp/scratch-render#develop",
-    "scratch-vm": "github:TurboWarp/scratch-vm#develop",
+    "scratch-vm": "file:./scratch-vm",
     "style-loader": "^0.23.0",
     "text-encoding": "0.7.0",
     "three": "^0.152.2",

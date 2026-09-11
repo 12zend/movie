@@ -16,6 +16,17 @@ npm-*
 /.opt-in
 /cloudflare/.wrangler
 
+# Integrated scratch-vm generated files
+/scratch-vm/node_modules
+/scratch-vm/dist
+/scratch-vm/playground
+/scratch-vm/benchmark
+/scratch-vm/coverage
+/scratch-vm/.nyc_output
+/scratch-vm/translations
+/scratch-vm/.idea
+/scratch-vm/.vscode
+
 # Generated translation files
 /translations
 /locale

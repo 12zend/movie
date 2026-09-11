@@ -1,0 +1,49 @@
+// TW Snapshot
+// Input SHA-256: 19e0b3f9dcac763041039a8ffe87b6732eb744f9ebb136e8d61a53ccf19118e3
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["PsY$$vp$IVH;dDAr[q2h"];
+const b1 = stage.variables["l^q!%fq]Bv;72dlGf}^Z"];
+return function* genXYZ () {
+b0.value = 0;
+runtime.ext_scratch3_looks._say("plan 0", target);
+for (var a0 = 30; a0 > 0; a0--) {
+b1.value = runtime.ioDevices.clock.projectTimer();
+thread.timer = timer();
+var a1 = Math.max(0, 1000 * 0);
+runtime.requestRedraw();
+yield;
+while (thread.timer.timeElapsed() < a1) {
+yield;
+}
+thread.timer = null;
+yield;
+}
+b0.value = 1;
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["l^q!%fq]Bv;72dlGf}^Z"];
+const b1 = runtime.getOpcodeFunction("event_whengreaterthan");
+const b2 = stage.variables["PsY$$vp$IVH;dDAr[q2h"];
+return function* genXYZ () {
+{
+const resolvedValue = toBoolean((yield* executeInCompatibilityLayer({"VALUE":b0.value,"WHENGREATERTHANMENU":"TIMER",}, b1, false, false, "iNmua~6veGey6O-_UB9.", null)));
+const id = "iNmua~6veGey6O-_UB9.";
+const hasOldEdgeValue = target.hasEdgeActivatedValue(id);
+const oldEdgeValue = target.updateEdgeActivatedValue(id, resolvedValue);
+const edgeWasActivated = hasOldEdgeValue ? (!oldEdgeValue && resolvedValue) : resolvedValue;
+if (!edgeWasActivated) {
+retire(); return;
+}
+yield;
+}
+if (compareEqual(b2.value, 0)) {
+runtime.ext_scratch3_looks._say("fail", target);
+}
+retire(); return;
+}; })

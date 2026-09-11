@@ -1,0 +1,1774 @@
+// TW Snapshot
+// Input SHA-256: a419afcd49227908f6e7639bf006dca32430d3b406fbd9cd72aa14957d95ab67
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 0", target);
+if (!(("" + (0 < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 1: 0 should be < 0", target);
+}
+if (!(("" + (0 === 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 2: 0 should be = 0", target);
+}
+if (!(("" + (0 > 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 3: 0 should be > 0", target);
+}
+if (!(("" + (0 < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 4: 0 should be < 0.0", target);
+}
+if (!(("" + (0 === 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 5: 0 should be = 0.0", target);
+}
+if (!(("" + (0 > 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 6: 0 should be > 0.0", target);
+}
+if (!(("" + (0 < 1.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 7: 0 should be < 1.23", target);
+}
+if (!(("" + (0 === 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 8: 0 should be = 1.23", target);
+}
+if (!(("" + (0 > 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 9: 0 should be > 1.23", target);
+}
+if (!(("" + (0 < 0.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 10: 0 should be < .23", target);
+}
+if (!(("" + (0 === 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 11: 0 should be = .23", target);
+}
+if (!(("" + (0 > 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 12: 0 should be > .23", target);
+}
+if (!(("" + (0 < 0.123)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 13: 0 should be < 0.123", target);
+}
+if (!(("" + (0 === 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 14: 0 should be = 0.123", target);
+}
+if (!(("" + (0 > 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 15: 0 should be > 0.123", target);
+}
+if (!(("" + (0 < -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 16: 0 should be < -0", target);
+}
+if (!(("" + (0 === -0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 17: 0 should be = -0", target);
+}
+if (!(("" + (0 > -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 18: 0 should be > -0", target);
+}
+if (!(("" + (0 < -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 19: 0 should be < -1", target);
+}
+if (!(("" + (0 === -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 20: 0 should be = -1", target);
+}
+if (!(("" + (0 > -1)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 21: 0 should be > -1", target);
+}
+if (!(("" + ("0".toLowerCase() < "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 22: 0 should be < true", target);
+}
+if (!(("" + ("0".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 23: 0 should be = true", target);
+}
+if (!(("" + ("0".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 24: 0 should be > true", target);
+}
+if (!(("" + ("0".toLowerCase() < "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 25: 0 should be < false", target);
+}
+if (!(("" + ("0".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 26: 0 should be = false", target);
+}
+if (!(("" + ("0".toLowerCase() > "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 27: 0 should be > false", target);
+}
+if (!(("" + ("0".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 28: 0 should be < NaN", target);
+}
+if (!(("" + ("0".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 29: 0 should be = NaN", target);
+}
+if (!(("" + ("0".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 30: 0 should be > NaN", target);
+}
+if (!(("" + (0 < Infinity)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 31: 0 should be < Infinity", target);
+}
+if (!(("" + (0 === Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 32: 0 should be = Infinity", target);
+}
+if (!(("" + (0 > Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 33: 0 should be > Infinity", target);
+}
+if (!(("" + ("0".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 34: 0 should be < banana", target);
+}
+if (!(("" + ("0".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 35: 0 should be = banana", target);
+}
+if (!(("" + ("0".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 36: 0 should be > banana", target);
+}
+if (!(("" + ("0".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 37: 0 should be < 🎉", target);
+}
+if (!(("" + ("0".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 38: 0 should be = 🎉", target);
+}
+if (!(("" + ("0".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 39: 0 should be > 🎉", target);
+}
+if (!(("" + ("0".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 40: 0 should be < ", target);
+}
+if (!(("" + ("0".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 41: 0 should be = ", target);
+}
+if (!(("" + ("0".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 42: 0 should be > ", target);
+}
+if (!(("" + (0 < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 43: 0.0 should be < 0", target);
+}
+if (!(("" + (0 === 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 44: 0.0 should be = 0", target);
+}
+if (!(("" + (0 > 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 45: 0.0 should be > 0", target);
+}
+if (!(("" + (0 < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 46: 0.0 should be < 0.0", target);
+}
+if (!(("" + (0 === 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 47: 0.0 should be = 0.0", target);
+}
+if (!(("" + (0 > 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 48: 0.0 should be > 0.0", target);
+}
+if (!(("" + (0 < 1.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 49: 0.0 should be < 1.23", target);
+}
+if (!(("" + (0 === 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 50: 0.0 should be = 1.23", target);
+}
+if (!(("" + (0 > 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 51: 0.0 should be > 1.23", target);
+}
+if (!(("" + (0 < 0.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 52: 0.0 should be < .23", target);
+}
+if (!(("" + (0 === 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 53: 0.0 should be = .23", target);
+}
+if (!(("" + (0 > 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 54: 0.0 should be > .23", target);
+}
+if (!(("" + (0 < 0.123)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 55: 0.0 should be < 0.123", target);
+}
+if (!(("" + (0 === 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 56: 0.0 should be = 0.123", target);
+}
+if (!(("" + (0 > 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 57: 0.0 should be > 0.123", target);
+}
+if (!(("" + (0 < -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 58: 0.0 should be < -0", target);
+}
+if (!(("" + (0 === -0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 59: 0.0 should be = -0", target);
+}
+if (!(("" + (0 > -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 60: 0.0 should be > -0", target);
+}
+if (!(("" + (0 < -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 61: 0.0 should be < -1", target);
+}
+if (!(("" + (0 === -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 62: 0.0 should be = -1", target);
+}
+if (!(("" + (0 > -1)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 63: 0.0 should be > -1", target);
+}
+if (!(("" + ("0.0".toLowerCase() < "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 64: 0.0 should be < true", target);
+}
+if (!(("" + ("0.0".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 65: 0.0 should be = true", target);
+}
+if (!(("" + ("0.0".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 66: 0.0 should be > true", target);
+}
+if (!(("" + ("0.0".toLowerCase() < "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 67: 0.0 should be < false", target);
+}
+if (!(("" + ("0.0".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 68: 0.0 should be = false", target);
+}
+if (!(("" + ("0.0".toLowerCase() > "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 69: 0.0 should be > false", target);
+}
+if (!(("" + ("0.0".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 70: 0.0 should be < NaN", target);
+}
+if (!(("" + ("0.0".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 71: 0.0 should be = NaN", target);
+}
+if (!(("" + ("0.0".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 72: 0.0 should be > NaN", target);
+}
+if (!(("" + (0 < Infinity)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 73: 0.0 should be < Infinity", target);
+}
+if (!(("" + (0 === Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 74: 0.0 should be = Infinity", target);
+}
+if (!(("" + (0 > Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 75: 0.0 should be > Infinity", target);
+}
+if (!(("" + ("0.0".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 76: 0.0 should be < banana", target);
+}
+if (!(("" + ("0.0".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 77: 0.0 should be = banana", target);
+}
+if (!(("" + ("0.0".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 78: 0.0 should be > banana", target);
+}
+if (!(("" + ("0.0".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 79: 0.0 should be < 🎉", target);
+}
+if (!(("" + ("0.0".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 80: 0.0 should be = 🎉", target);
+}
+if (!(("" + ("0.0".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 81: 0.0 should be > 🎉", target);
+}
+if (!(("" + ("0.0".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 82: 0.0 should be < ", target);
+}
+if (!(("" + ("0.0".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 83: 0.0 should be = ", target);
+}
+if (!(("" + ("0.0".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 84: 0.0 should be > ", target);
+}
+if (!(("" + (1.23 < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 85: 1.23 should be < 0", target);
+}
+if (!(("" + (1.23 === 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 86: 1.23 should be = 0", target);
+}
+if (!(("" + (1.23 > 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 87: 1.23 should be > 0", target);
+}
+if (!(("" + (1.23 < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 88: 1.23 should be < 0.0", target);
+}
+if (!(("" + (1.23 === 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 89: 1.23 should be = 0.0", target);
+}
+if (!(("" + (1.23 > 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 90: 1.23 should be > 0.0", target);
+}
+if (!(("" + (1.23 < 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 91: 1.23 should be < 1.23", target);
+}
+if (!(("" + (1.23 === 1.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 92: 1.23 should be = 1.23", target);
+}
+if (!(("" + (1.23 > 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 93: 1.23 should be > 1.23", target);
+}
+if (!(("" + (1.23 < 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 94: 1.23 should be < .23", target);
+}
+if (!(("" + (1.23 === 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 95: 1.23 should be = .23", target);
+}
+if (!(("" + (1.23 > 0.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 96: 1.23 should be > .23", target);
+}
+if (!(("" + (1.23 < 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 97: 1.23 should be < 0.123", target);
+}
+if (!(("" + (1.23 === 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 98: 1.23 should be = 0.123", target);
+}
+if (!(("" + (1.23 > 0.123)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 99: 1.23 should be > 0.123", target);
+}
+if (!(("" + (1.23 < -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 100: 1.23 should be < -0", target);
+}
+if (!(("" + (1.23 === -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 101: 1.23 should be = -0", target);
+}
+if (!(("" + (1.23 > -0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 102: 1.23 should be > -0", target);
+}
+if (!(("" + (1.23 < -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 103: 1.23 should be < -1", target);
+}
+if (!(("" + (1.23 === -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 104: 1.23 should be = -1", target);
+}
+if (!(("" + (1.23 > -1)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 105: 1.23 should be > -1", target);
+}
+if (!(("" + ("1.23".toLowerCase() < "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 106: 1.23 should be < true", target);
+}
+if (!(("" + ("1.23".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 107: 1.23 should be = true", target);
+}
+if (!(("" + ("1.23".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 108: 1.23 should be > true", target);
+}
+if (!(("" + ("1.23".toLowerCase() < "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 109: 1.23 should be < false", target);
+}
+if (!(("" + ("1.23".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 110: 1.23 should be = false", target);
+}
+if (!(("" + ("1.23".toLowerCase() > "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 111: 1.23 should be > false", target);
+}
+if (!(("" + ("1.23".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 112: 1.23 should be < NaN", target);
+}
+if (!(("" + ("1.23".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 113: 1.23 should be = NaN", target);
+}
+if (!(("" + ("1.23".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 114: 1.23 should be > NaN", target);
+}
+if (!(("" + (1.23 < Infinity)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 115: 1.23 should be < Infinity", target);
+}
+if (!(("" + (1.23 === Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 116: 1.23 should be = Infinity", target);
+}
+if (!(("" + (1.23 > Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 117: 1.23 should be > Infinity", target);
+}
+if (!(("" + ("1.23".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 118: 1.23 should be < banana", target);
+}
+if (!(("" + ("1.23".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 119: 1.23 should be = banana", target);
+}
+if (!(("" + ("1.23".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 120: 1.23 should be > banana", target);
+}
+if (!(("" + ("1.23".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 121: 1.23 should be < 🎉", target);
+}
+if (!(("" + ("1.23".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 122: 1.23 should be = 🎉", target);
+}
+if (!(("" + ("1.23".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 123: 1.23 should be > 🎉", target);
+}
+if (!(("" + ("1.23".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 124: 1.23 should be < ", target);
+}
+if (!(("" + ("1.23".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 125: 1.23 should be = ", target);
+}
+if (!(("" + ("1.23".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 126: 1.23 should be > ", target);
+}
+if (!(("" + (0.23 < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 127: .23 should be < 0", target);
+}
+if (!(("" + (0.23 === 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 128: .23 should be = 0", target);
+}
+if (!(("" + (0.23 > 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 129: .23 should be > 0", target);
+}
+if (!(("" + (0.23 < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 130: .23 should be < 0.0", target);
+}
+if (!(("" + (0.23 === 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 131: .23 should be = 0.0", target);
+}
+if (!(("" + (0.23 > 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 132: .23 should be > 0.0", target);
+}
+if (!(("" + (0.23 < 1.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 133: .23 should be < 1.23", target);
+}
+if (!(("" + (0.23 === 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 134: .23 should be = 1.23", target);
+}
+if (!(("" + (0.23 > 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 135: .23 should be > 1.23", target);
+}
+if (!(("" + (0.23 < 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 136: .23 should be < .23", target);
+}
+if (!(("" + (0.23 === 0.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 137: .23 should be = .23", target);
+}
+if (!(("" + (0.23 > 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 138: .23 should be > .23", target);
+}
+if (!(("" + (0.23 < 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 139: .23 should be < 0.123", target);
+}
+if (!(("" + (0.23 === 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 140: .23 should be = 0.123", target);
+}
+if (!(("" + (0.23 > 0.123)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 141: .23 should be > 0.123", target);
+}
+if (!(("" + (0.23 < -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 142: .23 should be < -0", target);
+}
+if (!(("" + (0.23 === -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 143: .23 should be = -0", target);
+}
+if (!(("" + (0.23 > -0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 144: .23 should be > -0", target);
+}
+if (!(("" + (0.23 < -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 145: .23 should be < -1", target);
+}
+if (!(("" + (0.23 === -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 146: .23 should be = -1", target);
+}
+if (!(("" + (0.23 > -1)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 147: .23 should be > -1", target);
+}
+if (!(("" + (".23".toLowerCase() < "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 148: .23 should be < true", target);
+}
+if (!(("" + (".23".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 149: .23 should be = true", target);
+}
+if (!(("" + (".23".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 150: .23 should be > true", target);
+}
+if (!(("" + (".23".toLowerCase() < "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 151: .23 should be < false", target);
+}
+if (!(("" + (".23".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 152: .23 should be = false", target);
+}
+if (!(("" + (".23".toLowerCase() > "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 153: .23 should be > false", target);
+}
+if (!(("" + (".23".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 154: .23 should be < NaN", target);
+}
+if (!(("" + (".23".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 155: .23 should be = NaN", target);
+}
+if (!(("" + (".23".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 156: .23 should be > NaN", target);
+}
+if (!(("" + (0.23 < Infinity)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 157: .23 should be < Infinity", target);
+}
+if (!(("" + (0.23 === Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 158: .23 should be = Infinity", target);
+}
+if (!(("" + (0.23 > Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 159: .23 should be > Infinity", target);
+}
+if (!(("" + (".23".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 160: .23 should be < banana", target);
+}
+if (!(("" + (".23".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 161: .23 should be = banana", target);
+}
+if (!(("" + (".23".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 162: .23 should be > banana", target);
+}
+if (!(("" + (".23".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 163: .23 should be < 🎉", target);
+}
+if (!(("" + (".23".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 164: .23 should be = 🎉", target);
+}
+if (!(("" + (".23".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 165: .23 should be > 🎉", target);
+}
+if (!(("" + (".23".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 166: .23 should be < ", target);
+}
+if (!(("" + (".23".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 167: .23 should be = ", target);
+}
+if (!(("" + (".23".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 168: .23 should be > ", target);
+}
+if (!(("" + (0.123 < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 169: 0.123 should be < 0", target);
+}
+if (!(("" + (0.123 === 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 170: 0.123 should be = 0", target);
+}
+if (!(("" + (0.123 > 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 171: 0.123 should be > 0", target);
+}
+if (!(("" + (0.123 < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 172: 0.123 should be < 0.0", target);
+}
+if (!(("" + (0.123 === 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 173: 0.123 should be = 0.0", target);
+}
+if (!(("" + (0.123 > 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 174: 0.123 should be > 0.0", target);
+}
+if (!(("" + (0.123 < 1.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 175: 0.123 should be < 1.23", target);
+}
+if (!(("" + (0.123 === 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 176: 0.123 should be = 1.23", target);
+}
+if (!(("" + (0.123 > 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 177: 0.123 should be > 1.23", target);
+}
+if (!(("" + (0.123 < 0.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 178: 0.123 should be < .23", target);
+}
+if (!(("" + (0.123 === 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 179: 0.123 should be = .23", target);
+}
+if (!(("" + (0.123 > 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 180: 0.123 should be > .23", target);
+}
+if (!(("" + (0.123 < 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 181: 0.123 should be < 0.123", target);
+}
+if (!(("" + (0.123 === 0.123)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 182: 0.123 should be = 0.123", target);
+}
+if (!(("" + (0.123 > 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 183: 0.123 should be > 0.123", target);
+}
+if (!(("" + (0.123 < -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 184: 0.123 should be < -0", target);
+}
+if (!(("" + (0.123 === -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 185: 0.123 should be = -0", target);
+}
+if (!(("" + (0.123 > -0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 186: 0.123 should be > -0", target);
+}
+if (!(("" + (0.123 < -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 187: 0.123 should be < -1", target);
+}
+if (!(("" + (0.123 === -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 188: 0.123 should be = -1", target);
+}
+if (!(("" + (0.123 > -1)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 189: 0.123 should be > -1", target);
+}
+if (!(("" + ("0.123".toLowerCase() < "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 190: 0.123 should be < true", target);
+}
+if (!(("" + ("0.123".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 191: 0.123 should be = true", target);
+}
+if (!(("" + ("0.123".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 192: 0.123 should be > true", target);
+}
+if (!(("" + ("0.123".toLowerCase() < "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 193: 0.123 should be < false", target);
+}
+if (!(("" + ("0.123".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 194: 0.123 should be = false", target);
+}
+if (!(("" + ("0.123".toLowerCase() > "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 195: 0.123 should be > false", target);
+}
+if (!(("" + ("0.123".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 196: 0.123 should be < NaN", target);
+}
+if (!(("" + ("0.123".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 197: 0.123 should be = NaN", target);
+}
+if (!(("" + ("0.123".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 198: 0.123 should be > NaN", target);
+}
+if (!(("" + (0.123 < Infinity)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 199: 0.123 should be < Infinity", target);
+}
+if (!(("" + (0.123 === Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 200: 0.123 should be = Infinity", target);
+}
+if (!(("" + (0.123 > Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 201: 0.123 should be > Infinity", target);
+}
+if (!(("" + ("0.123".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 202: 0.123 should be < banana", target);
+}
+if (!(("" + ("0.123".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 203: 0.123 should be = banana", target);
+}
+if (!(("" + ("0.123".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 204: 0.123 should be > banana", target);
+}
+if (!(("" + ("0.123".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 205: 0.123 should be < 🎉", target);
+}
+if (!(("" + ("0.123".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 206: 0.123 should be = 🎉", target);
+}
+if (!(("" + ("0.123".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 207: 0.123 should be > 🎉", target);
+}
+if (!(("" + ("0.123".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 208: 0.123 should be < ", target);
+}
+if (!(("" + ("0.123".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 209: 0.123 should be = ", target);
+}
+if (!(("" + ("0.123".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 210: 0.123 should be > ", target);
+}
+if (!(("" + (-0 < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 211: -0 should be < 0", target);
+}
+if (!(("" + (-0 === 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 212: -0 should be = 0", target);
+}
+if (!(("" + (-0 > 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 213: -0 should be > 0", target);
+}
+if (!(("" + (-0 < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 214: -0 should be < 0.0", target);
+}
+if (!(("" + (-0 === 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 215: -0 should be = 0.0", target);
+}
+if (!(("" + (-0 > 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 216: -0 should be > 0.0", target);
+}
+if (!(("" + (-0 < 1.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 217: -0 should be < 1.23", target);
+}
+if (!(("" + (-0 === 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 218: -0 should be = 1.23", target);
+}
+if (!(("" + (-0 > 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 219: -0 should be > 1.23", target);
+}
+if (!(("" + (-0 < 0.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 220: -0 should be < .23", target);
+}
+if (!(("" + (-0 === 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 221: -0 should be = .23", target);
+}
+if (!(("" + (-0 > 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 222: -0 should be > .23", target);
+}
+if (!(("" + (-0 < 0.123)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 223: -0 should be < 0.123", target);
+}
+if (!(("" + (-0 === 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 224: -0 should be = 0.123", target);
+}
+if (!(("" + (-0 > 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 225: -0 should be > 0.123", target);
+}
+if (!(("" + (-0 < -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 226: -0 should be < -0", target);
+}
+if (!(("" + (-0 === -0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 227: -0 should be = -0", target);
+}
+if (!(("" + (-0 > -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 228: -0 should be > -0", target);
+}
+if (!(("" + (-0 < -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 229: -0 should be < -1", target);
+}
+if (!(("" + (-0 === -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 230: -0 should be = -1", target);
+}
+if (!(("" + (-0 > -1)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 231: -0 should be > -1", target);
+}
+if (!(("" + ("-0".toLowerCase() < "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 232: -0 should be < true", target);
+}
+if (!(("" + ("-0".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 233: -0 should be = true", target);
+}
+if (!(("" + ("-0".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 234: -0 should be > true", target);
+}
+if (!(("" + ("-0".toLowerCase() < "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 235: -0 should be < false", target);
+}
+if (!(("" + ("-0".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 236: -0 should be = false", target);
+}
+if (!(("" + ("-0".toLowerCase() > "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 237: -0 should be > false", target);
+}
+if (!(("" + ("-0".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 238: -0 should be < NaN", target);
+}
+if (!(("" + ("-0".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 239: -0 should be = NaN", target);
+}
+if (!(("" + ("-0".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 240: -0 should be > NaN", target);
+}
+if (!(("" + (-0 < Infinity)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 241: -0 should be < Infinity", target);
+}
+if (!(("" + (-0 === Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 242: -0 should be = Infinity", target);
+}
+if (!(("" + (-0 > Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 243: -0 should be > Infinity", target);
+}
+if (!(("" + ("-0".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 244: -0 should be < banana", target);
+}
+if (!(("" + ("-0".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 245: -0 should be = banana", target);
+}
+if (!(("" + ("-0".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 246: -0 should be > banana", target);
+}
+if (!(("" + ("-0".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 247: -0 should be < 🎉", target);
+}
+if (!(("" + ("-0".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 248: -0 should be = 🎉", target);
+}
+if (!(("" + ("-0".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 249: -0 should be > 🎉", target);
+}
+if (!(("" + ("-0".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 250: -0 should be < ", target);
+}
+if (!(("" + ("-0".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 251: -0 should be = ", target);
+}
+if (!(("" + ("-0".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 252: -0 should be > ", target);
+}
+if (!(("" + (-1 < 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 253: -1 should be < 0", target);
+}
+if (!(("" + (-1 === 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 254: -1 should be = 0", target);
+}
+if (!(("" + (-1 > 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 255: -1 should be > 0", target);
+}
+if (!(("" + (-1 < 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 256: -1 should be < 0.0", target);
+}
+if (!(("" + (-1 === 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 257: -1 should be = 0.0", target);
+}
+if (!(("" + (-1 > 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 258: -1 should be > 0.0", target);
+}
+if (!(("" + (-1 < 1.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 259: -1 should be < 1.23", target);
+}
+if (!(("" + (-1 === 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 260: -1 should be = 1.23", target);
+}
+if (!(("" + (-1 > 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 261: -1 should be > 1.23", target);
+}
+if (!(("" + (-1 < 0.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 262: -1 should be < .23", target);
+}
+if (!(("" + (-1 === 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 263: -1 should be = .23", target);
+}
+if (!(("" + (-1 > 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 264: -1 should be > .23", target);
+}
+if (!(("" + (-1 < 0.123)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 265: -1 should be < 0.123", target);
+}
+if (!(("" + (-1 === 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 266: -1 should be = 0.123", target);
+}
+if (!(("" + (-1 > 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 267: -1 should be > 0.123", target);
+}
+if (!(("" + (-1 < -0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 268: -1 should be < -0", target);
+}
+if (!(("" + (-1 === -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 269: -1 should be = -0", target);
+}
+if (!(("" + (-1 > -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 270: -1 should be > -0", target);
+}
+if (!(("" + (-1 < -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 271: -1 should be < -1", target);
+}
+if (!(("" + (-1 === -1)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 272: -1 should be = -1", target);
+}
+if (!(("" + (-1 > -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 273: -1 should be > -1", target);
+}
+if (!(("" + ("-1".toLowerCase() < "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 274: -1 should be < true", target);
+}
+if (!(("" + ("-1".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 275: -1 should be = true", target);
+}
+if (!(("" + ("-1".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 276: -1 should be > true", target);
+}
+if (!(("" + ("-1".toLowerCase() < "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 277: -1 should be < false", target);
+}
+if (!(("" + ("-1".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 278: -1 should be = false", target);
+}
+if (!(("" + ("-1".toLowerCase() > "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 279: -1 should be > false", target);
+}
+if (!(("" + ("-1".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 280: -1 should be < NaN", target);
+}
+if (!(("" + ("-1".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 281: -1 should be = NaN", target);
+}
+if (!(("" + ("-1".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 282: -1 should be > NaN", target);
+}
+if (!(("" + (-1 < Infinity)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 283: -1 should be < Infinity", target);
+}
+if (!(("" + (-1 === Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 284: -1 should be = Infinity", target);
+}
+if (!(("" + (-1 > Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 285: -1 should be > Infinity", target);
+}
+if (!(("" + ("-1".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 286: -1 should be < banana", target);
+}
+if (!(("" + ("-1".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 287: -1 should be = banana", target);
+}
+if (!(("" + ("-1".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 288: -1 should be > banana", target);
+}
+if (!(("" + ("-1".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 289: -1 should be < 🎉", target);
+}
+if (!(("" + ("-1".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 290: -1 should be = 🎉", target);
+}
+if (!(("" + ("-1".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 291: -1 should be > 🎉", target);
+}
+if (!(("" + ("-1".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 292: -1 should be < ", target);
+}
+if (!(("" + ("-1".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 293: -1 should be = ", target);
+}
+if (!(("" + ("-1".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 294: -1 should be > ", target);
+}
+if (!(("" + ("true".toLowerCase() < "0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 295: true should be < 0", target);
+}
+if (!(("" + ("true".toLowerCase() === "0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 296: true should be = 0", target);
+}
+if (!(("" + ("true".toLowerCase() > "0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 297: true should be > 0", target);
+}
+if (!(("" + ("true".toLowerCase() < "0.0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 298: true should be < 0.0", target);
+}
+if (!(("" + ("true".toLowerCase() === "0.0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 299: true should be = 0.0", target);
+}
+if (!(("" + ("true".toLowerCase() > "0.0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 300: true should be > 0.0", target);
+}
+if (!(("" + ("true".toLowerCase() < "1.23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 301: true should be < 1.23", target);
+}
+if (!(("" + ("true".toLowerCase() === "1.23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 302: true should be = 1.23", target);
+}
+if (!(("" + ("true".toLowerCase() > "1.23".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 303: true should be > 1.23", target);
+}
+if (!(("" + ("true".toLowerCase() < ".23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 304: true should be < .23", target);
+}
+if (!(("" + ("true".toLowerCase() === ".23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 305: true should be = .23", target);
+}
+if (!(("" + ("true".toLowerCase() > ".23".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 306: true should be > .23", target);
+}
+if (!(("" + ("true".toLowerCase() < "0.123".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 307: true should be < 0.123", target);
+}
+if (!(("" + ("true".toLowerCase() === "0.123".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 308: true should be = 0.123", target);
+}
+if (!(("" + ("true".toLowerCase() > "0.123".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 309: true should be > 0.123", target);
+}
+if (!(("" + ("true".toLowerCase() < "-0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 310: true should be < -0", target);
+}
+if (!(("" + ("true".toLowerCase() === "-0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 311: true should be = -0", target);
+}
+if (!(("" + ("true".toLowerCase() > "-0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 312: true should be > -0", target);
+}
+if (!(("" + ("true".toLowerCase() < "-1".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 313: true should be < -1", target);
+}
+if (!(("" + ("true".toLowerCase() === "-1".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 314: true should be = -1", target);
+}
+if (!(("" + ("true".toLowerCase() > "-1".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 315: true should be > -1", target);
+}
+if (!(("" + ("true".toLowerCase() < "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 316: true should be < true", target);
+}
+if (!(("" + ("true".toLowerCase() === "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 317: true should be = true", target);
+}
+if (!(("" + ("true".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 318: true should be > true", target);
+}
+if (!(("" + ("true".toLowerCase() < "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 319: true should be < false", target);
+}
+if (!(("" + ("true".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 320: true should be = false", target);
+}
+if (!(("" + ("true".toLowerCase() > "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 321: true should be > false", target);
+}
+if (!(("" + ("true".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 322: true should be < NaN", target);
+}
+if (!(("" + ("true".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 323: true should be = NaN", target);
+}
+if (!(("" + ("true".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 324: true should be > NaN", target);
+}
+if (!(("" + ("true".toLowerCase() < "Infinity".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 325: true should be < Infinity", target);
+}
+if (!(("" + ("true".toLowerCase() === "Infinity".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 326: true should be = Infinity", target);
+}
+if (!(("" + ("true".toLowerCase() > "Infinity".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 327: true should be > Infinity", target);
+}
+if (!(("" + ("true".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 328: true should be < banana", target);
+}
+if (!(("" + ("true".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 329: true should be = banana", target);
+}
+if (!(("" + ("true".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 330: true should be > banana", target);
+}
+if (!(("" + ("true".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 331: true should be < 🎉", target);
+}
+if (!(("" + ("true".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 332: true should be = 🎉", target);
+}
+if (!(("" + ("true".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 333: true should be > 🎉", target);
+}
+if (!(("" + ("true".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 334: true should be < ", target);
+}
+if (!(("" + ("true".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 335: true should be = ", target);
+}
+if (!(("" + ("true".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 336: true should be > ", target);
+}
+if (!(("" + ("false".toLowerCase() < "0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 337: false should be < 0", target);
+}
+if (!(("" + ("false".toLowerCase() === "0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 338: false should be = 0", target);
+}
+if (!(("" + ("false".toLowerCase() > "0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 339: false should be > 0", target);
+}
+if (!(("" + ("false".toLowerCase() < "0.0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 340: false should be < 0.0", target);
+}
+if (!(("" + ("false".toLowerCase() === "0.0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 341: false should be = 0.0", target);
+}
+if (!(("" + ("false".toLowerCase() > "0.0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 342: false should be > 0.0", target);
+}
+if (!(("" + ("false".toLowerCase() < "1.23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 343: false should be < 1.23", target);
+}
+if (!(("" + ("false".toLowerCase() === "1.23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 344: false should be = 1.23", target);
+}
+if (!(("" + ("false".toLowerCase() > "1.23".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 345: false should be > 1.23", target);
+}
+if (!(("" + ("false".toLowerCase() < ".23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 346: false should be < .23", target);
+}
+if (!(("" + ("false".toLowerCase() === ".23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 347: false should be = .23", target);
+}
+if (!(("" + ("false".toLowerCase() > ".23".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 348: false should be > .23", target);
+}
+if (!(("" + ("false".toLowerCase() < "0.123".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 349: false should be < 0.123", target);
+}
+if (!(("" + ("false".toLowerCase() === "0.123".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 350: false should be = 0.123", target);
+}
+if (!(("" + ("false".toLowerCase() > "0.123".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 351: false should be > 0.123", target);
+}
+if (!(("" + ("false".toLowerCase() < "-0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 352: false should be < -0", target);
+}
+if (!(("" + ("false".toLowerCase() === "-0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 353: false should be = -0", target);
+}
+if (!(("" + ("false".toLowerCase() > "-0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 354: false should be > -0", target);
+}
+if (!(("" + ("false".toLowerCase() < "-1".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 355: false should be < -1", target);
+}
+if (!(("" + ("false".toLowerCase() === "-1".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 356: false should be = -1", target);
+}
+if (!(("" + ("false".toLowerCase() > "-1".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 357: false should be > -1", target);
+}
+if (!(("" + ("false".toLowerCase() < "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 358: false should be < true", target);
+}
+if (!(("" + ("false".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 359: false should be = true", target);
+}
+if (!(("" + ("false".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 360: false should be > true", target);
+}
+if (!(("" + ("false".toLowerCase() < "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 361: false should be < false", target);
+}
+if (!(("" + ("false".toLowerCase() === "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 362: false should be = false", target);
+}
+if (!(("" + ("false".toLowerCase() > "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 363: false should be > false", target);
+}
+if (!(("" + ("false".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 364: false should be < NaN", target);
+}
+if (!(("" + ("false".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 365: false should be = NaN", target);
+}
+if (!(("" + ("false".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 366: false should be > NaN", target);
+}
+if (!(("" + ("false".toLowerCase() < "Infinity".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 367: false should be < Infinity", target);
+}
+if (!(("" + ("false".toLowerCase() === "Infinity".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 368: false should be = Infinity", target);
+}
+if (!(("" + ("false".toLowerCase() > "Infinity".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 369: false should be > Infinity", target);
+}
+if (!(("" + ("false".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 370: false should be < banana", target);
+}
+if (!(("" + ("false".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 371: false should be = banana", target);
+}
+if (!(("" + ("false".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 372: false should be > banana", target);
+}
+if (!(("" + ("false".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 373: false should be < 🎉", target);
+}
+if (!(("" + ("false".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 374: false should be = 🎉", target);
+}
+if (!(("" + ("false".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 375: false should be > 🎉", target);
+}
+if (!(("" + ("false".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 376: false should be < ", target);
+}
+if (!(("" + ("false".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 377: false should be = ", target);
+}
+if (!(("" + ("false".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 378: false should be > ", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 379: NaN should be < 0", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 380: NaN should be = 0", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 381: NaN should be > 0", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "0.0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 382: NaN should be < 0.0", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "0.0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 383: NaN should be = 0.0", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "0.0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 384: NaN should be > 0.0", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "1.23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 385: NaN should be < 1.23", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "1.23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 386: NaN should be = 1.23", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "1.23".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 387: NaN should be > 1.23", target);
+}
+if (!(("" + ("NaN".toLowerCase() < ".23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 388: NaN should be < .23", target);
+}
+if (!(("" + ("NaN".toLowerCase() === ".23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 389: NaN should be = .23", target);
+}
+if (!(("" + ("NaN".toLowerCase() > ".23".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 390: NaN should be > .23", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "0.123".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 391: NaN should be < 0.123", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "0.123".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 392: NaN should be = 0.123", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "0.123".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 393: NaN should be > 0.123", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "-0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 394: NaN should be < -0", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "-0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 395: NaN should be = -0", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "-0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 396: NaN should be > -0", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "-1".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 397: NaN should be < -1", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "-1".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 398: NaN should be = -1", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "-1".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 399: NaN should be > -1", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 400: NaN should be < true", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 401: NaN should be = true", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 402: NaN should be > true", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 403: NaN should be < false", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 404: NaN should be = false", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 405: NaN should be > false", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 406: NaN should be < NaN", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 407: NaN should be = NaN", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 408: NaN should be > NaN", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "Infinity".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 409: NaN should be < Infinity", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "Infinity".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 410: NaN should be = Infinity", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "Infinity".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 411: NaN should be > Infinity", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 412: NaN should be < banana", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 413: NaN should be = banana", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 414: NaN should be > banana", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 415: NaN should be < 🎉", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 416: NaN should be = 🎉", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 417: NaN should be > 🎉", target);
+}
+if (!(("" + ("NaN".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 418: NaN should be < ", target);
+}
+if (!(("" + ("NaN".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 419: NaN should be = ", target);
+}
+if (!(("" + ("NaN".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 420: NaN should be > ", target);
+}
+if (!(("" + (Infinity < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 421: Infinity should be < 0", target);
+}
+if (!(("" + (Infinity === 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 422: Infinity should be = 0", target);
+}
+if (!(("" + (Infinity > 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 423: Infinity should be > 0", target);
+}
+if (!(("" + (Infinity < 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 424: Infinity should be < 0.0", target);
+}
+if (!(("" + (Infinity === 0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 425: Infinity should be = 0.0", target);
+}
+if (!(("" + (Infinity > 0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 426: Infinity should be > 0.0", target);
+}
+if (!(("" + (Infinity < 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 427: Infinity should be < 1.23", target);
+}
+if (!(("" + (Infinity === 1.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 428: Infinity should be = 1.23", target);
+}
+if (!(("" + (Infinity > 1.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 429: Infinity should be > 1.23", target);
+}
+if (!(("" + (Infinity < 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 430: Infinity should be < .23", target);
+}
+if (!(("" + (Infinity === 0.23)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 431: Infinity should be = .23", target);
+}
+if (!(("" + (Infinity > 0.23)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 432: Infinity should be > .23", target);
+}
+if (!(("" + (Infinity < 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 433: Infinity should be < 0.123", target);
+}
+if (!(("" + (Infinity === 0.123)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 434: Infinity should be = 0.123", target);
+}
+if (!(("" + (Infinity > 0.123)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 435: Infinity should be > 0.123", target);
+}
+if (!(("" + (Infinity < -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 436: Infinity should be < -0", target);
+}
+if (!(("" + (Infinity === -0)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 437: Infinity should be = -0", target);
+}
+if (!(("" + (Infinity > -0)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 438: Infinity should be > -0", target);
+}
+if (!(("" + (Infinity < -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 439: Infinity should be < -1", target);
+}
+if (!(("" + (Infinity === -1)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 440: Infinity should be = -1", target);
+}
+if (!(("" + (Infinity > -1)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 441: Infinity should be > -1", target);
+}
+if (!(("" + ("Infinity".toLowerCase() < "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 442: Infinity should be < true", target);
+}
+if (!(("" + ("Infinity".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 443: Infinity should be = true", target);
+}
+if (!(("" + ("Infinity".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 444: Infinity should be > true", target);
+}
+if (!(("" + ("Infinity".toLowerCase() < "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 445: Infinity should be < false", target);
+}
+if (!(("" + ("Infinity".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 446: Infinity should be = false", target);
+}
+if (!(("" + ("Infinity".toLowerCase() > "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 447: Infinity should be > false", target);
+}
+if (!(("" + ("Infinity".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 448: Infinity should be < NaN", target);
+}
+if (!(("" + ("Infinity".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 449: Infinity should be = NaN", target);
+}
+if (!(("" + ("Infinity".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 450: Infinity should be > NaN", target);
+}
+if (!(("" + (Infinity < Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 451: Infinity should be < Infinity", target);
+}
+if (!(("" + (Infinity === Infinity)).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 452: Infinity should be = Infinity", target);
+}
+if (!(("" + (Infinity > Infinity)).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 453: Infinity should be > Infinity", target);
+}
+if (!(("" + ("Infinity".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 454: Infinity should be < banana", target);
+}
+if (!(("" + ("Infinity".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 455: Infinity should be = banana", target);
+}
+if (!(("" + ("Infinity".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 456: Infinity should be > banana", target);
+}
+if (!(("" + ("Infinity".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 457: Infinity should be < 🎉", target);
+}
+if (!(("" + ("Infinity".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 458: Infinity should be = 🎉", target);
+}
+if (!(("" + ("Infinity".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 459: Infinity should be > 🎉", target);
+}
+if (!(("" + ("Infinity".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 460: Infinity should be < ", target);
+}
+if (!(("" + ("Infinity".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 461: Infinity should be = ", target);
+}
+if (!(("" + ("Infinity".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 462: Infinity should be > ", target);
+}
+if (!(("" + ("banana".toLowerCase() < "0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 463: banana should be < 0", target);
+}
+if (!(("" + ("banana".toLowerCase() === "0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 464: banana should be = 0", target);
+}
+if (!(("" + ("banana".toLowerCase() > "0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 465: banana should be > 0", target);
+}
+if (!(("" + ("banana".toLowerCase() < "0.0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 466: banana should be < 0.0", target);
+}
+if (!(("" + ("banana".toLowerCase() === "0.0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 467: banana should be = 0.0", target);
+}
+if (!(("" + ("banana".toLowerCase() > "0.0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 468: banana should be > 0.0", target);
+}
+if (!(("" + ("banana".toLowerCase() < "1.23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 469: banana should be < 1.23", target);
+}
+if (!(("" + ("banana".toLowerCase() === "1.23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 470: banana should be = 1.23", target);
+}
+if (!(("" + ("banana".toLowerCase() > "1.23".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 471: banana should be > 1.23", target);
+}
+if (!(("" + ("banana".toLowerCase() < ".23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 472: banana should be < .23", target);
+}
+if (!(("" + ("banana".toLowerCase() === ".23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 473: banana should be = .23", target);
+}
+if (!(("" + ("banana".toLowerCase() > ".23".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 474: banana should be > .23", target);
+}
+if (!(("" + ("banana".toLowerCase() < "0.123".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 475: banana should be < 0.123", target);
+}
+if (!(("" + ("banana".toLowerCase() === "0.123".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 476: banana should be = 0.123", target);
+}
+if (!(("" + ("banana".toLowerCase() > "0.123".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 477: banana should be > 0.123", target);
+}
+if (!(("" + ("banana".toLowerCase() < "-0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 478: banana should be < -0", target);
+}
+if (!(("" + ("banana".toLowerCase() === "-0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 479: banana should be = -0", target);
+}
+if (!(("" + ("banana".toLowerCase() > "-0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 480: banana should be > -0", target);
+}
+if (!(("" + ("banana".toLowerCase() < "-1".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 481: banana should be < -1", target);
+}
+if (!(("" + ("banana".toLowerCase() === "-1".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 482: banana should be = -1", target);
+}
+if (!(("" + ("banana".toLowerCase() > "-1".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 483: banana should be > -1", target);
+}
+if (!(("" + ("banana".toLowerCase() < "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 484: banana should be < true", target);
+}
+if (!(("" + ("banana".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 485: banana should be = true", target);
+}
+if (!(("" + ("banana".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 486: banana should be > true", target);
+}
+if (!(("" + ("banana".toLowerCase() < "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 487: banana should be < false", target);
+}
+if (!(("" + ("banana".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 488: banana should be = false", target);
+}
+if (!(("" + ("banana".toLowerCase() > "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 489: banana should be > false", target);
+}
+if (!(("" + ("banana".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 490: banana should be < NaN", target);
+}
+if (!(("" + ("banana".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 491: banana should be = NaN", target);
+}
+if (!(("" + ("banana".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 492: banana should be > NaN", target);
+}
+if (!(("" + ("banana".toLowerCase() < "Infinity".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 493: banana should be < Infinity", target);
+}
+if (!(("" + ("banana".toLowerCase() === "Infinity".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 494: banana should be = Infinity", target);
+}
+if (!(("" + ("banana".toLowerCase() > "Infinity".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 495: banana should be > Infinity", target);
+}
+if (!(("" + ("banana".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 496: banana should be < banana", target);
+}
+if (!(("" + ("banana".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 497: banana should be = banana", target);
+}
+if (!(("" + ("banana".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 498: banana should be > banana", target);
+}
+if (!(("" + ("banana".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 499: banana should be < 🎉", target);
+}
+if (!(("" + ("banana".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 500: banana should be = 🎉", target);
+}
+if (!(("" + ("banana".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 501: banana should be > 🎉", target);
+}
+if (!(("" + ("banana".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 502: banana should be < ", target);
+}
+if (!(("" + ("banana".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 503: banana should be = ", target);
+}
+if (!(("" + ("banana".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 504: banana should be > ", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 505: 🎉 should be < 0", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 506: 🎉 should be = 0", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 507: 🎉 should be > 0", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "0.0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 508: 🎉 should be < 0.0", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "0.0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 509: 🎉 should be = 0.0", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "0.0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 510: 🎉 should be > 0.0", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "1.23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 511: 🎉 should be < 1.23", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "1.23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 512: 🎉 should be = 1.23", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "1.23".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 513: 🎉 should be > 1.23", target);
+}
+if (!(("" + ("🎉".toLowerCase() < ".23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 514: 🎉 should be < .23", target);
+}
+if (!(("" + ("🎉".toLowerCase() === ".23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 515: 🎉 should be = .23", target);
+}
+if (!(("" + ("🎉".toLowerCase() > ".23".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 516: 🎉 should be > .23", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "0.123".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 517: 🎉 should be < 0.123", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "0.123".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 518: 🎉 should be = 0.123", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "0.123".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 519: 🎉 should be > 0.123", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "-0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 520: 🎉 should be < -0", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "-0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 521: 🎉 should be = -0", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "-0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 522: 🎉 should be > -0", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "-1".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 523: 🎉 should be < -1", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "-1".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 524: 🎉 should be = -1", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "-1".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 525: 🎉 should be > -1", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 526: 🎉 should be < true", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 527: 🎉 should be = true", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 528: 🎉 should be > true", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 529: 🎉 should be < false", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 530: 🎉 should be = false", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 531: 🎉 should be > false", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 532: 🎉 should be < NaN", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 533: 🎉 should be = NaN", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 534: 🎉 should be > NaN", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "Infinity".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 535: 🎉 should be < Infinity", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "Infinity".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 536: 🎉 should be = Infinity", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "Infinity".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 537: 🎉 should be > Infinity", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 538: 🎉 should be < banana", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 539: 🎉 should be = banana", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 540: 🎉 should be > banana", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 541: 🎉 should be < 🎉", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 542: 🎉 should be = 🎉", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 543: 🎉 should be > 🎉", target);
+}
+if (!(("" + ("🎉".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 544: 🎉 should be < ", target);
+}
+if (!(("" + ("🎉".toLowerCase() === "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 545: 🎉 should be = ", target);
+}
+if (!(("" + ("🎉".toLowerCase() > "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 546: 🎉 should be > ", target);
+}
+if (!(("" + ("".toLowerCase() < "0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 547:  should be < 0", target);
+}
+if (!(("" + ("".toLowerCase() === "0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 548:  should be = 0", target);
+}
+if (!(("" + ("".toLowerCase() > "0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 549:  should be > 0", target);
+}
+if (!(("" + ("".toLowerCase() < "0.0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 550:  should be < 0.0", target);
+}
+if (!(("" + ("".toLowerCase() === "0.0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 551:  should be = 0.0", target);
+}
+if (!(("" + ("".toLowerCase() > "0.0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 552:  should be > 0.0", target);
+}
+if (!(("" + ("".toLowerCase() < "1.23".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 553:  should be < 1.23", target);
+}
+if (!(("" + ("".toLowerCase() === "1.23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 554:  should be = 1.23", target);
+}
+if (!(("" + ("".toLowerCase() > "1.23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 555:  should be > 1.23", target);
+}
+if (!(("" + ("".toLowerCase() < ".23".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 556:  should be < .23", target);
+}
+if (!(("" + ("".toLowerCase() === ".23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 557:  should be = .23", target);
+}
+if (!(("" + ("".toLowerCase() > ".23".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 558:  should be > .23", target);
+}
+if (!(("" + ("".toLowerCase() < "0.123".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 559:  should be < 0.123", target);
+}
+if (!(("" + ("".toLowerCase() === "0.123".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 560:  should be = 0.123", target);
+}
+if (!(("" + ("".toLowerCase() > "0.123".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 561:  should be > 0.123", target);
+}
+if (!(("" + ("".toLowerCase() < "-0".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 562:  should be < -0", target);
+}
+if (!(("" + ("".toLowerCase() === "-0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 563:  should be = -0", target);
+}
+if (!(("" + ("".toLowerCase() > "-0".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 564:  should be > -0", target);
+}
+if (!(("" + ("".toLowerCase() < "-1".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 565:  should be < -1", target);
+}
+if (!(("" + ("".toLowerCase() === "-1".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 566:  should be = -1", target);
+}
+if (!(("" + ("".toLowerCase() > "-1".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 567:  should be > -1", target);
+}
+if (!(("" + ("".toLowerCase() < "true".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 568:  should be < true", target);
+}
+if (!(("" + ("".toLowerCase() === "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 569:  should be = true", target);
+}
+if (!(("" + ("".toLowerCase() > "true".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 570:  should be > true", target);
+}
+if (!(("" + ("".toLowerCase() < "false".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 571:  should be < false", target);
+}
+if (!(("" + ("".toLowerCase() === "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 572:  should be = false", target);
+}
+if (!(("" + ("".toLowerCase() > "false".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 573:  should be > false", target);
+}
+if (!(("" + ("".toLowerCase() < "NaN".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 574:  should be < NaN", target);
+}
+if (!(("" + ("".toLowerCase() === "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 575:  should be = NaN", target);
+}
+if (!(("" + ("".toLowerCase() > "NaN".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 576:  should be > NaN", target);
+}
+if (!(("" + ("".toLowerCase() < "Infinity".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 577:  should be < Infinity", target);
+}
+if (!(("" + ("".toLowerCase() === "Infinity".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 578:  should be = Infinity", target);
+}
+if (!(("" + ("".toLowerCase() > "Infinity".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 579:  should be > Infinity", target);
+}
+if (!(("" + ("".toLowerCase() < "banana".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 580:  should be < banana", target);
+}
+if (!(("" + ("".toLowerCase() === "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 581:  should be = banana", target);
+}
+if (!(("" + ("".toLowerCase() > "banana".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 582:  should be > banana", target);
+}
+if (!(("" + ("".toLowerCase() < "🎉".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 583:  should be < 🎉", target);
+}
+if (!(("" + ("".toLowerCase() === "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 584:  should be = 🎉", target);
+}
+if (!(("" + ("".toLowerCase() > "🎉".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 585:  should be > 🎉", target);
+}
+if (!(("" + ("".toLowerCase() < "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 586:  should be < ", target);
+}
+if (!(("" + ("".toLowerCase() === "".toLowerCase())).toLowerCase() === "true".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 587:  should be = ", target);
+}
+if (!(("" + ("".toLowerCase() > "".toLowerCase())).toLowerCase() === "false".toLowerCase())) {
+runtime.ext_scratch3_looks._say("fail 588:  should be > ", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })

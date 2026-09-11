@@ -1,0 +1,30 @@
+// TW Snapshot
+// Input SHA-256: a340f37844807c66f3b85eb4e85c8092a779d33d50e5655e035420ae05cea26c
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 2", target);
+thread.procedures["Znumber or text %s %s"]("bad","ok");
+thread.procedures["Zboolean %b %b"]("false",!false);
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite1 Znumber or text %s %s
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_number_or_text__ (p0,p1) {
+if ((("" + p1).toLowerCase() === "ok".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+return "";
+}; })
+
+// Sprite1 Zboolean %b %b
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_boolean__ (p0,p1) {
+if (toBoolean(p1)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+return "";
+}; })

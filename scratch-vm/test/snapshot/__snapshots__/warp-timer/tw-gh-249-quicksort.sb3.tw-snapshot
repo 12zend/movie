@@ -1,0 +1,117 @@
+// TW Snapshot
+// Input SHA-256: ce657aa0f3e55d0c2166813c9fa3dd076c3f0c81df2e527f44d0ad31856a448d
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 1", target);
+yield* thread.procedures["Wrun"]();
+yield* thread.procedures["Wvalidate"]();
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite1 Wrun
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["EF^k=u-t@S)w60;RP?dZ-list-list"];
+const b1 = stage.variables["rQq!wAuU2T9DV9,S[/s."];
+return function* genXYZ_run () {
+b0.value = [];
+for (var a0 = 100; a0 > 0; a0--) {
+b0.value.push((b1.value[(b0.value.length + 1) - 1] ?? ""));
+b0._monitorUpToDate = false;
+if (isStuck()) yield;
+}
+yield* thread.procedures["Wqsort %s %s"](1,b0.value.length);
+return "";
+}; })
+
+// Sprite1 Wvalidate
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["7AH{dO^X;}C[{[l~g-7m"];
+const b1 = stage.variables["gPJ}c-PZz?Y+_L][iMU_"];
+const b2 = stage.variables["EF^k=u-t@S)w60;RP?dZ-list-list"];
+const b3 = stage.variables["FsKqV/2kid0gw0J+Jj(c"];
+return function* genXYZ_validate () {
+b0.value = 1;
+b1.value = 1;
+for (var a0 = b2.value.length; a0 > 0; a0--) {
+if (!compareEqual(listGet(b2.value, b1.value), listGet(b3.value, b1.value))) {
+b0.value = 0;
+runtime.ext_scratch3_looks._say(("fail mismatch at index " + ("" + b1.value)), target);
+}
+b1.value = (toNotNaN(+b1.value) + 1);
+if (isStuck()) yield;
+}
+if ((toNotNaN(+b0.value) === 1)) {
+runtime.ext_scratch3_looks._say("pass sorted", target);
+}
+return "";
+}; })
+
+// Sprite1 Wqsort %s %s
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["EF^k=u-t@S)w60;RP?dZ-pivot-"];
+const b1 = stage.variables["EF^k=u-t@S)w60;RP?dZ-list-list"];
+const b2 = stage.variables["EF^k=u-t@S)w60;RP?dZ-low-"];
+const b3 = stage.variables["EF^k=u-t@S)w60;RP?dZ-high-"];
+const b4 = stage.variables["EF^k=u-t@S)w60;RP?dZ-tmp-"];
+const b5 = target.variables["JIHtr29*ug5G;5*`f2.K-i-"];
+const b6 = target.variables["JIHtr29*ug5G;5*`f2.K-min pos-"];
+const b7 = target.variables["JIHtr29*ug5G;5*`f2.K-min-"];
+const b8 = target.variables["JIHtr29*ug5G;5*`f2.K-j-"];
+return function* genXYZ_qsort__ (p0,p1) {
+if (compareLessThan(p0, p1)) {
+if (!((toNotNaN(+p1) - toNotNaN(+p0)) <= 7)) {
+b0.value = (b1.value[((toNotNaN((toNotNaN(+p1) + toNotNaN(+p0))) / 2) | 0) - 1] ?? "");
+b2.value = p0;
+b3.value = p1;
+while (true) {
+while (compareLessThan(listGet(b1.value, b2.value), b0.value)) {
+b2.value = (toNotNaN(+b2.value) + 1);
+if (isStuck()) yield;
+}
+while (compareGreaterThan(listGet(b1.value, b3.value), b0.value)) {
+b3.value = (toNotNaN(+b3.value) + -1);
+if (isStuck()) yield;
+}
+if (compareGreaterThan(b2.value, b3.value)) {
+yield* thread.procedures["Wqsort %s %s"](p0,b3.value);
+yield* thread.procedures["Wqsort %s %s"](b2.value,p1);
+return "";
+} else {
+b4.value = listGet(b1.value, b2.value);
+listReplace(b1, b2.value, listGet(b1.value, b3.value));
+listReplace(b1, b3.value, b4.value);
+b2.value = (toNotNaN(+b2.value) + 1);
+b3.value = (toNotNaN(+b3.value) + -1);
+}
+if (isStuck()) yield;
+}
+} else {
+b5.value = p0;
+for (var a0 = toNotNaN((toNotNaN(+p1) - toNotNaN(+p0))); a0 >= 0.5; a0--) {
+b6.value = b5.value;
+b7.value = listGet(b1.value, b5.value);
+b8.value = (toNotNaN(+b5.value) + 1);
+for (var a1 = toNotNaN((toNotNaN(+p1) - toNotNaN(+b5.value))); a1 >= 0.5; a1--) {
+if (compareLessThan(listGet(b1.value, b8.value), b7.value)) {
+b7.value = listGet(b1.value, b8.value);
+b6.value = b8.value;
+}
+b8.value = (toNotNaN(+b8.value) + 1);
+if (isStuck()) yield;
+}
+if (compareEqual(b6.value, b5.value)) {
+} else {
+b4.value = listGet(b1.value, b5.value);
+listReplace(b1, b5.value, b7.value);
+listReplace(b1, b6.value, b4.value);
+}
+b5.value = (toNotNaN(+b5.value) + 1);
+if (isStuck()) yield;
+}
+}
+}
+return "";
+}; })

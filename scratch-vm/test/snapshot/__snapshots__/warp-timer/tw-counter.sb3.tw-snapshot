@@ -1,0 +1,39 @@
+// TW Snapshot
+// Input SHA-256: 29dd30c632645f071bfd450530dab86dc85a2c1cf30564bee984394a790eca6a
+
+// 2 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function* genXYZ () {
+if ((runtime.ext_scratch3_control._counter === 10)) {
+runtime.ext_scratch3_looks._say("pass global", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// 1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 5", target);
+if ((runtime.ext_scratch3_control._counter === 0)) {
+runtime.ext_scratch3_looks._say("pass initial value = 0", target);
+}
+runtime.ext_scratch3_control._counter++;
+if ((runtime.ext_scratch3_control._counter === 1)) {
+runtime.ext_scratch3_looks._say("pass incr 1", target);
+}
+runtime.ext_scratch3_control._counter++;
+if ((runtime.ext_scratch3_control._counter === 2)) {
+runtime.ext_scratch3_looks._say("pass incr 2", target);
+}
+runtime.ext_scratch3_control._counter = 0;
+if ((runtime.ext_scratch3_control._counter === 0)) {
+runtime.ext_scratch3_looks._say("pass clear = 0", target);
+}
+for (var a0 = 10; a0 > 0; a0--) {
+runtime.ext_scratch3_control._counter++;
+yield;
+}
+startHats("event_whenbroadcastreceived", { BROADCAST_OPTION: "check globalness" });
+retire(); return;
+}; })

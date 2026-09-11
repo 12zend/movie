@@ -1,0 +1,29 @@
+// TW Snapshot
+// Input SHA-256: a12680688ca945364abe1e094b35cf53326f70189cb09b58d5f52b4de0c3b2a9
+
+// Text script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 0", target);
+yield* thread.procedures["Wtest 1"]();
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Text Wtest 1
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = target.variables["ts-.PQ{/]mN_9@MbG:m/"];
+return function* genXYZ_test_1 () {
+for (var a0 = toNotNaN(+thread.procedures["Wany procedure reporter"]()); a0 >= 0.5; a0--) {
+b0.value = (toNotNaN(+b0.value) + 1);
+if (isStuck()) yield;
+}
+return "";
+}; })
+
+// Text Wany procedure reporter
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_any_procedure_report () {
+return 0;
+return "";
+}; })

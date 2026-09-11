@@ -1,0 +1,36 @@
+// TW Snapshot
+// Input SHA-256: e6a6f5ea252886949eab2f4b5608526dc3686160d65f6e07c2d864c82db24326
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["PJl9-2GypE.OstQk*B_*"];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 1", target);
+yield* thread.procedures["Wa"]();
+if ((("" + b0.value).toLowerCase() === "babab".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite1 Wa
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["uEt-Ix{%|r3`}-W%+kdm"];
+const b1 = stage.variables["PJl9-2GypE.OstQk*B_*"];
+const b2 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function* genXYZ_a () {
+b0.value = "ababa";
+b1.value = "";
+b2.value = 1;
+for (var a0 = b0.value.length; a0 > 0; a0--) {
+if ((((("" + b0.value))[((+b2.value) | 0) - 1] || "").toLowerCase() === "a".toLowerCase())) {
+b1.value = (("" + b1.value) + "b");
+} else {
+b1.value = (("" + b1.value) + "a");
+}
+b2.value = (toNotNaN(+b2.value) + 1);
+if (isStuck()) yield;
+}
+return "";
+}; })

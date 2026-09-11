@@ -1,0 +1,33 @@
+// TW Snapshot
+// Input SHA-256: 2422e407892596fbf410e032196131f9bae718563fd80b1ff32cf972859c034b
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 0", target);
+startHats("event_whenbroadcastreceived", { BROADCAST_OPTION: "message1" });
+b0.value = "bwah";
+while (!(("" + b0.value).toLowerCase() === "bleh".toLowerCase())) {
+yield;
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function* genXYZ () {
+b0.value = (1 + 2);
+thread.timer = timer();
+var a0 = Math.max(0, 1000 * 0);
+runtime.requestRedraw();
+yield;
+while (thread.timer.timeElapsed() < a0) {
+yield;
+}
+thread.timer = null;
+b0.value = "bleh";
+retire(); return;
+}; })

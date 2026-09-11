@@ -1,0 +1,33 @@
+// TW Snapshot
+// Input SHA-256: 7be6188a713254fa9b1f4ca207fbb6116aad958f321cd54f4f07f49a9f2c1a58
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+const b1 = runtime.getOpcodeFunction("looks_sayforsecs");
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 1", target);
+b0.value = (0 + 0);
+yield* executeInCompatibilityLayer({"MESSAGE":"Hello!","SECS":0.1,}, b1, false, false, "d", null);
+if (((toNotNaN(+b0.value) + 2) === 2)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function* genXYZ () {
+thread.timer = timer();
+var a0 = Math.max(0, 1000 * 0);
+runtime.requestRedraw();
+yield;
+while (thread.timer.timeElapsed() < a0) {
+yield;
+}
+thread.timer = null;
+b0.value = "string";
+retire(); return;
+}; })

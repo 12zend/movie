@@ -16,3 +16,20 @@ npm-*
 
 # generated translation files
 /translations
+
+# Development files from the integrated scratch-vm repository
+/scratch-vm/.editorconfig
+/scratch-vm/.eslintignore
+/scratch-vm/.eslintrc.js
+/scratch-vm/.gitattributes
+/scratch-vm/.github
+/scratch-vm/.travis.yml
+/scratch-vm/.tx
+/scratch-vm/node_modules
+/scratch-vm/test
+
+# Build and coverage files from the integrated scratch-vm repository
+/scratch-vm/playground
+/scratch-vm/.nyc_output
+/scratch-vm/coverage
+/scratch-vm/scratch-vm-*.{tar,tgz}

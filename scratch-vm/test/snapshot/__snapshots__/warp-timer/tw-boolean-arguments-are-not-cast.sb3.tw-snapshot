@@ -1,0 +1,22 @@
+// TW Snapshot
+// Input SHA-256: 9ecff9e3c4b1dcdf3e23d0e49c0a2da3de446b6d626a2b5ee39d761be20344ca
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 1", target);
+thread.procedures["ZBlock A %s"]("Hai!!!");
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite1 ZBlock A %s
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_Block_A_ (p0) {
+if ((("" + p0).toLowerCase() === "Hai!!!".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass did not cast", target);
+} else {
+runtime.ext_scratch3_looks._say("fail was casted", target);
+}
+return "";
+}; })

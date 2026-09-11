@@ -1,0 +1,109 @@
+// TW Snapshot
+// Input SHA-256: cd516553f3cbf4a41ae9a8bc1f5d06a3392d365226bccdfa294578314f18facb
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 8", target);
+if ((("" + thread.procedures["Zsimplest"]()).toLowerCase() === "It works!".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass simplest", target);
+}
+if ((("" + thread.procedures["Znesting 1"]()).toLowerCase() === "42-54".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass nesting1", target);
+}
+if ((toNotNaN(+thread.procedures["Wwarp fib %s"](12)) === 144)) {
+runtime.ext_scratch3_looks._say("pass fib 12", target);
+}
+if ((toNotNaN(+thread.procedures["Wfactorial %s"](12)) === 479001600)) {
+runtime.ext_scratch3_looks._say("pass factorial 12", target);
+}
+b0.value = thread.procedures["Zno shadowing 1 %s %s"]("f","g");
+if ((("" + b0.value).toLowerCase() === "".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass default return value", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite1 Zsimplest
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_simplest () {
+return "It works!";
+return "";
+}; })
+
+// Sprite1 Znesting 1
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_nesting_1 () {
+thread.procedures["Znesting 2"]();
+return (("" + thread.procedures["Znesting 3 %s %s"](6,7)) + ("" + thread.procedures["Znesting 3 %s %s"](-1,54)));
+return "";
+}; })
+
+// Sprite1 Wwarp fib %s
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_warp_fib_ (p0) {
+return thread.procedures["Wfib %s"](p0);
+return "";
+}; })
+
+// Sprite1 Wfactorial %s
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_factorial_ (p0) {
+if (compareGreaterThan(p0, 1)) {
+return (toNotNaN(+p0) * toNotNaN(+thread.procedures["Wfactorial %s"]((toNotNaN(+p0) - 1))));
+}
+return 1;
+return "";
+}; })
+
+// Sprite1 Zno shadowing 1 %s %s
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function funXYZ_no_shadowing_1__ (p0,p1) {
+if (((("" + p0).toLowerCase() === "f".toLowerCase()) && (("" + p1).toLowerCase() === "g".toLowerCase()))) {
+runtime.ext_scratch3_looks._say("pass shadow check 1", target);
+}
+b0.value = thread.procedures["Zno shadowing 2 %s %s"](1,2);
+if (((("" + p0).toLowerCase() === "f".toLowerCase()) && (("" + p1).toLowerCase() === "g".toLowerCase()))) {
+runtime.ext_scratch3_looks._say("pass shadow check 2", target);
+}
+b0.value = thread.procedures["Zno shadowing 2 %s %s"](3,4);
+if (((("" + p0).toLowerCase() === "f".toLowerCase()) && (("" + p1).toLowerCase() === "g".toLowerCase()))) {
+runtime.ext_scratch3_looks._say("pass shadow check 3", target);
+}
+return "";
+}; })
+
+// Sprite1 Znesting 2
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_nesting_2 () {
+return "discard nesting 2";
+return "";
+}; })
+
+// Sprite1 Znesting 3 %s %s
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_nesting_3__ (p0,p1) {
+return (toNotNaN(+p0) * toNotNaN(+p1));
+return "";
+}; })
+
+// Sprite1 Wfib %s
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_fib_ (p0) {
+if (compareLessThan(p0, 2)) {
+return p0;
+} else {
+return (toNotNaN(+thread.procedures["Wfib %s"]((toNotNaN(+p0) - 1))) + toNotNaN(+thread.procedures["Wfib %s"]((toNotNaN(+p0) - 2))));
+}
+return "";
+}; })
+
+// Sprite1 Zno shadowing 2 %s %s
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_no_shadowing_2__ (p0,p1) {
+return "discard shadow 2";
+return "";
+}; })

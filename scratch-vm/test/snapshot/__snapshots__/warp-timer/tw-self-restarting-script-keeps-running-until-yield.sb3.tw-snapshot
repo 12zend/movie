@@ -1,0 +1,36 @@
+// TW Snapshot
+// Input SHA-256: dc029abbf128cea0830f4578e89619949837ec26dfa76f110ca599a9ee12e66e
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["G{NQ*NXG*qzywe1Q3?FM"];
+const b1 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 1", target);
+b0.value = 0;
+b1.value = 0;
+startHats("event_whenbroadcastreceived", { BROADCAST_OPTION: "message1" });
+retire(); return;
+}; })
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+const b1 = stage.variables["G{NQ*NXG*qzywe1Q3?FM"];
+return function* genXYZ () {
+if (compareEqual(b0.value, 0)) {
+b0.value = 1;
+startHats("event_whenbroadcastreceived", { BROADCAST_OPTION: "message1" });
+b1.value = 1;
+for (var a0 = 1; a0 > 0; a0--) {
+yield;
+}
+b1.value = 2;
+} else {
+if ((toNotNaN(+b1.value) === 1)) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+}
+retire(); return;
+}; })

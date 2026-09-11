@@ -1,0 +1,35 @@
+// TW Snapshot
+// Input SHA-256: b1e62179f7a495c46c7e9c64a03d405924f6011b66aa71f6ec0f1781b936d38c
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = runtime.getSpriteTargetByName("Sprite1");
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 6", target);
+target.setXY(1e-9, target.y);
+if ((limitPrecision(target.x) === 1e-9)) {
+runtime.ext_scratch3_looks._say("pass much above x does not round", target);
+}
+if (((b0 ? b0.x : 0) === 1e-9)) {
+runtime.ext_scratch3_looks._say("pass initial 'of' test", target);
+}
+target.setXY(target.x + 0, target.y);
+runtime.ext_scratch3_motion._moveSteps(0, target);
+target.setXY(target.x + -9e-10, target.y);
+if (((b0 ? b0.x : 0) === 1.0000000000000007e-10)) {
+runtime.ext_scratch3_looks._say("pass 'of' never rounds - positive x", target);
+}
+if ((limitPrecision(target.x) === 0)) {
+runtime.ext_scratch3_looks._say("pass x slightly above 0 rounds", target);
+}
+target.setXY(target.x + -9e-10, target.y);
+target.setXY(target.x, target.y + 0);
+if (((b0 ? b0.x : 0) === -7.999999999999999e-10)) {
+runtime.ext_scratch3_looks._say("pass 'of' never rounds and change x - negative x", target);
+}
+if ((limitPrecision(target.x) === 0)) {
+runtime.ext_scratch3_looks._say("pass x slightly below 0 rounds", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })

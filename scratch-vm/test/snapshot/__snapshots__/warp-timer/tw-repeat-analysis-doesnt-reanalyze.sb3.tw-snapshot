@@ -1,0 +1,28 @@
+// TW Snapshot
+// Input SHA-256: 38075839898d1ba3d2556f350ff18438a205c5b6b3cb809d07d3f738bd37dad9
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 1", target);
+yield* thread.procedures["Wa"]();
+if ((("" + b0.value).toLowerCase() === "bwah".toLowerCase())) {
+runtime.ext_scratch3_looks._say("pass", target);
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Sprite1 Wa
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = stage.variables["`jEk@4|i[#Fk?(8x)AV.-my variable"];
+const b1 = stage.variables["6h7bpiz0`;;x^G1B3(%["];
+return function* genXYZ_a () {
+b0.value = b1.value.length;
+for (var a0 = b0.value; a0 > 0; a0--) {
+b0.value = "bwah";
+if (isStuck()) yield;
+}
+return "";
+}; })

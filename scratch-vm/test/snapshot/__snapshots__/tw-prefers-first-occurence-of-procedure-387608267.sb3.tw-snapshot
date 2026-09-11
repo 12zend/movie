@@ -1,0 +1,18 @@
+// TW Snapshot
+// Input SHA-256: 5b964fa791468016b188af74e50cadad73d482be066b104bb22faff7e4a156dc
+
+// Player script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 1", target);
+thread.procedures["ZSet Costume"]();
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
+
+// Player ZSet Costume
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+return function funXYZ_Set_Costume () {
+runtime.ext_scratch3_looks._say("pass", target);
+return "";
+}; })

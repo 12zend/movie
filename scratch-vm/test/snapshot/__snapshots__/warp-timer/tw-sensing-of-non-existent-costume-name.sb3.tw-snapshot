@@ -1,0 +1,13 @@
+// TW Snapshot
+// Input SHA-256: c3b1a45369f15f6809142ef2a2c6d1a680b802b70524a499b347af1008730a03
+
+// Sprite1 script
+(function factoryXYZ(thread) { const target = thread.target; const runtime = target.runtime; const stage = runtime.getTargetForStage();
+const b0 = runtime.getSpriteTargetByName("Sprite2");
+return function* genXYZ () {
+runtime.ext_scratch3_looks._say("plan 0", target);
+if ((("" + (b0 ? b0.getCostumes()[b0.currentCostume].name : 0)).toLowerCase() === "a".toLowerCase())) {
+}
+runtime.ext_scratch3_looks._say("end", target);
+retire(); return;
+}; })
