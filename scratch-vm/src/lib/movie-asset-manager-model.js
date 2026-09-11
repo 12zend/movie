@@ -121,9 +121,6 @@ const MovieAssetManagerModelMethods = {
         if (mapsChanged) {
             material.needsUpdate = true;
         }
-        if (this.modelRenderer && typeof this.modelRenderer.invalidateRenderCache === 'function') {
-            this.modelRenderer.invalidateRenderCache();
-        }
     },
 
     rerenderBuildingScenes () {
@@ -398,7 +395,7 @@ const MovieAssetManagerModelMethods = {
         state.modelRenderCamera = camera;
         state.modelRenderVersion++;
 
-        const cachedItems = state.modelScene.map(item => {
+        const readyItems = state.modelScene.map(item => {
             if (item.sourceObject) {
                 return {
                     animationName: '',
@@ -425,19 +422,13 @@ const MovieAssetManagerModelMethods = {
                 }
             };
         });
-        if (cachedItems.length && cachedItems.every(Boolean) && state.requestedMode === 'model') {
+        if (readyItems.length && readyItems.every(Boolean) && state.requestedMode === 'model') {
             if (!this.modelRenderer) this.modelRenderer = new ModelRenderer();
-            const renderArguments = [cachedItems, camera, this.getStageSize(), BITMAP_RESOLUTION];
+            const renderArguments = [readyItems, camera, this.getStageSize(), BITMAP_RESOLUTION];
             if (Array.isArray(this.lights)) renderArguments.push(this.lights);
             const canvas = this.modelRenderer.renderWorldScene(...renderArguments);
-            const shouldApplyBitmap = state.modelCanvas !== canvas || this.modelRenderer.lastRenderWasCached !== true;
-            if (shouldApplyBitmap) {
-                if (penOnly) this.applyBitmap(target, canvas, 'model', null, true);
-                else this.applyBitmap(target, canvas, 'model');
-                state.modelCanvas = canvas;
-            } else {
-                this.applyProjection(target);
-            }
+            if (penOnly) this.applyBitmap(target, canvas, 'model', null, true);
+            else this.applyBitmap(target, canvas, 'model');
             this.publishModelZBuffer(target, camera);
             // The scene is already installed. Do not wait for an older queued clear/render request here, or
             // consecutive render-model blocks would expose an empty pen frame between them.
@@ -487,15 +478,8 @@ const MovieAssetManagerModelMethods = {
                 ];
                 if (Array.isArray(this.lights)) renderArguments.push(this.lights);
                 const canvas = this.modelRenderer.renderWorldScene(...renderArguments);
-                const shouldApplyBitmap = state.modelCanvas !== canvas ||
-                    this.modelRenderer.lastRenderWasCached !== true;
-                if (shouldApplyBitmap) {
-                    if (penOnly) this.applyBitmap(target, canvas, 'model', null, true);
-                    else this.applyBitmap(target, canvas, 'model');
-                    state.modelCanvas = canvas;
-                } else {
-                    this.applyProjection(target);
-                }
+                if (penOnly) this.applyBitmap(target, canvas, 'model', null, true);
+                else this.applyBitmap(target, canvas, 'model');
                 this.publishModelZBuffer(target, renderCamera);
                 return;
             }

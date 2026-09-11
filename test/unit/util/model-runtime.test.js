@@ -217,7 +217,7 @@ describe('Movie 3D projection', () => {
         expect(renderer.renderer.render).toHaveBeenCalledTimes(2);
     });
 
-    test('reuses a completed scene without submitting another GPU render', () => {
+    test('submits a GPU render for every completed scene', () => {
         const renderer = Object.create(ModelRenderer.prototype);
         renderer.canvas = {height: 0, reusable: true, width: 0};
         renderer.renderer = {
@@ -259,8 +259,7 @@ describe('Movie 3D projection', () => {
         renderer.renderWorldScene([sceneItem], cameraTransform, [480, 360], 2);
         renderer.renderWorldScene([sceneItem], cameraTransform, [480, 360], 2);
 
-        expect(renderer.renderer.render).toHaveBeenCalledTimes(1);
-        expect(renderer.lastRenderWasCached).toBe(true);
+        expect(renderer.renderer.render).toHaveBeenCalledTimes(2);
     });
 
     test('tightens the zBuffer camera range around visible 3D geometry', () => {

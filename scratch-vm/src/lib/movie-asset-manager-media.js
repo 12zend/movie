@@ -836,7 +836,6 @@ const MovieAssetManagerMediaMethods = {
         this.clearPendingVideoFrames(state);
         state.modelRenderVersion++;
         state.modelScene = [];
-        state.modelCanvas = null;
         state.modelAssetId = null;
         state.mode = 'costume';
         state.projectionKey = null;

@@ -808,7 +808,6 @@ const MovieAssetManagerObjectMethods = {
         state.textQueue.length = 0;
         state.modelRenderVersion++;
         state.modelScene = [];
-        state.modelCanvas = null;
         state.modelAssetId = null;
         state.mode = 'shape';
         state.textKey = null;

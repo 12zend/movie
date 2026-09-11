@@ -133,89 +133,9 @@ class ModelRenderer {
         this.currentSources = [];
         this.currentAnimationNames = [];
         this.currentFrames = [];
-        this.sourceIds = new WeakMap();
-        this.nextSourceId = 1;
         this.depthBounds = new THREE.Box3();
         this.depthPoint = new THREE.Vector3();
-        this.lastRenderKey = null;
-        this.lastRenderWasCached = false;
-        this.renderVersion = 0;
         this.animationStates = new WeakMap();
-        this.lightsKeySource = null;
-        this.lightsKeyValue = 'studio';
-    }
-
-    invalidateRenderCache () {
-        this.lastRenderKey = null;
-    }
-
-    getSourceId (source) {
-        if (!source || typeof source !== 'object') return String(source);
-        if (!this.sourceIds) this.sourceIds = new WeakMap();
-        let id = this.sourceIds.get(source);
-        if (!id) {
-            id = this.nextSourceId || 1;
-            this.nextSourceId = id + 1;
-            this.sourceIds.set(source, id);
-        }
-        return id;
-    }
-
-    getLightsKey (lights) {
-        if (!Array.isArray(lights)) return 'studio';
-        // Light configurations are compared by identity in setLights, so serializing them again only
-        // when the array identity changes produces the same key while skipping a per-frame JSON pass.
-        if (this.lightsKeySource !== lights) {
-            this.lightsKeySource = lights;
-            this.lightsKeyValue = JSON.stringify(lights);
-        }
-        return this.lightsKeyValue;
-    }
-
-    getRenderCacheKey (sceneItems, cameraTransform, width, height, bitmapResolution, lights) {
-        const camera = cameraTransform || {};
-        const position = camera.position || {};
-        const rotation = camera.rotation || {};
-        const parts = [
-            width,
-            height,
-            bitmapResolution,
-            camera.focalLength,
-            camera.rotationOrder,
-            position.x,
-            position.y,
-            position.z,
-            rotation.x,
-            rotation.y,
-            rotation.z,
-            this.getLightsKey(lights)
-        ];
-        for (const item of sceneItems || []) {
-            const transform = item.transform || {};
-            const itemPosition = transform.position || {};
-            const itemRotation = transform.rotation || {};
-            const scale = transform.scale || {};
-            parts.push(
-                this.getSourceId(item.sourceObject),
-                item.animationName,
-                item.frame,
-                transform.rotationOrder,
-                transform.size,
-                transform.worldX,
-                transform.worldY,
-                transform.worldZ,
-                itemPosition.x,
-                itemPosition.y,
-                itemPosition.z,
-                itemRotation.x,
-                itemRotation.y,
-                itemRotation.z,
-                scale.x,
-                scale.y,
-                scale.z
-            );
-        }
-        return parts.join('|');
     }
 
     // --- Lighting -------------------------------------------------------
@@ -284,7 +204,6 @@ class ModelRenderer {
     setLights (requestedLights) {
         if (this.lightConfiguration === requestedLights) return;
         this.lightConfiguration = requestedLights;
-        this.invalidateRenderCache();
         this.clearLightObjects();
 
         // A null configuration keeps existing projects and model previews using the original studio lighting.
@@ -326,7 +245,6 @@ class ModelRenderer {
 
     setOutputSize (width, height) {
         if (this.canvas.width === width && this.canvas.height === height) return;
-        this.invalidateRenderCache();
         this.renderer.setSize(width, height, false);
         if (this.renderTarget) this.renderTarget.setSize(width, height);
         if (this.depthCanvas) {
@@ -523,7 +441,6 @@ class ModelRenderer {
         if (this.imagePlaneBatches) this.imagePlaneBatches.forEach(batch => batch.dispose());
         this.imagePlaneBatches = [];
         if (this.currentObjects) this.currentObjects.forEach(object => this.removeObject(object));
-        this.invalidateRenderCache();
         this.currentObject = null;
         this.currentObjects = [];
         this.currentSources = [];
@@ -628,19 +545,6 @@ class ModelRenderer {
         const height = Math.max(1, stageSize[1]);
         this.setOutputSize(Math.round(width * bitmapResolution), Math.round(height * bitmapResolution));
         this.setLights(lights);
-        const renderKey = this.getRenderCacheKey(
-            sceneItems,
-            cameraTransform,
-            width,
-            height,
-            bitmapResolution,
-            lights
-        );
-        if (this.lastRenderKey === renderKey) {
-            this.lastRenderWasCached = true;
-            return this.canvas;
-        }
-        this.lastRenderWasCached = false;
         this.syncObjects(sceneItems);
         this.currentObjects.forEach((object, index) => {
             const item = sceneItems[index];
@@ -678,8 +582,6 @@ class ModelRenderer {
 
         if (this.usesShadows && this.renderer.shadowMap) this.renderer.shadowMap.needsUpdate = true;
         this.renderInstancedImagePlanes();
-        this.lastRenderKey = renderKey;
-        this.renderVersion++;
         return this.canvas;
     }
 

@@ -27,7 +27,6 @@ const MovieAssetManagerTransformMethods = {
                 displayedVideoAssetId: null,
                 ignoreCamera: false,
                 mode: 'costume',
-                modelCanvas: null,
                 modelAssetId: null,
                 modelFrame: 1,
                 modelRenderCamera: null,
