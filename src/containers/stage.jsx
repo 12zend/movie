@@ -6,6 +6,7 @@ import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 
 import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
+import installShadingFeatures from '../lib/shading-features';
 import {getEventXY} from '../lib/touch-utils';
 import VideoProvider from '../lib/video/video-provider';
 import {BitmapAdapter as V2BitmapAdapter} from '@turbowarp/scratch-svg-renderer';
@@ -85,6 +86,9 @@ class Stage extends React.Component {
             this.props.vm.renderer.on('UseHighQualityRenderChanged', this.props.onHighQualityPenChanged);
         }
         this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter());
+        // Install VM-owned primitives as soon as the renderer exists. This is earlier than
+        // project loading and prevents a first compile from caching a Movie block as unknown.
+        installShadingFeatures(this.props.vm);
     }
     componentDidMount () {
         this.attachRectEvents();

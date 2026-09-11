@@ -81,6 +81,7 @@ const base = {
             loader: 'babel-loader',
             include: [
                 path.resolve(__dirname, 'src'),
+                path.resolve(__dirname, 'scratch-vm/src'),
                 /node_modules[\\/]scratch-[^\\/]+[\\/]src/,
                 /node_modules[\\/]pify/,
                 /node_modules[\\/]@vernier[\\/]godirect/,

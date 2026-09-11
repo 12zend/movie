@@ -7,6 +7,7 @@ import VM from 'scratch-vm';
 import {injectIntl, intlShape} from 'react-intl';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
+import installShadingFeatures from '../lib/shading-features';
 import {
     getIsError,
     getIsShowingProject
@@ -39,14 +40,6 @@ import storage from '../lib/storage';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
 import cloudManagerHOC from '../lib/cloud-manager-hoc.jsx';
-import installDefaultExtensions from '../lib/default-extensions';
-import installGraphicEffectsManager from '../lib/graphic-effects-manager';
-import installMovieAssetManager from '../lib/movie-asset-manager';
-import installMovieEasing from '../lib/movie-easing';
-import installTimerOffset from '../lib/timer-offset';
-import installObjectBlocks from '../lib/object-blocks';
-import installPenFX from '../lib/pen-fx';
-import installListBlocks from '../lib/list-blocks';
 
 import GUIComponent from '../components/gui/gui.jsx';
 import {setIsScratchDesktop} from '../lib/isScratchDesktop.js';
@@ -69,14 +62,7 @@ class GUI extends React.Component {
     componentDidMount () {
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.props.onStorageInit(storage);
-        installGraphicEffectsManager(this.props.vm);
-        installMovieEasing(this.props.vm);
-        installTimerOffset(this.props.vm);
-        installListBlocks(this.props.vm);
-        installMovieAssetManager(this.props.vm);
-        installDefaultExtensions(this.props.vm);
-        installPenFX(this.props.vm);
-        installObjectBlocks(this.props.vm);
+        installShadingFeatures(this.props.vm);
         this.props.onVmInit(this.props.vm);
         setProjectIdMetadata(this.props.projectId);
     }

@@ -63,7 +63,7 @@ const makeManifestZip = async () => {
 describe('Pen FX custom shader packages', () => {
     const defaultPackagePath = path.resolve(
         __dirname,
-        '../../../src/lib/pen-fx/default-shader-package/penfx-builtins.zip'
+        '../../../scratch-vm/src/lib/pen-fx/default-shader-package/penfx-builtins.zip'
     );
 
     test('loads a manifest and its GLSL from a zip', async () => {

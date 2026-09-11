@@ -1431,6 +1431,24 @@ class VirtualMachine extends EventEmitter {
     }
 
     /**
+     * Install Shading's renderer-backed runtime features.
+     *
+     * This is deliberately explicit because the VM can also run without a renderer (for example
+     * in Node-based project conversion tools). The GUI calls this after attaching its renderer.
+     * @returns {VirtualMachine} This VM.
+     */
+    installShadingFeatures () {
+        // The installer is an ES module in the migrated VM package. Depending on whether
+        // this file is consumed through Node/CommonJS or webpack, require() returns either
+        // the function itself or a namespace object containing its default export.
+        const shadingFeatures = require('./lib/movie-features');
+        const installShadingFeatures = shadingFeatures.default ||
+            shadingFeatures.installShadingFeatures || shadingFeatures;
+        installShadingFeatures(this);
+        return this;
+    }
+
+    /**
      * @returns {RenderWebGL} The renderer attached to the vm
      */
     get renderer () {
