@@ -33,7 +33,7 @@ describe('built-in Pen FX category', () => {
         const info = new PenFX().getInfo();
 
         expect(info.id).toBe('penfx');
-        expect(info.name).toBe('エフェクト');
+        expect(info.name).toBe('Looks');
         expect(info.blockIconURI).toBeUndefined();
         expect(info.blocks.find(block => block.opcode === 'contrast')).toBeDefined();
         const vhs = info.blocks.find(block => block.opcode === 'vhs');
@@ -84,6 +84,21 @@ describe('built-in Pen FX category', () => {
         ]);
         expect(info.menus.fractalNoiseType.items).toEqual(['ブロック', 'リニア', 'ソフトリニア', 'スプライン']);
         expect(info.menus.fractalOverflowType.items).toEqual(['HDR', 'Clip', 'Soft clamp']);
+    });
+
+    test('localizes the Pen FX category and built-in blocks in Japanese mode', () => {
+        const vm = {
+            getLocale: () => 'ja',
+            runtime: {renderer: {}}
+        };
+        const PenFX = createPenFXClass(vm);
+        const info = new PenFX().getInfo();
+
+        expect(info.name).toBe('エフェクト');
+        expect(info.blocks.find(block => block.opcode === 'contrast').text)
+            .toBe('コントラスト 値: [VALUE] 基準: [PIVOT] 混合: [MIX] %');
+        expect(info.blocks.find(block => block.opcode === 'contrast').arguments.VALUE)
+            .toMatchObject({defaultValue: 1});
     });
 
     test('routes RGB overlay and multi-stop gradation overlay without returning a promise', () => {

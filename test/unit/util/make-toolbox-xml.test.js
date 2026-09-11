@@ -12,7 +12,7 @@ describe('Movie toolbox categories', () => {
         const categories = [{id: 'objects', xml: '<category id="objects" />'}];
         const toolbox = makeToolboxXML(false, false, 'target', categories, 'costume1');
 
-        expect(toolbox).toContain('<category name="レイヤー" id="objects"');
+        expect(toolbox).toContain('<category name="Objects" id="objects"');
         expect(toolbox).not.toContain('<category name="Shape"');
         expect(toolbox).not.toContain('<category name="Arc"');
         expect(toolbox).not.toContain('<category name="Circular Segment"');
@@ -115,11 +115,21 @@ describe('Movie toolbox categories', () => {
     test('renames Motion to Camera and only offers camera controls', () => {
         const toolbox = makeToolboxXML(false, false, 'target', []);
 
-        expect(toolbox).toContain('<category name="カメラ" id="motion"');
+        expect(toolbox).toContain('<category name="Camera" id="motion"');
         expect(toolbox).toContain('type="motion_setcamerato"');
         expect(toolbox).toContain('type="motion_lookat"');
         expect(toolbox).not.toContain('type="motion_gotoxyz"');
         expect(toolbox).not.toContain('type="motion_gotoxyz_nocamera"');
+    });
+
+    test('localizes Movie categories in Japanese mode', () => {
+        const categories = [{id: 'objects', xml: '<category id="objects" />'}];
+        const toolbox = makeToolboxXML(
+            false, false, 'target', categories, 'costume1', undefined, undefined, undefined, 'ja'
+        );
+
+        expect(toolbox).toContain('<category name="レイヤー" id="objects"');
+        expect(toolbox).toContain('<category name="カメラ" id="motion"');
     });
 
     test('moves object transforms out of Camera', () => {

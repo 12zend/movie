@@ -91,7 +91,7 @@ const DroppableBlocks = DropAreaHOC([
 class Blocks extends React.Component {
     constructor (props) {
         super(props);
-        this.ScratchBlocks = VMScratchBlocks(props.vm, false);
+        this.ScratchBlocks = VMScratchBlocks(props.vm, props.locale);
 
         window.ScratchBlocks = this.ScratchBlocks;
         AddonHooks.blockly = this.ScratchBlocks;
@@ -143,7 +143,7 @@ class Blocks extends React.Component {
         this.toolboxUpdateQueue = [];
     }
     componentDidMount () {
-        this.ScratchBlocks = VMScratchBlocks(this.props.vm, this.props.useCatBlocks);
+        this.ScratchBlocks = VMScratchBlocks(this.props.vm, this.props.locale);
         this.ScratchBlocks.prompt = this.handlePromptStart;
         this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
         this.ScratchBlocks.importSoundCallback = this.handleImportSound;
@@ -268,6 +268,12 @@ class Blocks extends React.Component {
             this.requestToolboxUpdate();
         }
 
+        const localeChanged = prevProps.locale !== this.props.locale ||
+            this.props.locale !== this.props.vm.getLocale();
+        if (this.props.isVisible && localeChanged) {
+            this.setLocale();
+        }
+
         if (this.props.isVisible === prevProps.isVisible) {
             if (
                 this.props.stageSize !== prevProps.stageSize ||
@@ -282,11 +288,7 @@ class Blocks extends React.Component {
         // @todo hack to reload the workspace due to gui bug #413
         if (this.props.isVisible) { // Scripts tab
             this.workspace.setVisible(true);
-            if (prevProps.locale !== this.props.locale || this.props.locale !== this.props.vm.getLocale()) {
-                // call setLocale if the locale has changed, or changed while the blocks were hidden.
-                // vm.getLocale() will be out of sync if locale was changed while not visible
-                this.setLocale();
-            } else {
+            if (!localeChanged) {
                 this.props.vm.refreshWorkspace();
                 this.requestToolboxUpdate();
             }
@@ -319,11 +321,16 @@ class Blocks extends React.Component {
     }
     setLocale () {
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
+        this.ScratchBlocks = VMScratchBlocks(this.props.vm, this.props.locale);
         this.props.vm.setLocale(this.props.locale, this.props.messages)
             .then(() => {
                 if (this.unmounted) return;
                 this.workspace.getFlyout().setRecyclingEnabled(false);
                 this.props.vm.refreshWorkspace();
+                const toolboxXML = this.getToolboxXML();
+                if (toolboxXML) {
+                    this.props.updateToolboxState(toolboxXML);
+                }
                 this.requestToolboxUpdate();
                 this.withToolboxUpdates(() => {
                     this.workspace.getFlyout().setRecyclingEnabled(true);
@@ -509,7 +516,8 @@ class Blocks extends React.Component {
                 targetCostumes[targetCostumes.length - 1].name,
                 stageCostumes[stageCostumes.length - 1].name,
                 targetSounds.length > 0 ? targetSounds[targetSounds.length - 1].name : '',
-                this.props.theme.getBlockColors()
+                this.props.theme.getBlockColors(),
+                this.props.locale
             );
         } catch {
             return null;
@@ -626,8 +634,12 @@ class Blocks extends React.Component {
                 .map(fieldTypeName => categoryInfo.customFieldTypes[fieldTypeName].scratchBlocksDefinition));
         defineBlocks(categoryInfo.menus);
         defineBlocks(categoryInfo.blocks);
-        if (categoryInfo.id === 'objects') installObjectBlockDefinitions(this.ScratchBlocks, this.props.vm);
-        if (categoryInfo.id === 'penfx') installPenFXBlockDefinitions(this.ScratchBlocks);
+        if (categoryInfo.id === 'objects') {
+            installObjectBlockDefinitions(this.ScratchBlocks, this.props.vm, this.props.locale);
+        }
+        if (categoryInfo.id === 'penfx') {
+            installPenFXBlockDefinitions(this.ScratchBlocks, this.props.locale);
+        }
 
         // Update the toolbox with new blocks if possible
         const toolboxXML = this.getToolboxXML();

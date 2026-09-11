@@ -5,6 +5,7 @@ import installEffects from './effects';
 import PenFXCustomShaderManager from './custom-shaders';
 import {BLEND_MODES} from './constants';
 import {mixAmount} from './helpers';
+import {localize, resolveLocale} from '../movie-block-l10n';
 
 const createPenFXClass = vm => {
     const renderer = vm.runtime.renderer;
@@ -31,7 +32,7 @@ const createPenFXClass = vm => {
         getInfo() {
             return {
                 id: 'penfx',
-                name: 'エフェクト',
+                name: localize(resolveLocale(null, vm), 'Looks', 'エフェクト'),
                 color1: '#6b56d9',
                 color2: '#5945c2',
                 color3: '#46359f',

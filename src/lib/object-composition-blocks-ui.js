@@ -7,6 +7,7 @@ import {
     TERTIARY,
     TIME_LOOP_MODES
 } from './object-blocks';
+import {localize} from './movie-block-l10n';
 
 const numberInput = name => ({type: 'input_value', name});
 const statementInput = {type: 'input_statement', name: 'SUBSTACK'};
@@ -15,8 +16,8 @@ const easingOptions = ANIMATION_EASING_TYPES.map(type => [
     type
 ]);
 
-const objectDefinition = definition => Object.assign({
-    category: 'レイヤー',
+const objectDefinition = (definition, locale) => Object.assign({
+    category: localize(locale, 'Objects', 'レイヤー'),
     colour: PRIMARY,
     colourSecondary: SECONDARY,
     colourTertiary: TERTIARY
@@ -28,11 +29,11 @@ const easingField = () => ({
     options: easingOptions
 });
 
-const installObjectCompositionBlockDefinitions = ScratchBlocks => {
+const installObjectCompositionBlockDefinitions = (ScratchBlocks, locale = 'en') => {
     const installObjectBlock = (opcode, definition) => {
         ScratchBlocks.Blocks[opcode] = {
             init: function () {
-                this.jsonInit(objectDefinition(definition));
+                this.jsonInit(objectDefinition(definition, locale));
                 // Scratch's statement-shape extension forces inline inputs. Transform deliberately uses
                 // one readable row per transform component, so reapply its explicit layout after extensions.
                 if (definition.inputsInline === false) this.setInputsInline(false);
@@ -56,7 +57,7 @@ const installObjectCompositionBlockDefinitions = ScratchBlocks => {
     });
 
     installObjectBlock('objects_transform', {
-        message0: '移動',
+        message0: localize(locale, 'transform', '移動'),
         message1: 'position x: %1 y: %2 z: %3',
         args1: [numberInput('PX'), numberInput('PY'), numberInput('PZ')],
         message2: 'anchor x: %1 y: %2 z: %3',
@@ -72,7 +73,7 @@ const installObjectCompositionBlockDefinitions = ScratchBlocks => {
     });
 
     installObjectBlock('objects_composite', {
-        message0: '合成 不透明度: %1 %% ブレンド: %2',
+        message0: localize(locale, 'composite opacity: %1 %% blend mode: %2', '合成 不透明度: %1 %% ブレンド: %2'),
         args0: [
             numberInput('OPACITY'),
             {
@@ -202,7 +203,7 @@ const installObjectCompositionBlockDefinitions = ScratchBlocks => {
     });
 
     installObjectBlock('objects_keyframeTime', {
-        message0: 'キーフレームの %1 番目',
+        message0: localize(locale, 'keyframe %1 time', 'キーフレームの %1 番目'),
         args0: [numberInput('ID')],
         inputsInline: true,
         extensions: ['output_number']
@@ -248,7 +249,7 @@ const installObjectCompositionBlockDefinitions = ScratchBlocks => {
     });
 
     installObjectBlock('objects_timeWithin', {
-        message0: '%1 から %2 まで',
+        message0: localize(locale, 'time within %1 to %2 sec', '%1 から %2 まで'),
         args0: [numberInput('T1'), numberInput('T2')],
         inputsInline: true,
         extensions: ['output_boolean']

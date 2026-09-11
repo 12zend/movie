@@ -25,6 +25,7 @@ import {
     isTimeWithin,
     posterizeTime
 } from './object-animation';
+import {localize, resolveLocale} from './movie-block-l10n';
 
 const EXTENSION_ID = 'objects';
 const PRIMARY = '#4968D4';
@@ -402,9 +403,10 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
 
     getInfo () {
         const numberArgument = defaultValue => ({type: ArgumentType.NUMBER, defaultValue});
+        const translate = (english, japanese) => localize(resolveLocale(null, vm), english, japanese);
         return {
             id: EXTENSION_ID,
-            name: 'レイヤー',
+            name: translate('Objects', 'レイヤー'),
             color1: PRIMARY,
             color2: SECONDARY,
             color3: TERTIARY,
@@ -412,7 +414,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                 {
                     opcode: 'draw',
                     blockType: BlockType.COMMAND,
-                    text: '描画 [ASSET]',
+                    text: translate('draw [ASSET]', '描画 [ASSET]'),
                     arguments: {
                         SOURCE: {type: ArgumentType.STRING, defaultValue: 'costume'},
                         ASSET: {type: ArgumentType.STRING, defaultValue: ''},
@@ -440,10 +442,16 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                 {
                     opcode: 'shape',
                     blockType: BlockType.COMMAND,
-                    text: '形状 [SHAPE] n: [N] ratio: [RATIO] position x: [PX] y: [PY] z: [PZ] ' +
-                        'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
-                        'radius: [INNER] [OUTER] width: [WIDTH] height: [HEIGHT] time: [T1] ~ [T2] ' +
-                        'color: [COLOR] opacity: [OPACITY] %',
+                    text: translate(
+                        `shape [SHAPE] n: [N] ratio: [RATIO] position x: [PX] y: [PY] z: [PZ] ` +
+                            'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
+                            'radius: [INNER] [OUTER] width: [WIDTH] height: [HEIGHT] time: [T1] ~ [T2] ' +
+                            'color: [COLOR] opacity: [OPACITY] %',
+                        `形状 [SHAPE] n: [N] ratio: [RATIO] position x: [PX] y: [PY] z: [PZ] ` +
+                            'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
+                            'radius: [INNER] [OUTER] width: [WIDTH] height: [HEIGHT] time: [T1] ~ [T2] ' +
+                            'color: [COLOR] opacity: [OPACITY] %'
+                    ),
                     arguments: {
                         SHAPE: {type: ArgumentType.STRING, menu: 'shapeType', defaultValue: 'polygon'},
                         N: numberArgument(6),
@@ -470,10 +478,16 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                 {
                     opcode: 'arc',
                     blockType: BlockType.COMMAND,
-                    text: '円弧 position x: [PX] y: [PY] z: [PZ] ' +
-                        'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
-                        'radius: [INNER] [OUTER] angle: [START] [END] width: [WIDTH] height: [HEIGHT] ' +
-                        'time: [T1] ~ [T2] color: [COLOR] opacity: [OPACITY] %',
+                    text: translate(
+                        `arc position x: [PX] y: [PY] z: [PZ] ` +
+                            'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
+                            'radius: [INNER] [OUTER] angle: [START] [END] width: [WIDTH] height: [HEIGHT] ' +
+                            'time: [T1] ~ [T2] color: [COLOR] opacity: [OPACITY] %',
+                        `円弧 position x: [PX] y: [PY] z: [PZ] ` +
+                            'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
+                            'radius: [INNER] [OUTER] angle: [START] [END] width: [WIDTH] height: [HEIGHT] ' +
+                            'time: [T1] ~ [T2] color: [COLOR] opacity: [OPACITY] %'
+                    ),
                     arguments: {
                         PX: numberArgument(0),
                         PY: numberArgument(0),
@@ -499,10 +513,16 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                 {
                     opcode: 'circularSegment',
                     blockType: BlockType.COMMAND,
-                    text: '弓形 position x: [PX] y: [PY] z: [PZ] ' +
-                        'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
-                        'size: [OUTER] angle: [START] [END] width: [WIDTH] height: [HEIGHT] ' +
-                        'time: [T1] ~ [T2] color: [COLOR] opacity: [OPACITY] %',
+                    text: translate(
+                        `circular segment position x: [PX] y: [PY] z: [PZ] ` +
+                            'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
+                            'size: [OUTER] angle: [START] [END] width: [WIDTH] height: [HEIGHT] ' +
+                            'time: [T1] ~ [T2] color: [COLOR] opacity: [OPACITY] %',
+                        `弓形 position x: [PX] y: [PY] z: [PZ] ` +
+                            'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ] ' +
+                            'size: [OUTER] angle: [START] [END] width: [WIDTH] height: [HEIGHT] ' +
+                            'time: [T1] ~ [T2] color: [COLOR] opacity: [OPACITY] %'
+                    ),
                     arguments: {
                         PX: numberArgument(0),
                         PY: numberArgument(0),
@@ -548,7 +568,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                     opcode: 'grouping',
                     blockType: BlockType.CONDITIONAL,
                     branchCount: 2,
-                    text: ['グループ化', 'エフェクト']
+                    text: [translate('grouping', 'グループ化'), translate('effects', 'エフェクト')]
                 },
                 {
                     opcode: 'scene',
@@ -575,8 +595,12 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                     opcode: 'transform',
                     blockType: BlockType.CONDITIONAL,
                     branchCount: 1,
-                    text: '移動 position x: [PX] y: [PY] z: [PZ] anchor x: [AX] y: [AY] z: [AZ] ' +
-                        'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ]',
+                    text: translate(
+                        `transform position x: [PX] y: [PY] z: [PZ] anchor x: [AX] y: [AY] z: [AZ] ` +
+                            'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ]',
+                        `移動 position x: [PX] y: [PY] z: [PZ] anchor x: [AX] y: [AY] z: [AZ] ` +
+                            'rotation x: [RX] y: [RY] z: [RZ] scale x: [SX] y: [SY] z: [SZ]'
+                    ),
                     arguments: {
                         PX: numberArgument(0),
                         PY: numberArgument(0),
@@ -596,7 +620,10 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                     opcode: 'composite',
                     blockType: BlockType.CONDITIONAL,
                     branchCount: 1,
-                    text: '合成 不透明度: [OPACITY] % ブレンド: [BLEND]',
+                    text: translate(
+                        'composite opacity: [OPACITY] % blend mode: [BLEND]',
+                        '合成 不透明度: [OPACITY] % ブレンド: [BLEND]'
+                    ),
                     arguments: {
                         OPACITY: numberArgument(100),
                         BLEND: {type: ArgumentType.STRING, menu: 'blendMode', defaultValue: 'normal'}
@@ -722,7 +749,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                 {
                     opcode: 'keyframeTime',
                     blockType: BlockType.REPORTER,
-                    text: 'キーフレームの [ID] 番目',
+                    text: translate('keyframe [ID] time', 'キーフレームの [ID] 番目'),
                     arguments: {
                         ID: numberArgument(1)
                     }
@@ -781,7 +808,7 @@ const createObjectBlocksClass = vm => class ObjectBlocks {
                 {
                     opcode: 'timeWithin',
                     blockType: BlockType.BOOLEAN,
-                    text: '[T1] から [T2] まで',
+                    text: translate('time within [T1] to [T2] sec', '[T1] から [T2] まで'),
                     arguments: {
                         T1: numberArgument(0),
                         T2: numberArgument(1)

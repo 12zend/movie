@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import styles from './pen-fx-ui.css';
+import {localize} from './movie-block-l10n';
 
 const MAX_STOPS = 8;
 const DEFAULT_GRADIENT = {
@@ -286,17 +287,17 @@ const createGradientField = ScratchBlocks => {
     return GradientField;
 };
 
-const installPenFXBlockDefinitions = ScratchBlocks => {
+const installPenFXBlockDefinitions = (ScratchBlocks, locale = 'en') => {
     if (!ScratchBlocks || !ScratchBlocks.Blocks || !ScratchBlocks.FieldTextInput) return;
     const GradientField = createGradientField(ScratchBlocks);
     ScratchBlocks.Blocks.penfx_gradationOverlay = {
         init: function () {
             this.appendDummyInput('GRADIENT_INPUT')
-                .appendField('グラデーションオーバーレイ')
+                .appendField(localize(locale, 'gradation overlay', 'グラデーションオーバーレイ'))
                 .appendField(new GradientField(), 'GRADIENT');
-            this.appendValueInput('DIR').appendField('向き:');
+            this.appendValueInput('DIR').appendField(localize(locale, 'dir:', '向き:'));
             this.appendValueInput('MIX')
-                .appendField('混合:')
+                .appendField(localize(locale, 'mix:', '混合:'))
                 .appendField('%');
             this.setInputsInline(true);
             this.setColour('#6b56d9', '#5945c2', '#46359f');

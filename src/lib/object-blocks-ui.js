@@ -11,6 +11,7 @@ import {
 } from './object-blocks';
 import installObjectCompositionBlockDefinitions from './object-composition-blocks-ui';
 import log from './log';
+import {localize, resolveLocale} from './movie-block-l10n';
 
 import styles from './object-blocks-ui.css';
 
@@ -1031,13 +1032,14 @@ const makeObjectRightEdgeRenderer = ScratchBlocks => function (steps, inputRows,
     return cursorY;
 };
 
-const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
+const installObjectBlockDefinitions = (ScratchBlocks, vm, locale) => {
+    const translate = (english, japanese) => localize(resolveLocale(locale, vm), english, japanese);
     // Saved projects use looks_* lighting opcodes. Keep those IDs while presenting the blocks as Objects.
     const objectStatement = (message0, args0) => ({
         message0,
         args0,
         inputsInline: true,
-        category: 'レイヤー',
+        category: translate('Objects', 'レイヤー'),
         colour: PRIMARY,
         colourSecondary: SECONDARY,
         colourTertiary: TERTIARY,
@@ -1117,7 +1119,7 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
             };
             const SourceField = ScratchBlocks.FieldLabelSerializable || ScratchBlocks.FieldLabel;
             this.appendDummyInput('DRAW')
-                .appendField('描画')
+                .appendField(translate('draw', '描画'))
                 .appendField(new MediaField(), 'ASSET');
             this.appendDummyInput('VIDEO_MODE_INPUT')
                 .appendField(new ScratchBlocks.FieldDropdown([
@@ -1273,7 +1275,7 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
         init: function () {
             const shapeOptions = SHAPE_TYPES.map(shape => [shape, shape]);
             this.appendDummyInput('SHAPE_INPUT')
-                .appendField('形状')
+                .appendField(translate('shape', '形状'))
                 .appendField(
                     new ScratchBlocks.FieldDropdown(shapeOptions, value => normalizeShapeType(value)),
                     'SHAPE'
@@ -1372,7 +1374,7 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
     };
 
     installProceduralShapeBlock('objects_arc', function () {
-        this.appendDummyInput('ARC_INPUT').appendField('円弧');
+        this.appendDummyInput('ARC_INPUT').appendField(translate('arc', '円弧'));
         addTransformInputs(this);
         this.appendValueInput('INNER').appendField('radius:');
         this.appendValueInput('OUTER');
@@ -1384,7 +1386,7 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
     });
 
     installProceduralShapeBlock('objects_circularSegment', function () {
-        this.appendDummyInput('SEGMENT_INPUT').appendField('弓形');
+        this.appendDummyInput('SEGMENT_INPUT').appendField(translate('circular segment', '弓形'));
         addTransformInputs(this);
         this.appendValueInput('OUTER').appendField('size:');
         this.appendValueInput('START').appendField('angle:');
@@ -1410,13 +1412,13 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
     ScratchBlocks.Blocks.objects_grouping = {
         init: function () {
             this.jsonInit({
-                message0: 'グループ化',
+                message0: translate('grouping', 'グループ化'),
                 message1: '%1',
                 args1: [{type: 'input_statement', name: 'SUBSTACK'}],
-                message2: 'エフェクト',
+                message2: translate('effects', 'エフェクト'),
                 message3: '%1',
                 args3: [{type: 'input_statement', name: 'SUBSTACK2'}],
-                category: 'レイヤー',
+                category: translate('Objects', 'レイヤー'),
                 colour: PRIMARY,
                 colourSecondary: SECONDARY,
                 colourTertiary: TERTIARY,
@@ -1431,7 +1433,7 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
                 message0: 'scene',
                 message1: '%1',
                 args1: [{type: 'input_statement', name: 'SUBSTACK'}],
-                category: 'レイヤー',
+                category: translate('Objects', 'レイヤー'),
                 colour: PRIMARY,
                 colourSecondary: SECONDARY,
                 colourTertiary: TERTIARY,
@@ -1440,7 +1442,7 @@ const installObjectBlockDefinitions = (ScratchBlocks, vm) => {
         }
     };
 
-    installObjectCompositionBlockDefinitions(ScratchBlocks);
+    installObjectCompositionBlockDefinitions(ScratchBlocks, resolveLocale(locale, vm));
 };
 
 export {

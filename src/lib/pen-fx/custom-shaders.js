@@ -9,7 +9,9 @@ import {boolean, color, number} from './helpers';
 import {BLEND_MODES, FRACTAL_NOISE_TYPES, FRACTAL_OVERFLOW_TYPES, FRACTAL_TYPES} from './constants';
 import {markMovieProject} from '../project-format';
 import defaultShaderManifest from './default-shader-package/shading-shader.json';
+import japaneseShaderTranslations from './default-shader-package/locales-ja.json';
 import {inferShaderInputs} from './shader-uniforms';
+import {resolveLocale} from '../movie-block-l10n';
 
 const CUSTOM_SHADER_PROJECT_KEY = 'penFXShaders';
 const CUSTOM_SHADER_FORMAT = 'shading.app/penfx-shader';
@@ -52,6 +54,19 @@ const DEFAULT_LEGACY_MENUS = {
     mirrorType: ['x', 'y', 'xy'],
     boolean: ['false', 'true'],
     blendMode: BLEND_MODES
+};
+
+const localizeDefaultShaderBlock = (packageDescriptor, shaderBlock, locale) => {
+    if (!packageDescriptor.isDefault || locale !== 'ja') return shaderBlock;
+    const translation = japaneseShaderTranslations[shaderBlock.id];
+    if (!translation) return shaderBlock;
+    return Object.assign({}, shaderBlock, {
+        name: translation.name,
+        text: translation.text,
+        inputs: shaderBlock.inputs.map(input => Object.assign({}, input, {
+            label: translation.labels[input.id] || input.label
+        }))
+    });
 };
 const PENFX_IMPLEMENTATIONS = new Set(defaultShaderManifest.blocks.map(block => block.implementation.opcode));
 const PENFX_PROGRAM_BINDINGS = new Set(defaultShaderManifest.programs.map(program => program.bind));
@@ -802,6 +817,7 @@ class PenFXCustomShaderManager extends EventEmitter {
     }
 
     getToolboxBlocks () {
+        const locale = resolveLocale(null, this.vm);
         const blocks = [
             {blockType: BlockType.LABEL, text: 'Custom Shaders'},
             {blockType: BlockType.BUTTON, text: 'Import shader', func: 'importShaderPackage'}
@@ -817,9 +833,10 @@ class PenFXCustomShaderManager extends EventEmitter {
                 });
             }
             for (const shaderBlock of packageDescriptor.blocks) {
-                if (shaderBlock.separatorBefore) blocks.push('---');
+                const displayBlock = localizeDefaultShaderBlock(packageDescriptor, shaderBlock, locale);
+                if (displayBlock.separatorBefore) blocks.push('---');
                 const argumentsInfo = {};
-                for (const input of shaderBlock.inputs) {
+                for (const input of displayBlock.inputs) {
                     argumentsInfo[input.id] = {
                         type: argumentTypeForInput(input),
                         defaultValue: input.defaultValue
@@ -827,17 +844,17 @@ class PenFXCustomShaderManager extends EventEmitter {
                     if (input.type === 'menu') {
                         argumentsInfo[input.id].menu = menuNameFor(
                             packageDescriptor.id,
-                            shaderBlock.id,
+                            displayBlock.id,
                             input.id
                         );
                     }
                 }
-                const opcode = opcodeFor(packageDescriptor.id, shaderBlock.id, shaderBlock.opcode);
+                const opcode = opcodeFor(packageDescriptor.id, displayBlock.id, displayBlock.opcode);
                 blocks.push({
                     opcode,
                     func: opcode,
-                    blockType: shaderBlock.blockType === 'reporter' ? BlockType.REPORTER : BlockType.COMMAND,
-                    text: shaderBlock.text,
+                    blockType: displayBlock.blockType === 'reporter' ? BlockType.REPORTER : BlockType.COMMAND,
+                    text: displayBlock.text,
                     arguments: argumentsInfo
                 });
             }

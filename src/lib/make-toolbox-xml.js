@@ -1,5 +1,6 @@
 import LazyScratchBlocks from './tw-lazy-scratch-blocks';
 import {defaultBlockColors} from './themes';
+import {localize} from './movie-block-l10n';
 
 const categorySeparator = '<sep gap="36"/>';
 
@@ -13,10 +14,11 @@ const translate = (id, english) => {
 };
 
 /* eslint-disable no-unused-vars */
-const motion = function (isInitialSetup, isStage, targetId, colors) {
+const motion = function (isInitialSetup, isStage, targetId, colors, locale) {
     // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
-    <category name="カメラ" id="motion" colour="${colors.primary}" secondaryColour="${colors.tertiary}">
+    <category name="${localize(locale, 'Camera', 'カメラ')}" id="motion"
+        colour="${colors.primary}" secondaryColour="${colors.tertiary}">
         <block type="motion_setcamerato">
             <value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
             <value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
@@ -770,7 +772,7 @@ const proceduralShapeBlocks = function () {
     ];
 };
 
-const objects = function (costumeName) {
+const objects = function (costumeName, locale) {
     const number = (name, value) => (
         `<value name="${name}"><shadow type="math_number"><field name="NUM">${value}</field></shadow></value>`
     );
@@ -778,7 +780,7 @@ const objects = function (costumeName) {
         `<value name="${name}"><shadow type="text"><field name="TEXT">${xmlEscape(value)}</field></shadow></value>`
     );
     return `
-    <category name="レイヤー" id="objects" colour="#4968D4" secondaryColour="#334A99">
+    <category name="${localize(locale, 'Objects', 'レイヤー')}" id="objects" colour="#4968D4" secondaryColour="#334A99">
         <block type="objects_draw">
             <field name="SOURCE">costume</field>
             <field name="ASSET">${costumeName}</field>
@@ -859,13 +861,14 @@ const xmlClose = '</xml>';
  * @param {?string} _backdropName - The name of the default selected backdrop dropdown.
  * @param {?string} soundName -  The name of the default selected sound dropdown.
  * @param {?object} colors - The colors for the theme.
+ * @param {?string} locale - The active UI locale.
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */
 // The backdrop argument is retained for the public toolbox builder signature;
 // the Movie toolbox supplies its own Camera category instead.
 const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categoriesXML = [],
     // eslint-disable-next-line no-unused-vars
-    costumeName = '', _backdropName = '', soundName = '', colors = defaultBlockColors) {
+    costumeName = '', _backdropName = '', soundName = '', colors = defaultBlockColors, locale = 'en') {
     isStage = isInitialSetup || isStage;
     const gap = [categorySeparator];
 
@@ -882,12 +885,12 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         }
         // return `undefined`
     };
-    const motionXML = moveCategory('motion') || motion(isInitialSetup, isStage, targetId, colors.motion);
+    const motionXML = moveCategory('motion') || motion(isInitialSetup, isStage, targetId, colors.motion, locale);
     // Looks blocks remain registered so existing projects can load, but the
     // category is intentionally hidden from the Movie toolbox.
     moveCategory('looks');
     const objectsCategory = moveCategory('objects');
-    const objectsXML = objectsCategory ? objects(costumeName) : null;
+    const objectsXML = objectsCategory ? objects(costumeName, locale) : null;
     const penFXXML = withPenFXGradientField(moveCategory('penfx'));
     const soundXML = moveCategory('sound') || sound(soundName, colors.sounds);
     const eventsXML = moveCategory('event') || events(isInitialSetup, isStage, targetId, soundName, colors.event);

@@ -1,0 +1,662 @@
+{
+  "contrast": {
+    "name": "コントラスト",
+    "text": "コントラスト 値: [VALUE] 基準: [PIVOT] 混合: [MIX] %",
+    "labels": {
+      "VALUE": "値",
+      "PIVOT": "基準",
+      "MIX": "混合"
+    }
+  },
+  "brightness": {
+    "name": "明るさ",
+    "text": "明るさ 色: [COLOR] 値: [VALUE] 混合: [MIX] %",
+    "labels": {
+      "COLOR": "色",
+      "VALUE": "値",
+      "MIX": "混合"
+    }
+  },
+  "gamma": {
+    "name": "ガンマ",
+    "text": "ガンマ 値: [VALUE] 混合: [MIX] %",
+    "labels": {
+      "VALUE": "値",
+      "MIX": "混合"
+    }
+  },
+  "saturation": {
+    "name": "彩度",
+    "text": "彩度 値: [VALUE] 混合: [MIX] %",
+    "labels": {
+      "VALUE": "値",
+      "MIX": "混合"
+    }
+  },
+  "alpha": {
+    "name": "透明度",
+    "text": "透明度 [VALUE] % 混合: [MIX] %",
+    "labels": {
+      "VALUE": "値",
+      "MIX": "混合"
+    }
+  },
+  "color-grade": {
+    "name": "カラーグレード",
+    "text": "カラーグレード 露出: [EXPOSURE] 色温度: [TEMP] 色かぶり: [TINT] コントラスト: [CONTRAST] 基準: [PIVOT] フィルター: [COLOR] 彩度: [SATURATION] 混合: [MIX] %",
+    "labels": {
+      "EXPOSURE": "露出",
+      "TEMP": "色温度",
+      "TINT": "色かぶり",
+      "CONTRAST": "コントラスト",
+      "PIVOT": "基準",
+      "COLOR": "色",
+      "SATURATION": "彩度",
+      "MIX": "混合"
+    }
+  },
+  "color-blindness": {
+    "name": "色覚サポート",
+    "text": "色覚サポート [TYPE] 強さ: [SEVERITY] % 混合: [MIX] %",
+    "labels": {
+      "TYPE": "種類",
+      "SEVERITY": "強さ",
+      "MIX": "混合"
+    }
+  },
+  "color-space-adjust": {
+    "name": "HSL調整",
+    "text": "HSL調整 色相加算: [HADD] 乗算: [HMUL] 彩度加算: [SADD] 乗算: [SMUL] 明度加算: [LADD] 乗算: [LMUL] 混合: [MIX] %",
+    "labels": {
+      "HADD": "色相加算",
+      "HMUL": "色相乗算",
+      "SADD": "彩度加算",
+      "SMUL": "彩度乗算",
+      "LADD": "明度加算",
+      "LMUL": "明度乗算",
+      "MIX": "混合"
+    }
+  },
+  "tone-map": {
+    "name": "トーンマップ",
+    "text": "トーンマップ [TYPE] 露出: [EXPOSURE] ホワイトポイント: [WHITE] 混合: [MIX] %",
+    "labels": {
+      "TYPE": "種類",
+      "EXPOSURE": "露出",
+      "WHITE": "ホワイトポイント",
+      "MIX": "混合"
+    }
+  },
+  "auto-exposure": {
+    "name": "自動露出",
+    "text": "自動露出 目標: [TARGET] 最小: [MIN] 最大: [MAX] 混合: [MIX] %",
+    "labels": {
+      "TARGET": "目標",
+      "MIN": "最小",
+      "MAX": "最大",
+      "MIX": "混合"
+    }
+  },
+  "palette-swap": {
+    "name": "パレット変換",
+    "text": "パレット変換 影: [C1] [C2] [C3] ハイライト: [C4] 混合: [MIX] %",
+    "labels": {
+      "C1": "影1",
+      "C2": "影2",
+      "C3": "影3",
+      "C4": "ハイライト",
+      "MIX": "混合"
+    }
+  },
+  "chroma-key": {
+    "name": "クロマキー",
+    "text": "クロマキー: [KEY] 許容: [TOLERANCE] 柔らかさ: [SOFTNESS] [BEHAVIOR] 色: [COLOR1] [COLOR2] 混合: [MIX] %",
+    "labels": {
+      "KEY": "キー",
+      "TOLERANCE": "許容",
+      "SOFTNESS": "柔らかさ",
+      "BEHAVIOR": "動作",
+      "COLOR1": "色1",
+      "COLOR2": "色2",
+      "MIX": "混合"
+    }
+  },
+  "color-overlay": {
+    "name": "カラーオーバーレイ",
+    "text": "カラーオーバーレイ [COLOR] 混合: [MIX] %",
+    "labels": {
+      "COLOR": "色",
+      "MIX": "混合"
+    }
+  },
+  "gradation-overlay": {
+    "name": "グラデーションオーバーレイ",
+    "text": "グラデーションオーバーレイ [GRADIENT] 向き: [DIR] 混合: [MIX] %",
+    "labels": {
+      "GRADIENT": "グラデーション",
+      "DIR": "向き",
+      "MIX": "混合"
+    }
+  },
+  "stroke": {
+    "name": "輪郭",
+    "text": "輪郭 色: [COLOR] 太さ: [WIDTH]",
+    "labels": {
+      "COLOR": "色",
+      "WIDTH": "太さ"
+    }
+  },
+  "blob": {
+    "name": "ブロブ",
+    "text": "ブロブ [MODE] キー: [KEY] しきい値: [THRESHOLD] ぼかし: [BLUR] 最小: [MIN] % 最大: [MAX] % 箱: [SHAPE] 色: [COLOR] 太さ: [WIDTH] 不透明度: [OPACITY] % 塗り: [FILL] % マーカー: [MARKER]",
+    "labels": {
+      "MODE": "モード",
+      "KEY": "キー",
+      "THRESHOLD": "しきい値",
+      "BLUR": "ぼかし",
+      "MIN": "最小",
+      "MAX": "最大",
+      "SHAPE": "形状",
+      "COLOR": "色",
+      "WIDTH": "太さ",
+      "OPACITY": "不透明度",
+      "FILL": "塗り",
+      "MARKER": "マーカー"
+    }
+  },
+  "rgb-shift": {
+    "name": "RGBシフト",
+    "text": "RGBシフト 向き: [DIR] 値: [VALUE] 色: [COLOR] 混合: [MIX] %",
+    "labels": {
+      "DIR": "向き",
+      "VALUE": "値",
+      "COLOR": "色",
+      "MIX": "混合"
+    }
+  },
+  "gaussian-blur": {
+    "name": "ガウスぼかし",
+    "text": "ガウスぼかし 種類: [TYPE] 値: [VALUE] 混合: [MIX] %",
+    "labels": {
+      "TYPE": "種類",
+      "VALUE": "値",
+      "MIX": "混合"
+    }
+  },
+  "directional-blur": {
+    "name": "方向ぼかし",
+    "text": "方向ぼかし 向き: [DIR] 値: [VALUE] 混合: [MIX] %",
+    "labels": {
+      "DIR": "向き",
+      "VALUE": "値",
+      "MIX": "混合"
+    }
+  },
+  "radial-blur": {
+    "name": "放射ぼかし",
+    "text": "放射ぼかし 種類: [TYPE] 値: [VALUE] 中心 x: [X] y: [Y] 混合: [MIX] %",
+    "labels": {
+      "TYPE": "種類",
+      "VALUE": "値",
+      "X": "x",
+      "Y": "y",
+      "MIX": "混合"
+    }
+  },
+  "lens-blur": {
+    "name": "レンズぼかし",
+    "text": "レンズぼかし 半径: [RADIUS] 形状: [SHAPE] 回転: [ROTATION] 混合: [MIX] %",
+    "labels": {
+      "RADIUS": "半径",
+      "SHAPE": "形状",
+      "ROTATION": "回転",
+      "MIX": "混合"
+    }
+  },
+  "depth-of-field": {
+    "name": "被写界深度",
+    "text": "被写界深度 ピント: [FOCUS] 範囲: [RANGE] 絞り: [APERTURE] 最大ぼかし: [MAXBLUR] 近: [NEAR] % 遠: [FAR] % 輪郭の柔らかさ: [EDGE] 形状: [SHAPE] 回転: [ROTATION] 混合: [MIX] %",
+    "labels": {
+      "FOCUS": "ピント",
+      "RANGE": "範囲",
+      "APERTURE": "絞り",
+      "MAXBLUR": "最大ぼかし",
+      "NEAR": "近",
+      "FAR": "遠",
+      "EDGE": "輪郭",
+      "SHAPE": "形状",
+      "ROTATION": "回転",
+      "MIX": "混合"
+    }
+  },
+  "fog": {
+    "name": "フォグ",
+    "text": "フォグ [TYPE] 開始: [START] 終了: [END] 近くの色: [NEARCOLOR] 遠くの色: [FARCOLOR] 濃度: [DENSITY] % カーブ: [CURVE] 混合: [MIX] %",
+    "labels": {
+      "TYPE": "種類",
+      "START": "開始",
+      "END": "終了",
+      "NEARCOLOR": "近くの色",
+      "FARCOLOR": "遠くの色",
+      "DENSITY": "濃度",
+      "CURVE": "カーブ",
+      "MIX": "混合"
+    }
+  },
+  "lens-distortion": {
+    "name": "レンズ歪み",
+    "text": "レンズ歪み 値: [VALUE] 中心 x: [X] y: [Y] ズーム: [ZOOM] % 混合: [MIX] %",
+    "labels": {
+      "VALUE": "値",
+      "X": "x",
+      "Y": "y",
+      "ZOOM": "ズーム",
+      "MIX": "混合"
+    }
+  },
+  "bloom": {
+    "name": "ブルーム",
+    "text": "ブルーム しきい値: [THRESHOLD] 半径: [RADIUS] 値: [VALUE] 色: [COLOR] 反転: [INVERT]",
+    "labels": {
+      "THRESHOLD": "しきい値",
+      "RADIUS": "半径",
+      "VALUE": "値",
+      "COLOR": "色",
+      "INVERT": "反転"
+    }
+  },
+  "deep-glow": {
+    "name": "ディープグロー",
+    "text": "ディープグロー しきい値: [THRESHOLD] 半径: [RADIUS] 値: [VALUE] 色: [COLOR]",
+    "labels": {
+      "THRESHOLD": "しきい値",
+      "RADIUS": "半径",
+      "VALUE": "値",
+      "COLOR": "色"
+    }
+  },
+  "edge-detection": {
+    "name": "輪郭検出",
+    "text": "輪郭検出 しきい値: [THRESHOLD] 強さ: [VALUE] 半径: [RADIUS] 柔らかさ: [SOFTNESS] 色: [COLOR] 背景: [BACKGROUND] 透明度: [ALPHA] % 混合: [MIX] %",
+    "labels": {
+      "THRESHOLD": "しきい値",
+      "VALUE": "値",
+      "RADIUS": "半径",
+      "SOFTNESS": "柔らかさ",
+      "COLOR": "色",
+      "BACKGROUND": "背景",
+      "ALPHA": "透明度",
+      "MIX": "混合"
+    }
+  },
+  "sharpen": {
+    "name": "シャープ",
+    "text": "シャープ 値: [VALUE] 半径: [RADIUS] 混合: [MIX] %",
+    "labels": {
+      "VALUE": "値",
+      "RADIUS": "半径",
+      "MIX": "混合"
+    }
+  },
+  "fxaa": {
+    "name": "FXAA",
+    "text": "FXAA コントラスト: [CONTRAST] 相対: [RELATIVE] サブピクセル: [SUBPIXEL] 混合: [MIX] %",
+    "labels": {
+      "CONTRAST": "コントラスト",
+      "RELATIVE": "相対",
+      "SUBPIXEL": "サブピクセル",
+      "MIX": "混合"
+    }
+  },
+  "difference-of-gaussians": {
+    "name": "ガウス差分",
+    "text": "ガウス差分 シグマ: [SIGMA] スケール: [SCALE] タウ: [TAU] しきい値: [THRESHOLD] カラー: [COLORED] インク: [COLOR] 混合: [MIX] %",
+    "labels": {
+      "SIGMA": "シグマ",
+      "SCALE": "スケール",
+      "TAU": "タウ",
+      "THRESHOLD": "しきい値",
+      "COLORED": "カラー",
+      "COLOR": "色",
+      "MIX": "混合"
+    }
+  },
+  "kuwahara": {
+    "name": "桑原フィルター",
+    "text": "桑原フィルター 半径: [RADIUS] 混合: [MIX] %",
+    "labels": {
+      "RADIUS": "半径",
+      "MIX": "混合"
+    }
+  },
+  "chromatic-aberration": {
+    "name": "色収差",
+    "text": "色収差 強さ: [INTENSITY] 半径: [RADIUS] 硬さ: [HARDNESS] ずれ x: [X] y: [Y] 混合: [MIX] %",
+    "labels": {
+      "INTENSITY": "強さ",
+      "RADIUS": "半径",
+      "HARDNESS": "硬さ",
+      "X": "x",
+      "Y": "y",
+      "MIX": "混合"
+    }
+  },
+  "film-grain": {
+    "name": "フィルムグレイン",
+    "text": "フィルムグレイン 強さ: [INTENSITY] 応答: [RESPONSE] 粒の大きさ: [SIZE] アニメ: [ANIMATE] 混合: [MIX] %",
+    "labels": {
+      "INTENSITY": "強さ",
+      "RESPONSE": "応答",
+      "SIZE": "大きさ",
+      "ANIMATE": "アニメ",
+      "MIX": "混合"
+    }
+  },
+  "dither": {
+    "name": "ディザ",
+    "text": "ディザ 色 r: [R] g: [G] b: [B] 拡散: [SPREAD] スケール: [SCALE] 混合: [MIX] %",
+    "labels": {
+      "R": "r",
+      "G": "g",
+      "B": "b",
+      "SPREAD": "拡散",
+      "SCALE": "スケール",
+      "MIX": "混合"
+    }
+  },
+  "halftone": {
+    "name": "ハーフトーン",
+    "text": "ハーフトーン 大きさ: [SIZE] 混合: [MIX] %",
+    "labels": {
+      "SIZE": "大きさ",
+      "MIX": "混合"
+    }
+  },
+  "ascii": {
+    "name": "アスキーアート",
+    "text": "アスキーアート セル x: [X] y: [Y] 前景: [FG] 背景: [BG] 反転: [INVERT] 混合: [MIX] %",
+    "labels": {
+      "X": "x",
+      "Y": "y",
+      "FG": "前景",
+      "BG": "背景",
+      "INVERT": "反転",
+      "MIX": "混合"
+    }
+  },
+  "crt": {
+    "name": "ブラウン管",
+    "text": "ブラウン管 カーブ: [CURVATURE] 枠: [BORDER] 走査線の大きさ: [SIZE] 強さ: [STRENGTH] 混合: [MIX] %",
+    "labels": {
+      "CURVATURE": "カーブ",
+      "BORDER": "枠",
+      "SIZE": "大きさ",
+      "STRENGTH": "強さ",
+      "MIX": "混合"
+    }
+  },
+  "vhs": {
+    "name": "VHS",
+    "text": "VHS トラッキング: [TRACKING] 色にじみ: [CHROMA] ノイズ: [NOISE] % 走査線: [SCANLINES] % シード: [SEED] 変化: [EVOLUTION] 混合: [MIX] %",
+    "labels": {
+      "TRACKING": "トラッキング",
+      "CHROMA": "色にじみ",
+      "NOISE": "ノイズ",
+      "SCANLINES": "走査線",
+      "SEED": "シード",
+      "EVOLUTION": "変化",
+      "MIX": "混合"
+    }
+  },
+  "glitch": {
+    "name": "グリッチ",
+    "text": "グリッチ 分割: [SLICES] ずれ: [SHIFT] RGB分離: [RGB] 密度: [DENSITY] % シード: [SEED] 変化: [EVOLUTION] 混合: [MIX] %",
+    "labels": {
+      "SLICES": "分割",
+      "SHIFT": "ずれ",
+      "RGB": "RGB",
+      "DENSITY": "濃度",
+      "SEED": "シード",
+      "EVOLUTION": "変化",
+      "MIX": "混合"
+    }
+  },
+  "vignette": {
+    "name": "ビネット",
+    "text": "ビネット 色: [COLOR] 大きさ x: [X] y: [Y] ずれ x: [OFFSETX] y: [OFFSETY] 強さ: [INTENSITY] 丸み: [ROUNDNESS] 柔らかさ: [SOFTNESS] 混合: [MIX] %",
+    "labels": {
+      "COLOR": "色",
+      "X": "x",
+      "Y": "y",
+      "OFFSETX": "ずれx",
+      "OFFSETY": "ずれy",
+      "INTENSITY": "強さ",
+      "ROUNDNESS": "丸み",
+      "SOFTNESS": "柔らかさ",
+      "MIX": "混合"
+    }
+  },
+  "composition": {
+    "name": "構図ガイド",
+    "text": "構図ガイド [DIVISIONS] 分割 太さ: [WIDTH] 色: [COLOR] 不透明度: [OPACITY] % 混合: [MIX] %",
+    "labels": {
+      "DIVISIONS": "分割",
+      "WIDTH": "太さ",
+      "COLOR": "色",
+      "OPACITY": "不透明度",
+      "MIX": "混合"
+    }
+  },
+  "framing": {
+    "name": "フレーム",
+    "text": "フレーム [SHAPE] 半径: [RADIUS] 柔らかさ: [SOFTNESS] 色: [COLOR] 不透明度: [OPACITY] % ずれ x: [X] y: [Y] 混合: [MIX] %",
+    "labels": {
+      "SHAPE": "形状",
+      "RADIUS": "半径",
+      "SOFTNESS": "柔らかさ",
+      "COLOR": "色",
+      "OPACITY": "不透明度",
+      "X": "x",
+      "Y": "y",
+      "MIX": "混合"
+    }
+  },
+  "zoom": {
+    "name": "ズーム",
+    "text": "ズーム 倍率: [VALUE] ずれ x: [X] y: [Y] サンプル: [SAMPLE] 混合: [MIX] %",
+    "labels": {
+      "VALUE": "値",
+      "X": "x",
+      "Y": "y",
+      "SAMPLE": "サンプル",
+      "MIX": "混合"
+    }
+  },
+  "wavy": {
+    "name": "波",
+    "text": "波 種類: [TYPE] 量: [VALUE] 大きさ: [SIZE] 複雑さ: [COMPLEXITY] 変化: [EVOLUTION] シード: [SEED] ずれ x: [X] y: [Y] 中心 x: [CENTERX] y: [CENTERY] 混合: [MIX] %",
+    "labels": {
+      "TYPE": "種類",
+      "VALUE": "値",
+      "SIZE": "大きさ",
+      "COMPLEXITY": "複雑さ",
+      "EVOLUTION": "変化",
+      "SEED": "シード",
+      "X": "x",
+      "Y": "y",
+      "CENTERX": "中心x",
+      "CENTERY": "中心y",
+      "MIX": "混合"
+    }
+  },
+  "fractalnoise": {
+    "name": "フラクタルノイズ",
+    "text": "フラクタルノイズ フラクタル種類: [FRACTALTYPE] ノイズ種類: [NOISETYPE] 反転: [INVERT] コントラスト: [CONTRAST] 明るさ: [BRIGHTNESS] オーバーフロー: [OVERFLOW] 回転: [ROTATE] スケール: [SCALE] 幅: [WIDTH] 高さ: [HEIGHT] ランダムずれ: [OX] [OY] 遠近ずれ: [PERSPECTIVE] 奥行: [DEPTH] 変化: [EVOLUTION] 周期変化: [CYCLEEVOLUTION] 周期: [FREQ]",
+    "labels": {
+      "FRACTALTYPE": "フラクタル種類",
+      "NOISETYPE": "ノイズ種類",
+      "INVERT": "反転",
+      "CONTRAST": "コントラスト",
+      "BRIGHTNESS": "明るさ",
+      "OVERFLOW": "オーバーフロー",
+      "ROTATE": "回転",
+      "SCALE": "スケール",
+      "WIDTH": "太さ",
+      "HEIGHT": "高さ",
+      "OX": "ずれx",
+      "OY": "ずれy",
+      "PERSPECTIVE": "遠近",
+      "DEPTH": "奥行",
+      "EVOLUTION": "変化",
+      "CYCLEEVOLUTION": "周期変化",
+      "FREQ": "周期"
+    }
+  },
+  "pulse": {
+    "name": "パルス",
+    "text": "パルス 中心 x: [X] y: [Y] 半径: [RADIUS] 値: [VALUE] 幅: [WIDTH] 周波数: [FREQUENCY] 混合: [MIX] %",
+    "labels": {
+      "X": "x",
+      "Y": "y",
+      "RADIUS": "半径",
+      "VALUE": "値",
+      "WIDTH": "太さ",
+      "FREQUENCY": "周波数",
+      "MIX": "混合"
+    }
+  },
+  "pixelate": {
+    "name": "モザイク",
+    "text": "モザイク 大きさ x: [X] y: [Y] ずれ x: [OFFSETX] y: [OFFSETY] 混合: [MIX] %",
+    "labels": {
+      "X": "x",
+      "Y": "y",
+      "OFFSETX": "ずれx",
+      "OFFSETY": "ずれy",
+      "MIX": "混合"
+    }
+  },
+  "pixel-stretch": {
+    "name": "ピクセルストレッチ",
+    "text": "ピクセルストレッチ 種類: [TYPE] 位置: [POSITION] 大きさ: [SIZE] サンプル幅: [SAMPLE] 中心 x: [CENTERX] y: [CENTERY] 混合: [MIX] %",
+    "labels": {
+      "TYPE": "種類",
+      "POSITION": "位置",
+      "SIZE": "大きさ",
+      "SAMPLE": "サンプル",
+      "CENTERX": "中心x",
+      "CENTERY": "中心y",
+      "MIX": "混合"
+    }
+  },
+  "mirror": {
+    "name": "ミラー",
+    "text": "ミラー 種類: [TYPE] 中心 x: [X] y: [Y] 混合: [MIX] %",
+    "labels": {
+      "TYPE": "種類",
+      "X": "x",
+      "Y": "y",
+      "MIX": "混合"
+    }
+  },
+  "transform": {
+    "name": "変形",
+    "text": "変形 x: [X] y: [Y] 大きさ: [SIZE] 向き: [DIR] 基準 x: [ANCHORX] y: [ANCHORY] 混合: [MIX] %",
+    "labels": {
+      "X": "x",
+      "Y": "y",
+      "SIZE": "大きさ",
+      "DIR": "向き",
+      "ANCHORX": "基準x",
+      "ANCHORY": "基準y",
+      "MIX": "混合"
+    }
+  },
+  "duplicate": {
+    "name": "複製",
+    "text": "複製 x: [X] y: [Y] 大きさ: [SIZE] 向き: [DIR] 基準 x: [ANCHORX] y: [ANCHORY] 混合: [MIX] %",
+    "labels": {
+      "X": "x",
+      "Y": "y",
+      "SIZE": "大きさ",
+      "DIR": "向き",
+      "ANCHORX": "基準x",
+      "ANCHORY": "基準y",
+      "MIX": "混合"
+    }
+  },
+  "pixel-sort": {
+    "name": "ピクセルソート",
+    "text": "ピクセルソート [TYPE] 範囲: [SPAN] 最小: [MIN] 最大: [MAX] 反転マスク: [INVERT] 並べ替え: [SORTBY] 逆順: [REVERSE] ガンマ: [GAMMA] 中心 x: [CENTERX] y: [CENTERY] 混合: [MIX] %",
+    "labels": {
+      "TYPE": "種類",
+      "SPAN": "範囲",
+      "MIN": "最小",
+      "MAX": "最大",
+      "INVERT": "反転",
+      "SORTBY": "並べ替え",
+      "REVERSE": "逆順",
+      "GAMMA": "ガンマ",
+      "CENTERX": "中心x",
+      "CENTERY": "中心y",
+      "MIX": "混合"
+    }
+  },
+  "color-adjustment": {
+    "name": "色調整",
+    "text": "色調整 加算: [ADD] 乗算: [MUL] 除算: [DIV] 混合: [MIX] %",
+    "labels": {
+      "ADD": "加算",
+      "MUL": "乗算",
+      "DIV": "除算",
+      "MIX": "混合"
+    }
+  },
+  "displacement-map": {
+    "name": "変位マップ",
+    "text": "変位マップ コスチューム: [COSTUME] 値: [VALUE] 種類: [TYPE] チャンネル: [CHANNEL] 中心: [CENTER] 反転: [INVERT] 混合: [MIX] %",
+    "labels": {
+      "COSTUME": "コスチューム",
+      "VALUE": "値",
+      "TYPE": "種類",
+      "CHANNEL": "チャンネル",
+      "CENTER": "中心",
+      "INVERT": "反転",
+      "MIX": "混合"
+    }
+  },
+  "stack-current-drawing": {
+    "name": "描画を重ねる",
+    "text": "描画を重ねる 重み: [WEIGHT] 最大: [LIMIT]",
+    "labels": {
+      "WEIGHT": "重み",
+      "LIMIT": "最大"
+    }
+  },
+  "render-buffer-stack": {
+    "name": "重ねを表示",
+    "text": "重ねた描画を [MODE] で表示 消去: [CLEAR]",
+    "labels": {
+      "MODE": "モード",
+      "CLEAR": "消去"
+    }
+  },
+  "clear-buffer-stack": {
+    "name": "重ねを消去",
+    "text": "重ねを消去",
+    "labels": {}
+  },
+  "buffer-stack-size": {
+    "name": "重ねの数",
+    "text": "重ねの数",
+    "labels": {}
+  },
+  "set-blend-mode": {
+    "name": "ブレンド",
+    "text": "ブレンド [TYPE] 不透明度: [OPACITY] %",
+    "labels": {
+      "TYPE": "種類",
+      "OPACITY": "不透明度"
+    }
+  }
+}

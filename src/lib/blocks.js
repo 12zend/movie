@@ -3,17 +3,20 @@ import installBlockNumberScrubbing from './block-number-scrubbing';
 import installObjectBlockDefinitions from './object-blocks-ui';
 import installPenFXBlockDefinitions from './pen-fx-ui';
 import installListBlocks from './list-blocks';
+import {localize} from './movie-block-l10n';
 
 /**
  * Connect scratch blocks with the vm
  * @param {VirtualMachine} vm - The scratch vm
+ * @param {?string} locale - The active UI locale
  * @return {ScratchBlocks} ScratchBlocks connected with the vm
  */
-export default function (vm) {
+export default function (vm, locale = 'en') {
     const ScratchBlocks = LazyScratchBlocks.get();
+    const translate = (english, japanese) => localize(locale, english, japanese);
     installListBlocks(vm, ScratchBlocks);
-    installObjectBlockDefinitions(ScratchBlocks, vm);
-    installPenFXBlockDefinitions(ScratchBlocks);
+    installObjectBlockDefinitions(ScratchBlocks, vm, locale);
+    installPenFXBlockDefinitions(ScratchBlocks, locale);
     installBlockNumberScrubbing(ScratchBlocks, () => {
         const manager = vm.runtime && vm.runtime.movieAssetManager;
         if (manager && typeof manager.requestTimelinePreviewRefresh === 'function') {
@@ -202,7 +205,7 @@ export default function (vm) {
     ScratchBlocks.Blocks.event_initialize = {
         init: function () {
             this.jsonInit({
-                message0: '初期化する',
+                message0: translate('initialize', '初期化する'),
                 category: ScratchBlocks.Categories.event,
                 extensions: ['colours_event', 'shape_hat']
             });
@@ -212,7 +215,7 @@ export default function (vm) {
     ScratchBlocks.Blocks.event_renderframe = {
         init: function () {
             this.jsonInit({
-                message0: 'フレームを描画する',
+                message0: translate('render frame', 'フレームを描画する'),
                 category: ScratchBlocks.Categories.event,
                 extensions: ['colours_event', 'shape_hat']
             });
@@ -248,7 +251,10 @@ export default function (vm) {
     ScratchBlocks.Blocks.sound_playattime = {
         init: function () {
             this.jsonInit({
-                message0: '音声 %1 を %2 から %3 まで %4 倍速で %5 の音量で鳴らす',
+                message0: translate(
+                    'play sound at %1 time: %2 ~ %3 speed: %4 volume: %5',
+                    '音声 %1 を %2 から %3 まで %4 倍速で %5 の音量で鳴らす'
+                ),
                 args0: [
                     {type: 'input_value', name: 'SOUND_MENU'},
                     {type: 'input_value', name: 'T1'},
@@ -328,7 +334,7 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.motion_gotoxyz = {
         init: function () {
-            this.jsonInit(motionStatement('x: %1 y: %2 z: %3 に移動する', [
+            this.jsonInit(motionStatement(translate('go to x: %1 y: %2 z: %3', 'x: %1 y: %2 z: %3 に移動する'), [
                 numberInput('X'), numberInput('Y'), numberInput('Z')
             ]));
         }
@@ -336,15 +342,20 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.motion_gotoxyz_nocamera = {
         init: function () {
-            this.jsonInit(motionStatement('(カメラを除く) x: %1 y: %2 z: %3 に移動する', [
-                numberInput('X'), numberInput('Y'), numberInput('Z')
-            ]));
+            this.jsonInit(motionStatement(
+                translate('go to (not camera) x: %1 y: %2 z: %3', '(カメラを除く) x: %1 y: %2 z: %3 に移動する'),
+                [
+                    numberInput('X'), numberInput('Y'), numberInput('Z')
+                ]
+            ));
         }
     };
 
     ScratchBlocks.Blocks.motion_setrotation = {
         init: function () {
-            this.jsonInit(motionStatement('向きを x: %1 y: %2 z: %3 にする', [
+            this.jsonInit(motionStatement(translate(
+                'set rotation x: %1 y: %2 z: %3', '向きを x: %1 y: %2 z: %3 にする'
+            ), [
                 numberInput('X'), numberInput('Y'), numberInput('Z')
             ]));
         }
@@ -352,7 +363,9 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.motion_setscale = {
         init: function () {
-            this.jsonInit(motionStatement('大きさを x: %1 y: %2 z: %3 にする', [
+            this.jsonInit(motionStatement(translate(
+                'set scale to x: %1 y: %2 z: %3', '大きさを x: %1 y: %2 z: %3 にする'
+            ), [
                 numberInput('X'), numberInput('Y'), numberInput('Z')
             ]));
         }
@@ -360,7 +373,9 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.motion_changerotationby = {
         init: function () {
-            this.jsonInit(motionStatement('向きを x: %1 y: %2 z: %3 ずつ変える', [
+            this.jsonInit(motionStatement(translate(
+                'change rotation by x: %1 y: %2 z: %3', '向きを x: %1 y: %2 z: %3 ずつ変える'
+            ), [
                 numberInput('X'), numberInput('Y'), numberInput('Z')
             ]));
         }
@@ -368,7 +383,7 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.motion_setrotationorder = {
         init: function () {
-            this.jsonInit(motionStatement('回転順を %1 にする', [{
+            this.jsonInit(motionStatement(translate('set rotation order to %1', '回転順を %1 にする'), [{
                 type: 'field_dropdown', name: 'ORDER', options: rotationOrderOptions
             }]));
         }
@@ -376,19 +391,21 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.motion_changezby = {
         init: function () {
-            this.jsonInit(motionStatement('zを %1 ずつ変える', [numberInput('DZ')]));
+            this.jsonInit(motionStatement(translate('change z by %1', 'zを %1 ずつ変える'), [numberInput('DZ')]));
         }
     };
 
     ScratchBlocks.Blocks.motion_setz = {
         init: function () {
-            this.jsonInit(motionStatement('zを %1 にする', [numberInput('Z')]));
+            this.jsonInit(motionStatement(translate('set z to %1', 'zを %1 にする'), [numberInput('Z')]));
         }
     };
 
     ScratchBlocks.Blocks.motion_setcamerato = {
         init: function () {
-            this.jsonInit(motionStatement('カメラを x: %1 y: %2 z: %3 にする', [
+            this.jsonInit(motionStatement(translate(
+                'set camera to x: %1 y: %2 z: %3', 'カメラを x: %1 y: %2 z: %3 にする'
+            ), [
                 numberInput('X'), numberInput('Y'), numberInput('Z')
             ]));
         }
@@ -398,12 +415,17 @@ export default function (vm) {
         const upper = axis.toUpperCase();
         ScratchBlocks.Blocks[`motion_setcamera${axis}`] = {
             init: function () {
-                this.jsonInit(motionStatement(`カメラの${axis}を %1 にする`, [numberInput(upper)]));
+                this.jsonInit(motionStatement(
+                    translate(`set camera ${axis} to %1`, `カメラの${axis}を %1 にする`), [numberInput(upper)]
+                ));
             }
         };
         ScratchBlocks.Blocks[`motion_changecamera${axis}by`] = {
             init: function () {
-                this.jsonInit(motionStatement(`カメラの${axis}を %1 ずつ変える`, [numberInput(upper)]));
+                this.jsonInit(motionStatement(
+                    translate(`change camera ${axis} by %1`, `カメラの${axis}を %1 ずつ変える`),
+                    [numberInput(upper)]
+                ));
             }
         };
     };
@@ -411,7 +433,9 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.motion_setcamerarotation = {
         init: function () {
-            this.jsonInit(motionStatement('カメラの向きを x: %1 y: %2 z: %3 にする', [
+            this.jsonInit(motionStatement(translate(
+                'set camera rotation to x: %1 y: %2 z: %3', 'カメラの向きを x: %1 y: %2 z: %3 にする'
+            ), [
                 numberInput('X'), numberInput('Y'), numberInput('Z')
             ]));
         }
@@ -419,7 +443,10 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.motion_changecamerarotationby = {
         init: function () {
-            this.jsonInit(motionStatement('カメラの向きを x: %1 y: %2 z: %3 ずつ変える', [
+            this.jsonInit(motionStatement(translate(
+                'change camera rotation by x: %1 y: %2 z: %3',
+                'カメラの向きを x: %1 y: %2 z: %3 ずつ変える'
+            ), [
                 numberInput('X'), numberInput('Y'), numberInput('Z')
             ]));
         }
@@ -427,7 +454,9 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.motion_setcamerarotationorder = {
         init: function () {
-            this.jsonInit(motionStatement('カメラの回転順を %1 にする', [{
+            this.jsonInit(motionStatement(translate(
+                'set camera rotation order to %1', 'カメラの回転順を %1 にする'
+            ), [{
                 type: 'field_dropdown', name: 'ORDER', options: rotationOrderOptions
             }]));
         }
@@ -435,14 +464,17 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.motion_setfov = {
         init: function () {
-            this.jsonInit(motionStatement('画角を %1 にする', [numberInput('FOV')]));
+            this.jsonInit(motionStatement(translate('set FOV to %1', '画角を %1 にする'), [numberInput('FOV')]));
         }
     };
 
     ScratchBlocks.Blocks.motion_lookat = {
         init: function () {
             this.jsonInit(motionStatement(
-                'x: %1 y: %2 z: %3 を カメラ x: %4 y: %5 z: %6 から見る',
+                translate(
+                    'look at x: %1 y: %2 z: %3 from camera x: %4 y: %5 z: %6',
+                    'x: %1 y: %2 z: %3 を カメラ x: %4 y: %5 z: %6 から見る'
+                ),
                 [
                     numberInput('X'), numberInput('Y'), numberInput('Z'),
                     numberInput('CAMERAX'), numberInput('CAMERAY'), numberInput('CAMERAZ')
@@ -452,18 +484,18 @@ export default function (vm) {
     };
 
     const reporterBlocks = {
-        motion_zposition: 'z座標',
-        motion_rotationx: '向きx',
-        motion_rotationy: '向きy',
-        motion_rotationz: '向きz',
-        motion_camerax: 'カメラのx座標',
-        motion_cameray: 'カメラのy座標',
-        motion_cameraz: 'カメラのz座標',
-        motion_camerarotationx: 'カメラの向きx',
-        motion_camerarotationy: 'カメラの向きy',
-        motion_camerarotationz: 'カメラの向きz',
-        motion_fov: '画角',
-        motion_focallength: '焦点距離'
+        motion_zposition: translate('z position', 'z座標'),
+        motion_rotationx: translate('rotation x', '向きx'),
+        motion_rotationy: translate('rotation y', '向きy'),
+        motion_rotationz: translate('rotation z', '向きz'),
+        motion_camerax: translate('camera x', 'カメラのx座標'),
+        motion_cameray: translate('camera y', 'カメラのy座標'),
+        motion_cameraz: translate('camera z', 'カメラのz座標'),
+        motion_camerarotationx: translate('camera rotation x', 'カメラの向きx'),
+        motion_camerarotationy: translate('camera rotation y', 'カメラの向きy'),
+        motion_camerarotationz: translate('camera rotation z', 'カメラの向きz'),
+        motion_fov: translate('FOV', '画角'),
+        motion_focallength: translate('focal length', '焦点距離')
     };
     Object.keys(reporterBlocks).forEach(opcode => {
         ScratchBlocks.Blocks[opcode] = {
@@ -476,7 +508,9 @@ export default function (vm) {
         ScratchBlocks.Blocks[opcode] = {
             init: function () {
                 this.jsonInit({
-                    message0: opcode === 'motion_rotationorder' ? '回転順' : 'カメラの回転順',
+                    message0: opcode === 'motion_rotationorder' ?
+                        translate('rotation order', '回転順') :
+                        translate('camera rotation order', 'カメラの回転順'),
                     category: ScratchBlocks.Categories.motion,
                     extensions: ['colours_motion', 'output_string']
                 });

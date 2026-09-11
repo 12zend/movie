@@ -80,12 +80,32 @@ describe('Objects blocks', () => {
             const block = {jsonInit: jest.fn()};
             ScratchBlocks.Blocks[opcode].init.call(block);
             expect(block.jsonInit).toHaveBeenCalledWith(expect.objectContaining({
-                category: 'レイヤー',
+                category: 'Objects',
                 colour: PRIMARY,
                 colourSecondary: SECONDARY,
                 colourTertiary: TERTIARY
             }));
         });
+    });
+
+    test('localizes Object block definitions in Japanese mode', () => {
+        const ScratchBlocks = {Blocks: {}};
+        const vm = {getLocale: () => 'ja', runtime: {}};
+        installObjectBlockDefinitions(ScratchBlocks, vm);
+
+        const legacyBlock = {jsonInit: jest.fn()};
+        ScratchBlocks.Blocks.looks_clearlight.init.call(legacyBlock);
+        expect(legacyBlock.jsonInit).toHaveBeenCalledWith(expect.objectContaining({
+            category: 'レイヤー'
+        }));
+
+        const groupingBlock = {jsonInit: jest.fn()};
+        ScratchBlocks.Blocks.objects_grouping.init.call(groupingBlock);
+        expect(groupingBlock.jsonInit).toHaveBeenCalledWith(expect.objectContaining({
+            message0: 'グループ化',
+            message2: 'エフェクト',
+            category: 'レイヤー'
+        }));
     });
 
     test('shows the shape ratio input only for star, curved star, and flower', () => {
@@ -484,6 +504,9 @@ describe('Objects blocks', () => {
         const blocks = new ObjectBlocks();
         const info = blocks.getInfo();
 
+        expect(info.name).toBe('Objects');
+        expect(info.blocks.find(blockInfo => blockInfo.opcode === 'draw').text).toBe('draw [ASSET]');
+
         expect(info.blocks.map(blockInfo => blockInfo.opcode)).toEqual([
             'draw', 'shape', 'arc', 'circularSegment', 'line', 'grouping', 'scene',
             'group', 'simulation', 'transform', 'composite', 'matte', 'renderPass', 'drawPass', 'clearPass',
@@ -502,6 +525,15 @@ describe('Objects blocks', () => {
             'SIZE', 'WIDTH', 'HEIGHT',
             'T1', 'T2'
         ]);
+
+        const JapaneseObjectBlocks = createObjectBlocksClass({
+            getLocale: () => 'ja',
+            runtime: {}
+        });
+        const japaneseInfo = new JapaneseObjectBlocks().getInfo();
+        expect(japaneseInfo.name).toBe('レイヤー');
+        expect(japaneseInfo.blocks.find(blockInfo => blockInfo.opcode === 'draw').text)
+            .toBe('描画 [ASSET]');
         expect(Object.keys(info.blocks[1].arguments)).toEqual([
             'SHAPE', 'N',
             'RATIO',

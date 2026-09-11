@@ -103,6 +103,15 @@ describe('Pen FX custom shader packages', () => {
         expect(descriptor.id).toBe(DEFAULT_SHADER_PACKAGE_ID);
         expect(descriptor.blocks).toHaveLength(59);
         expect(descriptor.programs).toHaveLength(Object.keys(programSources).length);
+        expect(descriptor.blocks.find(block => block.id === 'contrast')).toMatchObject({
+            name: 'contrast',
+            text: 'contrast value: [VALUE] pivot: [PIVOT] mix: [MIX] %',
+            inputs: expect.arrayContaining([
+                {id: 'VALUE', label: 'value'},
+                {id: 'PIVOT', label: 'pivot'},
+                {id: 'MIX', label: 'mix'}
+            ])
+        });
         expect(descriptor.blocks.map(block => block.opcode)).toEqual(expect.arrayContaining([
             'contrast',
             'depthOfField',
@@ -114,6 +123,25 @@ describe('Pen FX custom shader packages', () => {
         for (const program of descriptor.programs) {
             expect(program.source).toBe(programSources[program.bind].trim());
         }
+    });
+
+    test('uses English names from the default zip and localizes them only for Japanese UI', () => {
+        const englishVM = {runtime: {}, getLocale: () => 'en'};
+        const englishManager = new PenFXCustomShaderManager(englishVM, {});
+        englishManager.installDefaultPackage();
+        const englishContrast = englishManager.getToolboxBlocks()
+            .find(block => block && block.opcode === 'contrast');
+
+        const japaneseVM = {runtime: {}, getLocale: () => 'ja'};
+        const japaneseManager = new PenFXCustomShaderManager(japaneseVM, {});
+        japaneseManager.installDefaultPackage();
+        const japaneseContrast = japaneseManager.getToolboxBlocks()
+            .find(block => block && block.opcode === 'contrast');
+
+        expect(englishContrast.text).toBe('contrast value: [VALUE] pivot: [PIVOT] mix: [MIX] %');
+        expect(japaneseContrast.text).toBe('コントラスト 値: [VALUE] 基準: [PIVOT] 混合: [MIX] %');
+        expect(englishContrast.arguments.VALUE).toMatchObject({defaultValue: 1});
+        expect(japaneseContrast.arguments.VALUE).toMatchObject({defaultValue: 1});
     });
 
     test('loads the default zip without making extension installation wait', async () => {
